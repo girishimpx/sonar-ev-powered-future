@@ -491,7 +491,7 @@ function SoftwareSection() {
             {feats.map(({ icon: Icon, t }) => (
               <div key={t} className="flex items-start gap-3 rounded-xl border border-border bg-card p-4">
                 <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary ring-1 ring-primary/25">
-                  <Icon className="h-4.5 w-4.5" />
+                  <Icon className="h-4 w-4" />
                 </div>
                 <div>
                   <div className="text-sm font-semibold">{t}</div>
