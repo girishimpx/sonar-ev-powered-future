@@ -186,7 +186,7 @@ function Hero() {
           </div>
           <h1 className="mt-6 text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
             Build the Future of{" "}
-            <span className="bg-gradient-to-r from-primary to-[oklch(0.78_0.22_150)] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-white to-white/50 bg-clip-text text-transparent">
               EV Charging
             </span>
           </h1>
