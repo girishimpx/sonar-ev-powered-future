@@ -77,14 +77,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Sonar EV — End-to-End EV Charging Infrastructure for India" },
+      {
+        name: "description",
+        content:
+          "Sonar EV builds premium DC fast charging infrastructure for businesses, properties, highways and fleets across India. Hardware, software, installation and AMC — all in one place.",
+      },
+      { name: "author", content: "Sonar EV" },
+      { property: "og:title", content: "Sonar EV — EV Charging Infrastructure" },
+      {
+        property: "og:description",
+        content:
+          "Fast DC chargers, free software, free app, free AMC. Build your EV charging business with Sonar EV.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:site", content: "@SonarEV" },
     ],
     links: [
       {
