@@ -1,5 +1,24 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, CheckCircle2, Zap, ShieldCheck, Cpu, Thermometer, Ruler, Weight, Wifi, Monitor, Fingerprint } from "lucide-react";
+import { useMemo, useState, type ReactNode } from "react";
+import {
+  ArrowRight,
+  Zap,
+  ShieldCheck,
+  Cpu,
+  Wifi,
+  Monitor,
+  Fingerprint,
+  Thermometer,
+  Building2,
+  Hotel,
+  Fuel,
+  Truck,
+  ShoppingBag,
+  Car,
+  Home,
+  Sparkles,
+  Check,
+} from "lucide-react";
 import { Nav, Footer, FloatingCTAs, ContactStrip, btnPrimary, btnSecondary } from "@/components/site";
 import chargerImg from "@/assets/charger-product.jpg";
 import lineupImg from "@/assets/charger-lineup.jpg";
@@ -8,8 +27,8 @@ export const Route = createFileRoute("/chargers")({
   component: ChargersPage,
   head: () => ({
     meta: [
-      { title: "DC Fast Chargers 30–240kW | Sonar EV" },
-      { name: "description", content: "Explore Sonar EV's commercial DC fast charger line-up — 30kW, 60kW, 120kW, 180kW and 240kW ultra-fast chargers with full technical specifications." },
+      { title: "Configure Your Charger | Sonar EV" },
+      { name: "description", content: "Design your perfect Sonar EV DC fast charger. Pick your use case, power, connectors and deployment — see live specs from 30kW to 240kW." },
     ],
   }),
 });
@@ -158,14 +177,9 @@ function ChargersPage() {
     <div className="min-h-screen bg-black text-white antialiased">
       <Nav />
       <ChargersHero />
-      <ChargerNavBar />
-      <div className="mx-auto max-w-7xl px-6 py-8">
-        {CHARGERS.map((c, i) => (
-          <ChargerBlock key={c.power} c={c} reverse={i % 2 === 1} />
-        ))}
-      </div>
+      <Configurator />
+      <FeaturesGrid />
       <ContactStrip>Need a custom power configuration? Talk to our engineering team.</ContactStrip>
-      <CtaFooter />
       <Footer />
       <FloatingCTAs />
     </div>
@@ -190,8 +204,8 @@ function ChargersHero() {
               Our DC fast chargers deliver high power, unmatched reliability, and intelligent performance for every commercial and public charging need.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link to="/contact" className={btnPrimary}>Enquire about Chargers <ArrowRight className="h-4 w-4" /></Link>
-              <a href="#60" className={btnSecondary}>View Specifications</a>
+              <a href="#configurator" className={btnPrimary}>Start Configuring <ArrowRight className="h-4 w-4" /></a>
+              <Link to="/contact" className={btnSecondary}>Talk to an expert</Link>
             </div>
           </div>
           <div className="relative">
@@ -204,74 +218,248 @@ function ChargersHero() {
   );
 }
 
-function ChargerNavBar() {
-  return (
-    <div className="sticky top-16 z-40 border-b border-white/10 bg-black/80 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center gap-2 overflow-x-auto px-6 py-3">
-        <span className="mr-2 shrink-0 text-xs uppercase tracking-widest text-white/40">Jump to</span>
-        {CHARGERS.map((c) => (
-          <a
-            key={c.power}
-            href={`#${c.power}`}
-            className="shrink-0 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs font-medium text-white/80 transition-colors hover:border-white/30 hover:bg-white/10"
-          >
-            {c.power} kW
-          </a>
-        ))}
-      </div>
-    </div>
-  );
-}
+/* ------------------------------ Configurator ----------------------------- */
 
-function ChargerBlock({ c, reverse }: { c: Charger; reverse: boolean }) {
+type UseCase = {
+  id: string;
+  label: string;
+  icon: typeof Building2;
+  recommend: string; // recommended kW
+};
+
+const USE_CASES: UseCase[] = [
+  { id: "hotel", label: "Hotel / Resort", icon: Hotel, recommend: "60" },
+  { id: "highway", label: "Highway / Fuel", icon: Fuel, recommend: "240" },
+  { id: "fleet", label: "Fleet Depot", icon: Truck, recommend: "120" },
+  { id: "mall", label: "Mall / Retail", icon: ShoppingBag, recommend: "120" },
+  { id: "dealer", label: "Dealership", icon: Car, recommend: "30" },
+  { id: "office", label: "Office / Commercial", icon: Building2, recommend: "60" },
+  { id: "residential", label: "Residential", icon: Home, recommend: "30" },
+];
+
+const POWERS = CHARGERS.map((c) => c.power); // ["30","60","120","180","240"]
+
+function Configurator() {
+  const [useCaseId, setUseCaseId] = useState<string>("hotel");
+  const [power, setPower] = useState<string>("60");
+  const [guns, setGuns] = useState<"dual" | "single">("dual");
+  const [deployment, setDeployment] = useState<"outdoor" | "indoor">("outdoor");
+  const [connectors, setConnectors] = useState<string[]>(["CCS2"]);
+
+  const charger = useMemo(() => CHARGERS.find((c) => c.power === power)!, [power]);
+  const useCase = USE_CASES.find((u) => u.id === useCaseId)!;
+  const recommended = useCase.recommend === power;
+
+  const applyRecommendation = () => setPower(useCase.recommend);
+
+  const toggleConnector = (c: string) => {
+    setConnectors((prev) => (prev.includes(c) ? prev.filter((x) => x !== c) : [...prev, c]));
+  };
+
   return (
-    <section id={c.power} className="scroll-mt-32 border-b border-white/10 py-20 last:border-b-0 md:py-28">
-      <div className={`grid gap-12 lg:grid-cols-2 lg:items-start ${reverse ? "lg:[&>*:first-child]:order-2" : ""}`}>
-        <div className="relative">
-          <div className="sticky top-40">
-            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.04] to-transparent p-8">
-              <div className="absolute -inset-4 -z-10 rounded-3xl bg-white/5 blur-3xl" />
-              <img src={chargerImg} alt={`Sonar EV ${c.power}kW charger`} loading="lazy" width={1024} height={1408} className="mx-auto h-auto w-full max-w-sm object-contain" />
+    <section id="configurator" className="scroll-mt-20 border-b border-white/10 py-20 md:py-28">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="mb-12 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+          <div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/70">
+              <Sparkles className="h-3.5 w-3.5" /> Interactive Configurator
             </div>
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
+              Build your charger.<br />
+              <span className="text-white/50">See specs update in real time.</span>
+            </h2>
           </div>
+          <p className="max-w-md text-sm text-white/60">
+            Tell us where you're deploying and how much power you need — we'll assemble the right Sonar EV configuration and route your enquiry to the engineering team.
+          </p>
         </div>
-        <div>
-          <div className="flex items-baseline gap-2">
-            <span className="text-6xl font-semibold tracking-tight md:text-7xl">{c.power}</span>
-            <span className="text-2xl text-white/50">kW</span>
-          </div>
-          <h2 className="mt-3 text-2xl font-semibold tracking-tight md:text-3xl">{c.headline}</h2>
-          <p className="mt-2 text-sm font-medium uppercase tracking-widest text-white/50">{c.tagline}</p>
-          <p className="mt-6 max-w-xl text-white/70">{c.description}</p>
 
-          <div className="mt-8">
-            <div className="text-xs font-medium uppercase tracking-widest text-white/50">Ideal for</div>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {c.ideal.map((i) => (
-                <span key={i} className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs text-white/80">{i}</span>
-              ))}
+        <div className="grid gap-8 lg:grid-cols-[1fr_1.15fr]">
+          {/* CONTROLS */}
+          <div className="space-y-8">
+            {/* Step 1 */}
+            <StepCard step="01" title="Where will it be deployed?">
+              <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                {USE_CASES.map(({ id, label, icon: Icon }) => {
+                  const active = id === useCaseId;
+                  return (
+                    <button
+                      key={id}
+                      type="button"
+                      onClick={() => setUseCaseId(id)}
+                      className={`group flex flex-col items-start gap-2 rounded-xl border p-3 text-left transition-all ${
+                        active
+                          ? "border-white bg-white text-black"
+                          : "border-white/10 bg-white/[0.02] text-white/80 hover:border-white/30 hover:bg-white/[0.06]"
+                      }`}
+                    >
+                      <Icon className="h-4 w-4" />
+                      <span className="text-xs font-medium">{label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+              {!recommended && (
+                <button
+                  type="button"
+                  onClick={applyRecommendation}
+                  className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-3 py-1.5 text-xs text-white/80 transition-colors hover:border-white/40 hover:bg-white/10"
+                >
+                  <Sparkles className="h-3 w-3" />
+                  We recommend <span className="font-semibold text-white">{useCase.recommend}kW</span> for {useCase.label} — apply
+                </button>
+              )}
+            </StepCard>
+
+            {/* Step 2 */}
+            <StepCard step="02" title="Choose power capacity">
+              <div className="flex items-baseline gap-2">
+                <span className="text-5xl font-semibold tracking-tight md:text-6xl">{power}</span>
+                <span className="text-lg text-white/50">kW</span>
+                {recommended && (
+                  <span className="ml-3 inline-flex items-center gap-1 rounded-full border border-white/20 bg-white/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-widest text-white/80">
+                    <Check className="h-3 w-3" /> Recommended
+                  </span>
+                )}
+              </div>
+              <input
+                type="range"
+                min={0}
+                max={POWERS.length - 1}
+                step={1}
+                value={POWERS.indexOf(power)}
+                onChange={(e) => setPower(POWERS[Number(e.target.value)])}
+                className="mt-5 w-full accent-white"
+                aria-label="Charger power capacity"
+              />
+              <div className="mt-2 flex justify-between text-[10px] uppercase tracking-widest text-white/40">
+                {POWERS.map((p) => (
+                  <button
+                    key={p}
+                    type="button"
+                    onClick={() => setPower(p)}
+                    className={`transition-colors ${p === power ? "text-white" : "hover:text-white/70"}`}
+                  >
+                    {p}
+                  </button>
+                ))}
+              </div>
+            </StepCard>
+
+            {/* Step 3 */}
+            <StepCard step="03" title="Connector setup">
+              <div className="mb-4 text-xs uppercase tracking-widest text-white/40">Guns</div>
+              <div className="flex gap-2">
+                {(["dual", "single"] as const).map((g) => (
+                  <Segmented
+                    key={g}
+                    active={g === guns}
+                    onClick={() => setGuns(g)}
+                    label={g === "dual" ? "Dual Gun" : "Single Gun"}
+                  />
+                ))}
+              </div>
+              <div className="mb-3 mt-6 text-xs uppercase tracking-widest text-white/40">Connector types</div>
+              <div className="flex flex-wrap gap-2">
+                {["CCS2", "CHAdeMO", "GB/T", "Type 2 AC"].map((c) => {
+                  const active = connectors.includes(c);
+                  return (
+                    <button
+                      key={c}
+                      type="button"
+                      onClick={() => toggleConnector(c)}
+                      className={`rounded-full border px-3 py-1.5 text-xs transition-all ${
+                        active
+                          ? "border-white bg-white text-black"
+                          : "border-white/15 bg-white/[0.03] text-white/70 hover:border-white/40 hover:text-white"
+                      }`}
+                    >
+                      {active && <Check className="mr-1 inline h-3 w-3" />}
+                      {c}
+                    </button>
+                  );
+                })}
+              </div>
+            </StepCard>
+
+            {/* Step 4 */}
+            <StepCard step="04" title="Deployment environment">
+              <div className="flex gap-2">
+                {(["outdoor", "indoor"] as const).map((d) => (
+                  <Segmented
+                    key={d}
+                    active={d === deployment}
+                    onClick={() => setDeployment(d)}
+                    label={d === "outdoor" ? "Outdoor (IP55)" : "Indoor"}
+                  />
+                ))}
+              </div>
+            </StepCard>
+          </div>
+
+          {/* LIVE PREVIEW */}
+          <div className="lg:sticky lg:top-32 lg:self-start">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.05] to-transparent">
+              <div className="pointer-events-none absolute -inset-10 -z-10 rounded-full bg-white/5 blur-3xl" />
+
+              <div className="grid grid-cols-[0.9fr_1.1fr] gap-6 p-6 md:p-8">
+                <div className="relative flex items-center justify-center rounded-2xl border border-white/10 bg-black/50 p-4">
+                  <img
+                    src={chargerImg}
+                    alt={`Sonar EV ${charger.power}kW`}
+                    className="h-full max-h-72 w-auto object-contain transition-transform duration-500"
+                    style={{ transform: `scale(${0.85 + (POWERS.indexOf(power) * 0.05)})` }}
+                    width={1024}
+                    height={1408}
+                  />
+                  <div className="absolute left-3 top-3 rounded-full border border-white/15 bg-black/70 px-2 py-1 text-[10px] font-medium uppercase tracking-widest text-white/80 backdrop-blur">
+                    Live
+                  </div>
+                </div>
+                <div>
+                  <div className="text-xs font-medium uppercase tracking-widest text-white/40">Your configuration</div>
+                  <div className="mt-2 flex items-baseline gap-2">
+                    <span className="text-4xl font-semibold tracking-tight md:text-5xl">{charger.power}</span>
+                    <span className="text-white/50">kW</span>
+                  </div>
+                  <div className="mt-1 text-sm text-white/70">{charger.headline}</div>
+                  <p className="mt-3 text-xs text-white/50">{charger.tagline}</p>
+
+                  <dl className="mt-5 space-y-2 text-xs">
+                    <SummaryRow label="Use case" value={useCase.label} />
+                    <SummaryRow label="Guns" value={guns === "dual" ? "Dual Gun" : "Single Gun"} />
+                    <SummaryRow
+                      label="Connectors"
+                      value={connectors.length ? connectors.join(", ") : "—"}
+                    />
+                    <SummaryRow label="Deployment" value={deployment === "outdoor" ? "Outdoor / IP55" : "Indoor"} />
+                  </dl>
+                </div>
+              </div>
+
+              <div className="border-t border-white/10 p-6 md:p-8">
+                <div className="text-xs font-medium uppercase tracking-widest text-white/40">Full specifications</div>
+                <div className="mt-4 max-h-72 overflow-y-auto rounded-xl border border-white/10">
+                  <table className="w-full text-sm">
+                    <tbody>
+                      {charger.specs.map((s, i) => (
+                        <tr key={s.label} className={i % 2 === 0 ? "bg-white/[0.02]" : "bg-transparent"}>
+                          <td className="w-1/2 border-b border-white/5 px-4 py-2.5 text-white/60">{s.label}</td>
+                          <td className="border-b border-white/5 px-4 py-2.5 font-medium text-white">{s.value}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-3 border-t border-white/10 bg-black/40 p-6 md:p-8">
+                <Link to="/contact" className={btnPrimary}>
+                  Enquire about this configuration <ArrowRight className="h-4 w-4" />
+                </Link>
+                <a href="tel:+919000000000" className={btnSecondary}>Call our team</a>
+              </div>
             </div>
-          </div>
-
-          <div className="mt-10">
-            <div className="text-xs font-medium uppercase tracking-widest text-white/50">Technical Specifications</div>
-            <div className="mt-4 overflow-hidden rounded-2xl border border-white/10">
-              <table className="w-full text-sm">
-                <tbody>
-                  {c.specs.map((s, i) => (
-                    <tr key={s.label} className={i % 2 === 0 ? "bg-white/[0.02]" : "bg-transparent"}>
-                      <td className="w-1/2 border-b border-white/5 px-4 py-3 text-white/60">{s.label}</td>
-                      <td className="border-b border-white/5 px-4 py-3 font-medium text-white">{s.value}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link to="/contact" className={btnPrimary}>Enquire about {c.power}kW <ArrowRight className="h-4 w-4" /></Link>
-            <a href="tel:+919000000000" className={btnSecondary}>Call our team</a>
           </div>
         </div>
       </div>
@@ -279,7 +467,44 @@ function ChargerBlock({ c, reverse }: { c: Charger; reverse: boolean }) {
   );
 }
 
-function CtaFooter() {
+function StepCard({ step, title, children }: { step: string; title: string; children: ReactNode }) {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 md:p-7">
+      <div className="flex items-baseline gap-3">
+        <span className="text-xs font-mono text-white/40">{step}</span>
+        <h3 className="text-base font-semibold text-white md:text-lg">{title}</h3>
+      </div>
+      <div className="mt-5">{children}</div>
+    </div>
+  );
+}
+
+function Segmented({ active, onClick, label }: { active: boolean; onClick: () => void; label: string }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`rounded-full border px-4 py-2 text-xs font-medium transition-all ${
+        active
+          ? "border-white bg-white text-black"
+          : "border-white/15 bg-white/[0.03] text-white/70 hover:border-white/40 hover:text-white"
+      }`}
+    >
+      {label}
+    </button>
+  );
+}
+
+function SummaryRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex items-start justify-between gap-4 border-b border-white/5 pb-2 last:border-b-0">
+      <dt className="text-white/50">{label}</dt>
+      <dd className="text-right font-medium text-white">{value}</dd>
+    </div>
+  );
+}
+
+function FeaturesGrid() {
   const items = [
     { icon: ShieldCheck, t: "IP55 Rated" },
     { icon: Cpu, t: "OCPP 1.6J" },
@@ -287,8 +512,8 @@ function CtaFooter() {
     { icon: Monitor, t: "7\" Touch Display" },
     { icon: Fingerprint, t: "RFID / QR / App" },
     { icon: Thermometer, t: "-35 to +55°C" },
-    { icon: Ruler, t: "Compact Footprint" },
-    { icon: Weight, t: "Rugged Build" },
+    { icon: Zap, t: "Up to 96% Efficient" },
+    { icon: ShieldCheck, t: "IEC & CE Certified" },
   ];
   return (
     <section className="border-t border-white/10 bg-white/[0.02] py-20">
