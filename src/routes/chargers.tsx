@@ -1,5 +1,24 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, CheckCircle2, Zap, ShieldCheck, Cpu, Thermometer, Ruler, Weight, Wifi, Monitor, Fingerprint } from "lucide-react";
+import { useMemo, useState } from "react";
+import {
+  ArrowRight,
+  Zap,
+  ShieldCheck,
+  Cpu,
+  Wifi,
+  Monitor,
+  Fingerprint,
+  Thermometer,
+  Building2,
+  Hotel,
+  Fuel,
+  Truck,
+  ShoppingBag,
+  Car,
+  Home,
+  Sparkles,
+  Check,
+} from "lucide-react";
 import { Nav, Footer, FloatingCTAs, ContactStrip, btnPrimary, btnSecondary } from "@/components/site";
 import chargerImg from "@/assets/charger-product.jpg";
 import lineupImg from "@/assets/charger-lineup.jpg";
@@ -8,8 +27,8 @@ export const Route = createFileRoute("/chargers")({
   component: ChargersPage,
   head: () => ({
     meta: [
-      { title: "DC Fast Chargers 30–240kW | Sonar EV" },
-      { name: "description", content: "Explore Sonar EV's commercial DC fast charger line-up — 30kW, 60kW, 120kW, 180kW and 240kW ultra-fast chargers with full technical specifications." },
+      { title: "Configure Your Charger | Sonar EV" },
+      { name: "description", content: "Design your perfect Sonar EV DC fast charger. Pick your use case, power, connectors and deployment — see live specs from 30kW to 240kW." },
     ],
   }),
 });
