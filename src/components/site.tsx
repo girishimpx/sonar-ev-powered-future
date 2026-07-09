@@ -22,7 +22,7 @@ export function Logo({ className = "h-7" }: { className?: string }) {
       <img
         src={logoAsset.url}
         alt="Sonar EV"
-        className={`${className} w-auto object-contain`}
+        className={`${className} w-auto object-contain brightness-0 invert`}
         width={200}
         height={56}
       />
