@@ -454,11 +454,7 @@ function Configurator() {
               </div>
 
               <div className="flex flex-wrap gap-3 border-t border-white/10 bg-black/40 p-6 md:p-8">
-                <Link
-                  to="/contact"
-                  className={btnPrimary}
-                  search={undefined as never}
-                >
+                <Link to="/contact" className={btnPrimary}>
                   Enquire about this configuration <ArrowRight className="h-4 w-4" />
                 </Link>
                 <a href="tel:+919000000000" className={btnSecondary}>Call our team</a>
