@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import {
   ArrowRight,
   Zap,
@@ -467,7 +467,7 @@ function Configurator() {
   );
 }
 
-function StepCard({ step, title, children }: { step: string; title: string; children: React.ReactNode }) {
+function StepCard({ step, title, children }: { step: string; title: string; children: ReactNode }) {
   return (
     <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 md:p-7">
       <div className="flex items-baseline gap-3">
