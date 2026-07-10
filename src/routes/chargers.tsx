@@ -457,7 +457,7 @@ function Configurator() {
                 <Link to="/contact" className={btnPrimary}>
                   Enquire about this configuration <ArrowRight className="h-4 w-4" />
                 </Link>
-                <a href="tel:+919000000000" className={btnSecondary}>Call our team</a>
+                <a href="tel:+917019721320" className={btnSecondary}>Call our team</a>
               </div>
             </div>
           </div>

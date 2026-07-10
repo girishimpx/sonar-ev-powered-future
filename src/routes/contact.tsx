@@ -16,8 +16,8 @@ const channels = [
   {
     icon: Phone,
     label: "Call us",
-    value: "+91 90000 00000",
-    href: "tel:+919000000000",
+    value: "+91 70197 21320",
+    href: "tel:+917019721320",
     sub: "Mon–Sat, 9am – 8pm IST",
   },
   {
@@ -31,7 +31,7 @@ const channels = [
     icon: MessageCircle,
     label: "WhatsApp",
     value: "Chat instantly",
-    href: "https://wa.me/919000000000",
+    href: "https://wa.me/917019721320?text=Hi%20Sonar%20EV%2C%20I%27d%20like%20to%20know%20more%20about%20your%20EV%20chargers.",
     sub: "Fastest way to reach us",
   },
 ];

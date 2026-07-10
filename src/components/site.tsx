@@ -170,7 +170,7 @@ export function Footer() {
                 <Mail className="h-4 w-4" /> hello@sonarev.in
               </li>
               <li className="flex items-center gap-2">
-                <Phone className="h-4 w-4" /> +91 90000 00000
+                <Phone className="h-4 w-4" /> +91 70197 21320
               </li>
               <li className="flex items-center gap-2">
                 <MessageCircle className="h-4 w-4" /> WhatsApp support
@@ -196,7 +196,7 @@ export function FloatingCTAs() {
   return (
     <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3">
       <a
-        href="https://wa.me/919000000000"
+        href="https://wa.me/917019721320?text=Hi%20Sonar%20EV%2C%20I%27d%20like%20to%20know%20more%20about%20your%20EV%20chargers."
         target="_blank"
         rel="noreferrer"
         aria-label="Chat on WhatsApp"
@@ -205,7 +205,7 @@ export function FloatingCTAs() {
         <MessageCircle className="h-5 w-5" />
       </a>
       <a
-        href="tel:+919000000000"
+        href="tel:+917019721320"
         aria-label="Call Sonar EV"
         className="grid h-12 w-12 place-items-center rounded-full border border-white/20 bg-black text-white shadow-[0_10px_30px_-10px_rgba(0,0,0,0.8)] transition-transform hover:scale-105"
       >
@@ -231,7 +231,7 @@ export function ContactStrip({ children }: { children?: ReactNode }) {
         </div>
         <div className="flex items-center gap-2">
           <a
-            href="tel:+919000000000"
+            href="tel:+917019721320"
             className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-medium text-white/90 transition-colors hover:border-white/30 hover:bg-white/10"
           >
             <Phone className="h-3.5 w-3.5" /> Call
