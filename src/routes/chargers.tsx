@@ -251,6 +251,21 @@ function Configurator() {
   const useCase = USE_CASES.find((u) => u.id === useCaseId)!;
   const recommended = useCase.recommend === power;
 
+  const whatsappHref = useMemo(() => {
+    const lines = [
+      "Hi Sonar EV, I'd like to enquire about a DC fast charger with the following configuration:",
+      "",
+      `• Use case: ${useCase.label}`,
+      `• Power: ${charger.power}kW (${charger.headline})`,
+      `• Guns: ${guns === "dual" ? "Dual Gun" : "Single Gun"}`,
+      `• Connectors: ${connectors.length ? connectors.join(", ") : "—"}`,
+      `• Deployment: ${deployment === "outdoor" ? "Outdoor / IP55" : "Indoor"}`,
+      "",
+      "Please share pricing, timeline and next steps.",
+    ];
+    return `https://wa.me/917019721320?text=${encodeURIComponent(lines.join("\n"))}`;
+  }, [useCase, charger, guns, connectors, deployment]);
+
   const applyRecommendation = () => setPower(useCase.recommend);
 
   const toggleConnector = (c: string) => {
@@ -458,6 +473,14 @@ function Configurator() {
                 <Link to="/contact" className={btnPrimary}>
                   Enquire about this configuration <ArrowRight className="h-4 w-4" />
                 </Link>
+                <a
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={btnSecondary}
+                >
+                  <MessageCircle className="h-4 w-4" /> WhatsApp this config
+                </a>
                 <a href="tel:+917019721320" className={btnSecondary}>Call our team</a>
               </div>
             </div>
