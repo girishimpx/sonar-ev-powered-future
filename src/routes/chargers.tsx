@@ -18,6 +18,7 @@ import {
   Home,
   Sparkles,
   Check,
+  MessageCircle,
 } from "lucide-react";
 import { Nav, Footer, FloatingCTAs, ContactStrip, btnPrimary, btnSecondary } from "@/components/site";
 import chargerImg from "@/assets/charger-product.jpg";
