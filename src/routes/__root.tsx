@@ -7,6 +7,7 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
+import { useEffect, type ReactNode } from "react";
 import faviconAsset from "../assets/favicon.png.asset.json";
 
 import appCss from "../styles.css?url";
