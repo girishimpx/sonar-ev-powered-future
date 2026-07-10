@@ -470,17 +470,17 @@ function Configurator() {
               </div>
 
               <div className="flex flex-wrap gap-3 border-t border-white/10 bg-black/40 p-6 md:p-8">
-                <Link to="/contact" className={btnPrimary}>
-                  Enquire about this configuration <ArrowRight className="h-4 w-4" />
-                </Link>
                 <a
                   href={whatsappHref}
                   target="_blank"
                   rel="noreferrer"
-                  className={btnSecondary}
+                  className={btnPrimary}
                 >
-                  <MessageCircle className="h-4 w-4" /> WhatsApp this config
+                  <MessageCircle className="h-4 w-4" /> Connect <ArrowRight className="h-4 w-4" />
                 </a>
+                <Link to="/contact" className={btnSecondary}>
+                  Enquire via form
+                </Link>
                 <a href="tel:+917019721320" className={btnSecondary}>Call our team</a>
               </div>
             </div>
