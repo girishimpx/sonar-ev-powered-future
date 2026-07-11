@@ -65,7 +65,7 @@ function CalculatorPage() {
       revenueYear: revenueDay * 365,
       profitYear: profitDay * 365,
     };
-  }, [chargers, electricityCost, tariff, evTraffic]);
+  }, [chargers, electricityCost, tariff, evTraffic, avgChargePercent]);
 
   const inr = (n: number) =>
     "₹" + Math.round(n).toLocaleString("en-IN");
