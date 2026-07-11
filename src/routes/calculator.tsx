@@ -34,15 +34,17 @@ function CalculatorPage() {
   const [electricityCost, setElectricityCost] = useState(8); // ₹/kWh from board
   const [tariff, setTariff] = useState(24); // ₹/kWh charged to user
   const [evTraffic, setEvTraffic] = useState(60); // EVs moving around per day
+  const [avgChargePercent, setAvgChargePercent] = useState(40); // % of 60kWh battery charged per session
 
   const stats = useMemo(() => {
+    const avgKwhPerSession = AVG_BATTERY_PACK_KWH * (avgChargePercent / 100);
     const grossPerKwh = tariff;
     const profitPerKwh = Math.max(tariff - electricityCost - ADMIN_FEE_PER_KWH, 0);
 
     // sessions per day per charger, capped by traffic share
     const potentialSessions = (evTraffic * UTILIZATION_FACTOR) / Math.max(chargers, 1);
     const sessionsPerChargerDay = Math.min(Math.max(potentialSessions, 0), 10); // cap 10/day
-    const kwhPerChargerDay = sessionsPerChargerDay * AVG_KWH_PER_SESSION;
+    const kwhPerChargerDay = sessionsPerChargerDay * avgKwhPerSession;
 
     const revenuePerChargerDay = kwhPerChargerDay * grossPerKwh;
     const profitPerChargerDay = kwhPerChargerDay * profitPerKwh;
