@@ -145,6 +145,17 @@ function CalculatorPage() {
                 display={`${evTraffic} / day`}
                 hint="Estimated EVs in your catchment daily"
               />
+              <SliderInput
+                icon={<Battery className="h-4 w-4" />}
+                label="Average charge per car"
+                value={avgChargePercent}
+                onChange={setAvgChargePercent}
+                min={10}
+                max={100}
+                step={5}
+                display={`${avgChargePercent}%`}
+                hint={`Assuming a ${AVG_BATTERY_PACK_KWH} kWh battery pack`}
+              />
             </div>
 
             <div className="mt-10 rounded-2xl border border-white/10 bg-black p-5 text-sm text-white/60">
