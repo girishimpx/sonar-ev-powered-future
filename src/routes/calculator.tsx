@@ -221,7 +221,7 @@ function CalculatorPage() {
             <div className="flex flex-col gap-3 sm:flex-row">
               <a
                 href={`https://wa.me/917019721320?text=${encodeURIComponent(
-                  `Hi Sonar EV, I ran the profit calculator:\n• Chargers: ${chargers}\n• Electricity: ₹${electricityCost}/kWh\n• Tariff: ₹${tariff}/kWh\n• EV traffic: ${evTraffic}/day\n\nEstimated monthly profit: ${inr(stats.profitMonth)}\n\nPlease share a detailed proposal.`,
+                  `Hi Sonar EV, I ran the profit calculator:\n• Chargers: ${chargers}\n• Electricity: ₹${electricityCost}/kWh\n• Tariff: ₹${tariff}/kWh\n• EV traffic: ${evTraffic}/day\n• Avg charge per car: ${avgChargePercent}% of ${AVG_BATTERY_PACK_KWH}kWh\n\nEstimated monthly profit: ${inr(stats.profitMonth)}\n\nPlease share a detailed proposal.`,
                 )}`}
                 target="_blank"
                 rel="noreferrer"
