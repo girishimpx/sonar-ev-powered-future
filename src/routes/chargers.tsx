@@ -206,7 +206,7 @@ function ChargersHero() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a href="#configurator" className={btnPrimary}>Start Configuring <ArrowRight className="h-4 w-4" /></a>
-              <Link to="/contact" className={btnSecondary}>Talk to an expert</Link>
+              <Link to="/calculator" className={btnSecondary}>Calculate Your Profit</Link>
             </div>
           </div>
           <div className="relative">
@@ -478,8 +478,8 @@ function Configurator() {
                 >
                   <MessageCircle className="h-4 w-4" /> Connect <ArrowRight className="h-4 w-4" />
                 </a>
-                <Link to="/contact" className={btnSecondary}>
-                  Enquire via form
+                <Link to="/calculator" className={btnSecondary}>
+                  Calculate Your Profit
                 </Link>
                 <a href="tel:+917019721320" className={btnSecondary}>Call our team</a>
               </div>

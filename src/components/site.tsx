@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Mail, MessageCircle, Phone, Menu, X } from "lucide-react";
+import { ArrowRight, Mail, MessageCircle, Phone, Menu, X, Calculator } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import logoAsset from "@/assets/sonar-logo.png.asset.json";
 
@@ -34,12 +34,8 @@ export function Logo({ className = "h-7" }: { className?: string }) {
 
 const NAV_LINKS: Array<{ label: string; to?: string; href?: string }> = [
   { label: "Home", to: "/" },
-  { label: "Chargers", to: "/chargers" },
+  { label: "DC Fast Chargers", to: "/chargers" },
   { label: "Profit Calculator", to: "/calculator" },
-  { label: "Solutions", href: "/#solutions" },
-  { label: "Industries", href: "/#industries" },
-  { label: "Software", href: "/#software" },
-  { label: "Contact", to: "/contact" },
 ];
 
 export function Nav() {
@@ -72,16 +68,10 @@ export function Nav() {
         </nav>
         <div className="flex items-center gap-2">
           <Link
-            to="/contact"
-            className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3.5 py-2 text-xs font-medium text-white/80 transition-colors hover:border-white/30 hover:text-white"
-          >
-            <Phone className="h-3.5 w-3.5" /> Contact
-          </Link>
-          <Link
-            to="/contact"
+            to="/calculator"
             className="inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-xs font-semibold text-black transition-all hover:bg-white/90 hover:shadow-[0_0_25px_-8px_rgba(255,255,255,0.7)]"
           >
-            Get Consultation <ArrowRight className="h-3.5 w-3.5" />
+            <Calculator className="h-3.5 w-3.5" /> Profit Calculator
           </Link>
           <button
             onClick={() => setOpen((v) => !v)}
@@ -149,13 +139,13 @@ export function Footer() {
                 <Link to="/" className="text-white/60 hover:text-white">Home</Link>
               </li>
               <li>
-                <Link to="/chargers" className="text-white/60 hover:text-white">Chargers</Link>
+                <Link to="/chargers" className="text-white/60 hover:text-white">DC Fast Chargers</Link>
               </li>
               <li>
-                <a href="/#solutions" className="text-white/60 hover:text-white">Solutions</a>
+                <Link to="/calculator" className="text-white/60 hover:text-white">Profit Calculator</Link>
               </li>
               <li>
-                <a href="/#software" className="text-white/60 hover:text-white">Software</a>
+                <Link to="/blog" className="text-white/60 hover:text-white">Blog</Link>
               </li>
               <li>
                 <Link to="/contact" className="text-white/60 hover:text-white">Contact</Link>
