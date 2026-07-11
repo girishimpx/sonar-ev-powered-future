@@ -35,6 +35,7 @@ export function Logo({ className = "h-7" }: { className?: string }) {
 const NAV_LINKS: Array<{ label: string; to?: string; href?: string }> = [
   { label: "Home", to: "/" },
   { label: "Chargers", to: "/chargers" },
+  { label: "Profit Calculator", to: "/calculator" },
   { label: "Solutions", href: "/#solutions" },
   { label: "Industries", href: "/#industries" },
   { label: "Software", href: "/#software" },
