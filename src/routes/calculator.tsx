@@ -214,7 +214,7 @@ function CalculatorPage() {
                 <BigStat label="Per year" revenue={stats.revenueYear} profit={stats.profitYear} inr={inr} />
               </div>
               <p className="mt-6 text-xs text-white/40">
-                Estimates assume ~{AVG_KWH_PER_SESSION} kWh per session and typical utilization. Actual returns depend on site, tariff, and grid conditions.
+                Estimates assume {AVG_BATTERY_PACK_KWH} kWh battery packs charged at {avgChargePercent}% per session and typical utilization. Actual returns depend on site, tariff, and grid conditions.
               </p>
             </div>
 
