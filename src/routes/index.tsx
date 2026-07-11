@@ -106,8 +106,8 @@ function Hero() {
             for serious businesses, properties, and fleets.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link to="/contact" className={btnPrimary}>
-              Get a Consultation <ArrowRight className="h-4 w-4" />
+            <Link to="/calculator" className={btnPrimary}>
+              Calculate Your Profit <ArrowRight className="h-4 w-4" />
             </Link>
             <Link to="/chargers" className={btnSecondary}>
               Explore Chargers
