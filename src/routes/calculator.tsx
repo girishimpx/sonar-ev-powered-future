@@ -25,7 +25,7 @@ export const Route = createFileRoute("/calculator")({
 });
 
 // Assumptions
-const AVG_KWH_PER_SESSION = 25; // avg energy delivered per EV session
+const AVG_BATTERY_PACK_KWH = 60; // avg EV battery size
 const ADMIN_FEE_PER_KWH = 2; // ₹/kWh platform + admin
 const UTILIZATION_FACTOR = 0.35; // % of nearby EVs that actually charge here per day
 
@@ -34,15 +34,17 @@ function CalculatorPage() {
   const [electricityCost, setElectricityCost] = useState(8); // ₹/kWh from board
   const [tariff, setTariff] = useState(24); // ₹/kWh charged to user
   const [evTraffic, setEvTraffic] = useState(60); // EVs moving around per day
+  const [avgChargePercent, setAvgChargePercent] = useState(40); // % of 60kWh battery charged per session
 
   const stats = useMemo(() => {
+    const avgKwhPerSession = AVG_BATTERY_PACK_KWH * (avgChargePercent / 100);
     const grossPerKwh = tariff;
     const profitPerKwh = Math.max(tariff - electricityCost - ADMIN_FEE_PER_KWH, 0);
 
     // sessions per day per charger, capped by traffic share
     const potentialSessions = (evTraffic * UTILIZATION_FACTOR) / Math.max(chargers, 1);
     const sessionsPerChargerDay = Math.min(Math.max(potentialSessions, 0), 10); // cap 10/day
-    const kwhPerChargerDay = sessionsPerChargerDay * AVG_KWH_PER_SESSION;
+    const kwhPerChargerDay = sessionsPerChargerDay * avgKwhPerSession;
 
     const revenuePerChargerDay = kwhPerChargerDay * grossPerKwh;
     const profitPerChargerDay = kwhPerChargerDay * profitPerKwh;
@@ -63,7 +65,7 @@ function CalculatorPage() {
       revenueYear: revenueDay * 365,
       profitYear: profitDay * 365,
     };
-  }, [chargers, electricityCost, tariff, evTraffic]);
+  }, [chargers, electricityCost, tariff, evTraffic, avgChargePercent]);
 
   const inr = (n: number) =>
     "₹" + Math.round(n).toLocaleString("en-IN");
@@ -143,6 +145,17 @@ function CalculatorPage() {
                 display={`${evTraffic} / day`}
                 hint="Estimated EVs in your catchment daily"
               />
+              <SliderInput
+                icon={<Battery className="h-4 w-4" />}
+                label="Average charge per car"
+                value={avgChargePercent}
+                onChange={setAvgChargePercent}
+                min={10}
+                max={100}
+                step={5}
+                display={`${avgChargePercent}%`}
+                hint={`Assuming a ${AVG_BATTERY_PACK_KWH} kWh battery pack`}
+              />
             </div>
 
             <div className="mt-10 rounded-2xl border border-white/10 bg-black p-5 text-sm text-white/60">
@@ -201,14 +214,14 @@ function CalculatorPage() {
                 <BigStat label="Per year" revenue={stats.revenueYear} profit={stats.profitYear} inr={inr} />
               </div>
               <p className="mt-6 text-xs text-white/40">
-                Estimates assume ~{AVG_KWH_PER_SESSION} kWh per session and typical utilization. Actual returns depend on site, tariff, and grid conditions.
+                Estimates assume {AVG_BATTERY_PACK_KWH} kWh battery packs charged at {avgChargePercent}% per session and typical utilization. Actual returns depend on site, tariff, and grid conditions.
               </p>
             </div>
 
             <div className="flex flex-col gap-3 sm:flex-row">
               <a
                 href={`https://wa.me/917019721320?text=${encodeURIComponent(
-                  `Hi Sonar EV, I ran the profit calculator:\n• Chargers: ${chargers}\n• Electricity: ₹${electricityCost}/kWh\n• Tariff: ₹${tariff}/kWh\n• EV traffic: ${evTraffic}/day\n\nEstimated monthly profit: ${inr(stats.profitMonth)}\n\nPlease share a detailed proposal.`,
+                  `Hi Sonar EV, I ran the profit calculator:\n• Chargers: ${chargers}\n• Electricity: ₹${electricityCost}/kWh\n• Tariff: ₹${tariff}/kWh\n• EV traffic: ${evTraffic}/day\n• Avg charge per car: ${avgChargePercent}% of ${AVG_BATTERY_PACK_KWH}kWh\n\nEstimated monthly profit: ${inr(stats.profitMonth)}\n\nPlease share a detailed proposal.`,
                 )}`}
                 target="_blank"
                 rel="noreferrer"
