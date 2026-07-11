@@ -25,7 +25,7 @@ export const Route = createFileRoute("/calculator")({
 });
 
 // Assumptions
-const AVG_KWH_PER_SESSION = 25; // avg energy delivered per EV session
+const AVG_BATTERY_PACK_KWH = 60; // avg EV battery size
 const ADMIN_FEE_PER_KWH = 2; // ₹/kWh platform + admin
 const UTILIZATION_FACTOR = 0.35; // % of nearby EVs that actually charge here per day
 
