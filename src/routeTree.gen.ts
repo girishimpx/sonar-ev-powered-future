@@ -13,6 +13,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ChargersRouteImport } from './routes/chargers'
 import { Route as CalculatorRouteImport } from './routes/calculator'
 import { Route as BlogRouteImport } from './routes/blog'
+import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
@@ -36,6 +37,11 @@ const BlogRoute = BlogRouteImport.update({
   path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AccountRoute = AccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -49,6 +55,7 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/account': typeof AccountRoute
   '/blog': typeof BlogRouteWithChildren
   '/calculator': typeof CalculatorRoute
   '/chargers': typeof ChargersRoute
@@ -57,6 +64,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/account': typeof AccountRoute
   '/blog': typeof BlogRouteWithChildren
   '/calculator': typeof CalculatorRoute
   '/chargers': typeof ChargersRoute
@@ -66,6 +74,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/account': typeof AccountRoute
   '/blog': typeof BlogRouteWithChildren
   '/calculator': typeof CalculatorRoute
   '/chargers': typeof ChargersRoute
@@ -76,16 +85,25 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/account'
     | '/blog'
     | '/calculator'
     | '/chargers'
     | '/contact'
     | '/blog/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/blog' | '/calculator' | '/chargers' | '/contact' | '/blog/$slug'
+  to:
+    | '/'
+    | '/account'
+    | '/blog'
+    | '/calculator'
+    | '/chargers'
+    | '/contact'
+    | '/blog/$slug'
   id:
     | '__root__'
     | '/'
+    | '/account'
     | '/blog'
     | '/calculator'
     | '/chargers'
@@ -95,6 +113,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AccountRoute: typeof AccountRoute
   BlogRoute: typeof BlogRouteWithChildren
   CalculatorRoute: typeof CalculatorRoute
   ChargersRoute: typeof ChargersRoute
@@ -131,6 +150,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/account': {
+      id: '/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -160,6 +186,7 @@ const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AccountRoute: AccountRoute,
   BlogRoute: BlogRouteWithChildren,
   CalculatorRoute: CalculatorRoute,
   ChargersRoute: ChargersRoute,

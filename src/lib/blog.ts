@@ -5,6 +5,7 @@ export type BlogPost = {
   excerpt: string;
   body: string;
   author: string;
+  authorId?: string;
   cover?: string;
   createdAt: number;
 };
@@ -73,6 +74,7 @@ export function addPost(input: {
   body: string;
   author: string;
   cover?: string;
+  authorId?: string;
 }): BlogPost {
   const posts = loadPosts();
   const post: BlogPost = {
@@ -82,6 +84,7 @@ export function addPost(input: {
     excerpt: input.excerpt.trim(),
     body: input.body.trim(),
     author: input.author.trim() || "Sonar EV Team",
+    authorId: input.authorId,
     cover: input.cover?.trim() || undefined,
     createdAt: Date.now(),
   };
@@ -91,6 +94,31 @@ export function addPost(input: {
 
 export function deletePost(id: string) {
   savePosts(loadPosts().filter((p) => p.id !== id));
+}
+
+export function updatePost(
+  id: string,
+  patch: Partial<Pick<BlogPost, "title" | "excerpt" | "body" | "author" | "cover">>,
+): BlogPost | undefined {
+  const posts = loadPosts();
+  const idx = posts.findIndex((p) => p.id === id);
+  if (idx === -1) return undefined;
+  const next: BlogPost = { ...posts[idx], ...patch };
+  if (patch.title) {
+    next.title = patch.title.trim();
+    next.slug = slugify(patch.title);
+  }
+  if (patch.excerpt !== undefined) next.excerpt = patch.excerpt.trim();
+  if (patch.body !== undefined) next.body = patch.body.trim();
+  if (patch.author !== undefined) next.author = patch.author.trim() || next.author;
+  if (patch.cover !== undefined) next.cover = patch.cover.trim() || undefined;
+  posts[idx] = next;
+  savePosts(posts);
+  return next;
+}
+
+export function postsByAuthor(authorId: string): BlogPost[] {
+  return loadPosts().filter((p) => p.authorId === authorId);
 }
 
 export function getPost(slug: string): BlogPost | undefined {
