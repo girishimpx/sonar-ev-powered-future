@@ -9,11 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ChargersRouteImport } from './routes/chargers'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
+const ChargersRoute = ChargersRouteImport.update({
+  id: '/chargers',
+  path: '/chargers',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogRoute = BlogRouteImport.update({
   id: '/blog',
   path: '/blog',
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/blog': typeof BlogRouteWithChildren
+  '/chargers': typeof ChargersRoute
   '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/blog': typeof BlogRouteWithChildren
+  '/chargers': typeof ChargersRoute
   '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRoutesById {
@@ -52,24 +60,33 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/blog': typeof BlogRouteWithChildren
+  '/chargers': typeof ChargersRoute
   '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/account' | '/blog' | '/blog/$slug'
+  fullPaths: '/' | '/account' | '/blog' | '/chargers' | '/blog/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/account' | '/blog' | '/blog/$slug'
-  id: '__root__' | '/' | '/account' | '/blog' | '/blog/$slug'
+  to: '/' | '/account' | '/blog' | '/chargers' | '/blog/$slug'
+  id: '__root__' | '/' | '/account' | '/blog' | '/chargers' | '/blog/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccountRoute: typeof AccountRoute
   BlogRoute: typeof BlogRouteWithChildren
+  ChargersRoute: typeof ChargersRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/chargers': {
+      id: '/chargers'
+      path: '/chargers'
+      fullPath: '/chargers'
+      preLoaderRoute: typeof ChargersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog': {
       id: '/blog'
       path: '/blog'
@@ -115,6 +132,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccountRoute: AccountRoute,
   BlogRoute: BlogRouteWithChildren,
+  ChargersRoute: ChargersRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
