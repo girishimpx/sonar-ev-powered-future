@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ChargersRouteImport } from './routes/chargers'
 import { Route as CalculatorRouteImport } from './routes/calculator'
 import { Route as BlogRouteImport } from './routes/blog'
@@ -16,6 +17,11 @@ import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ChargersRoute = ChargersRouteImport.update({
   id: '/chargers',
   path: '/chargers',
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/blog': typeof BlogRouteWithChildren
   '/calculator': typeof CalculatorRoute
   '/chargers': typeof ChargersRoute
+  '/contact': typeof ContactRoute
   '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRoutesByTo {
@@ -61,6 +68,7 @@ export interface FileRoutesByTo {
   '/blog': typeof BlogRouteWithChildren
   '/calculator': typeof CalculatorRoute
   '/chargers': typeof ChargersRoute
+  '/contact': typeof ContactRoute
   '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRoutesById {
@@ -70,6 +78,7 @@ export interface FileRoutesById {
   '/blog': typeof BlogRouteWithChildren
   '/calculator': typeof CalculatorRoute
   '/chargers': typeof ChargersRoute
+  '/contact': typeof ContactRoute
   '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRouteTypes {
@@ -80,9 +89,17 @@ export interface FileRouteTypes {
     | '/blog'
     | '/calculator'
     | '/chargers'
+    | '/contact'
     | '/blog/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/account' | '/blog' | '/calculator' | '/chargers' | '/blog/$slug'
+  to:
+    | '/'
+    | '/account'
+    | '/blog'
+    | '/calculator'
+    | '/chargers'
+    | '/contact'
+    | '/blog/$slug'
   id:
     | '__root__'
     | '/'
@@ -90,6 +107,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/calculator'
     | '/chargers'
+    | '/contact'
     | '/blog/$slug'
   fileRoutesById: FileRoutesById
 }
@@ -99,10 +117,18 @@ export interface RootRouteChildren {
   BlogRoute: typeof BlogRouteWithChildren
   CalculatorRoute: typeof CalculatorRoute
   ChargersRoute: typeof ChargersRoute
+  ContactRoute: typeof ContactRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/chargers': {
       id: '/chargers'
       path: '/chargers'
@@ -164,6 +190,7 @@ const rootRouteChildren: RootRouteChildren = {
   BlogRoute: BlogRouteWithChildren,
   CalculatorRoute: CalculatorRoute,
   ChargersRoute: ChargersRoute,
+  ContactRoute: ContactRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
