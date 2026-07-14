@@ -1,63 +1,80 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
-  Zap, Gauge, Cpu, Wrench, ShieldCheck, TrendingUp,
-  BarChart3, Smartphone, MapPin, Building2, Hotel, Car,
-  Factory, ShoppingBag, Home as HomeIcon, ArrowRight,
-  CheckCircle2, Plug, Activity, Layers,
+  ArrowRight, Zap, Cpu, Wrench, ShieldCheck, TrendingUp, BarChart3,
+  Smartphone, Handshake, CheckCircle2, Activity, Layers, Users,
+  Building2, Bolt, MapPin, PlugZap, HeartHandshake, LineChart,
+  Download,
 } from "lucide-react";
 import heroImg from "@/assets/hero-charger.jpg";
-import chargerImg from "@/assets/charger-product.jpg";
-import dashboardImg from "@/assets/dashboard.jpg";
 import plazaImg from "@/assets/plaza.jpg";
 import {
   Nav, Footer, FloatingCTAs, ContactStrip, EnquiryForm,
   btnPrimary, btnSecondary,
 } from "@/components/site";
 
-export const Route = createFileRoute("/")({ component: Index });
+export const Route = createFileRoute("/")({
+  component: Index,
+  head: () => ({
+    meta: [
+      { title: "SONAR.EV Franchise — Own an EV Charging Station in India" },
+      {
+        name: "description",
+        content:
+          "Become a SONAR.EV franchise partner. Own an EV charging station backed by enterprise-grade chargers, software, installation, and 24/7 support. 95% revenue share to franchisees.",
+      },
+      { property: "og:title", content: "SONAR.EV Franchise — Own an EV Charging Station in India" },
+      { property: "og:description", content: "Build India's EV charging future. We power it. You profit. Enterprise-grade charging franchise with 95% revenue share." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+});
 
-const chargers = [
-  { power: "30", tag: "Compact DC Fast", use: "Retail, hotels, dealerships", features: ["Dual gun CCS2", "Compact footprint", "Entry commercial"] },
-  { power: "60", tag: "Commercial DC Fast", use: "Offices, malls, residential", features: ["200A output", "Dual gun", "IP55 rated"] },
-  { power: "120", tag: "Public Fast Charging", use: "Public stations, fleet depots", features: ["300A output", "OCPP 1.6J", "Dual 60kW split"] },
-  { power: "180", tag: "Highway Fast Charging", use: "Highways, transit corridors", features: ["High throughput", "Liquid-cooled cable", "Multi-vehicle"] },
-  { power: "240", tag: "Ultra-Fast Hub", use: "Highway hubs, EV plazas", features: ["Ultra-fast", "Modular power", "24/7 uptime"] },
+const steps = [
+  { n: "01", title: "You invest", body: "You invest in the charging station and secure a suitable site." },
+  { n: "02", title: "We supply", body: "SONAR.EV supplies chargers, software, and driver app." },
+  { n: "03", title: "We install", body: "We install, commission, and connect the station to our network." },
+  { n: "04", title: "EVs charge", body: "Customers charge their EVs — payments captured automatically." },
+  { n: "05", title: "You earn", body: "Revenue is shared transparently, monthly." },
+];
+
+const provides = [
+  "Fast DC Chargers", "AC Chargers", "Charging Management Software", "Mobile App",
+  "Remote Monitoring", "Payment Collection", "QR Charging", "Fleet Integration",
+  "Installation Support", "Preventive Maintenance", "Corrective Maintenance", "Spare Parts Support",
+  "Warranty Management", "Firmware Updates", "Technical Helpdesk", "Marketing Support",
+  "Business Analytics Dashboard", "Site Assessment", "Staff Training", "Network Listing",
+];
+
+const responsibilities = [
+  { icon: MapPin, t: "Suitable Land" },
+  { icon: Zap, t: "Electrical Connection" },
+  { icon: Bolt, t: "Transformer (if required)" },
+  { icon: Building2, t: "Civil Work" },
+  { icon: ShieldCheck, t: "Site Security" },
+  { icon: Users, t: "Daily Site Operations" },
+  { icon: Layers, t: "Local Permissions" },
+  { icon: Activity, t: "Internet & Utilities" },
 ];
 
 const whyCards = [
-  { icon: Layers, title: "Complete Infrastructure Setup", body: "From site survey to grid, civil, hardware and go-live — one accountable partner." },
-  { icon: Zap, title: "Fast & Reliable DC Charging", body: "Commercial-grade 30kW to 240kW+ chargers engineered for Indian conditions." },
-  { icon: Cpu, title: "Software + App Included", body: "Free charging management platform and driver app with every deployment." },
-  { icon: Wrench, title: "Installation + Free AMC", body: "Turnkey installation, remote monitoring, and annual maintenance included." },
-  { icon: ShieldCheck, title: "Commercial-Grade Hardware", body: "OCPP-compliant, IP55-rated, safety-certified chargers built to scale." },
-  { icon: TrendingUp, title: "Scalable Business Model", body: "Start with one charger, expand to a network — infrastructure that grows with you." },
-];
-
-const useCases = [
-  { icon: MapPin, title: "Highways & Fuel Stations" },
-  { icon: Hotel, title: "Hotels & Resorts" },
-  { icon: Building2, title: "Apartments & Communities" },
-  { icon: Factory, title: "Offices & Tech Parks" },
-  { icon: Car, title: "Fleet Depots" },
-  { icon: ShoppingBag, title: "Malls & Retail" },
-  { icon: HomeIcon, title: "Real Estate Projects" },
-  { icon: Plug, title: "Auto Dealerships" },
-];
-
-const processSteps = [
-  { n: "01", title: "Consultation & Site Assessment", body: "Load study, footfall, ROI model and site plan." },
-  { n: "02", title: "Charger Recommendation & Proposal", body: "Right-sized hardware mix with commercial terms." },
-  { n: "03", title: "Installation & Deployment", body: "Civil, electrical, grid coordination and commissioning." },
-  { n: "04", title: "Software Onboarding", body: "Dashboard, app, pricing, payments and go-live." },
-  { n: "05", title: "Support, AMC & Scale-up", body: "24/7 monitoring, uptime SLA, and expansion planning." },
+  { icon: TrendingUp, title: "Lowest Revenue Share", body: "Keep 95% of net revenue — one of the most partner-friendly splits in India." },
+  { icon: Cpu, title: "Enterprise Software Included", body: "Charging management platform, analytics, and driver app — all included, free." },
+  { icon: Wrench, title: "AMC Included", body: "Preventive and corrective maintenance handled by SONAR.EV engineers." },
+  { icon: LineChart, title: "AI Business Dashboard", body: "Real-time revenue, utilization, and health metrics for every station." },
+  { icon: HeartHandshake, title: "Dedicated Account Manager", body: "A single point of contact for operations, support, and expansion." },
+  { icon: Layers, title: "Scalable & Future-Ready", body: "Start with one site. Scale to a network with a national brand behind you." },
 ];
 
 const faqs = [
-  { q: "How much does an EV charging station cost to set up?", a: "It depends on charger capacity, site conditions and grid readiness. A 60kW station typically starts from a few lakhs including installation. We share a detailed proposal after a site assessment." },
-  { q: "What is the ROI on an EV charger?", a: "Most commercial DC fast chargers achieve payback in 18–36 months depending on utilization, tariff, and location. We share ROI projections for your specific site." },
-  { q: "Do you provide software and app?", a: "Yes — a charging management dashboard, driver mobile app, and payment integration are included free with every Sonar EV deployment." },
-  { q: "Is AMC and support included?", a: "Free AMC, remote monitoring, and priority support are included. Our engineers respond to critical alerts round the clock." },
-  { q: "Can I white-label the app and station?", a: "Yes. We offer custom branding and white-label options for operators building their own EV charging brand." },
+  { q: "Who owns the charger?", a: "The franchise partner owns the charger and the station assets. SONAR.EV owns the software platform, brand, and network integration." },
+  { q: "Who pays the electricity bills?", a: "The franchise partner is responsible for electricity, internet, and day-to-day utilities. These are treated as approved operating expenses in the revenue-share calculation." },
+  { q: "How is revenue calculated?", a: "Revenue share is calculated on net revenue — after electricity, payment-gateway fees, applicable taxes, and other approved operating expenses. Partners receive 95%, SONAR.EV retains 5%." },
+  { q: "Can I own multiple stations?", a: "Yes. Partners in good standing can expand to additional sites with priority rights on new territories." },
+  { q: "Who maintains the charger?", a: "SONAR.EV provides preventive maintenance, remote monitoring, spare parts, and emergency support under the AMC." },
+  { q: "How long is the franchise agreement?", a: "The standard franchise agreement is 5 years, renewable, subject to performance and brand-guideline compliance." },
+  { q: "What happens if the charger fails?", a: "Our 24/7 technical helpdesk and field engineers respond under a defined SLA, with remote diagnostics and spare-parts support." },
+  { q: "Can I exit the agreement?", a: "The agreement includes clear termination clauses and exit procedures. A specialist will walk you through the terms during consultation." },
 ];
 
 function Index() {
@@ -66,16 +83,14 @@ function Index() {
       <Nav />
       <Hero />
       <TrustStrip />
+      <ModelSection />
+      <RevenueSplitSection />
+      <ProvidesSection />
+      <ResponsibilitiesSection />
+      <AmcSection />
+      <ContractSection />
       <WhySection />
-      <ContactStrip />
-      <ChargerSection />
-      <UseCasesSection />
-      <ProcessSection />
-      <RoiSection />
-      <SoftwareSection />
-      <TrustSection />
-      <PartnersSection />
-      <ContactStrip>Ready to power your property? Talk to Sonar EV today.</ContactStrip>
+      <ContactStrip>Ready to power a station? Talk to a SONAR.EV franchise specialist.</ContactStrip>
       <LeadSection />
       <FaqSection />
       <Footer />
@@ -92,26 +107,38 @@ function Hero() {
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/70">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-white" />
-            End-to-end EV charging infrastructure • India
+            SONAR.EV Franchise Program • India
           </div>
           <h1 className="mt-6 text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-            Build the Future of{" "}
+            Own an EV charging business —{" "}
             <span className="bg-gradient-to-r from-white to-white/40 bg-clip-text text-transparent">
-              EV Charging
+              without building it yourself.
             </span>
           </h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
-            Sonar EV is India's end-to-end EV charging infrastructure partner —
-            fast DC chargers, software, installation, and lifetime support built
-            for serious businesses, properties, and fleets.
+            Launch a SONAR.EV charging station backed by enterprise-grade infrastructure,
+            intelligent software, nationwide support, and recurring revenue. We power it. You profit.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link to="/calculator" className={btnPrimary}>
-              Calculate Your Profit <ArrowRight className="h-4 w-4" />
+            <Link to="/contact" className={btnPrimary}>
+              Become a Partner <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link to="/chargers" className={btnSecondary}>
-              Explore Chargers
+            <Link to="/calculator" className={btnSecondary}>
+              <Download className="h-4 w-4" /> Estimate Your Earnings
             </Link>
+          </div>
+          <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
+            {[
+              { n: "99.9%", t: "Uptime target" },
+              { n: "24/7", t: "Technical support" },
+              { n: "95%", t: "Revenue to partner" },
+              { n: "PAN India", t: "Expansion" },
+            ].map((s) => (
+              <div key={s.t} className="rounded-xl border border-white/10 bg-white/[0.03] p-3">
+                <div className="text-xl font-semibold">{s.n}</div>
+                <div className="mt-0.5 text-[11px] text-white/50">{s.t}</div>
+              </div>
+            ))}
           </div>
         </div>
         <div className="relative">
@@ -119,7 +146,7 @@ function Hero() {
           <div className="overflow-hidden rounded-2xl border border-white/10 shadow-[0_40px_100px_-30px_rgba(0,0,0,0.9)]">
             <img
               src={heroImg}
-              alt="Premium Sonar EV DC fast charger charging a modern electric SUV"
+              alt="SONAR.EV DC fast charging station"
               width={1920}
               height={1200}
               className="h-full w-full object-cover"
@@ -132,7 +159,7 @@ function Hero() {
 }
 
 function TrustStrip() {
-  const items = ["Fast Charger Solutions", "End-to-End Setup", "Free Software & App", "Free AMC Support", "Built for Commercial Scale"];
+  const items = ["Enterprise Hardware", "Software Included", "24/7 Support", "AMC Included", "95% Revenue Share"];
   return (
     <section className="border-y border-white/10 bg-white/[0.02]">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-10 gap-y-3 px-6 py-5 text-xs text-white/60 sm:text-sm">
@@ -156,18 +183,232 @@ function SectionHeader({ eyebrow, title, sub }: { eyebrow: string; title: string
   );
 }
 
-function WhySection() {
+function ModelSection() {
   return (
-    <section id="solutions" className="py-24 md:py-32">
+    <section id="model" className="py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeader
-          eyebrow="Why Sonar EV"
-          title="Infrastructure-grade EV charging, built for scale"
-          sub="One accountable partner across hardware, software, installation, and support."
+          eyebrow="Business Model"
+          title="How the SONAR.EV franchise works"
+          sub="Five steps from investment to recurring revenue — with SONAR.EV accountable for the tech and operations spine."
         />
+        <div className="mt-16 grid gap-4 md:grid-cols-5">
+          {steps.map((s) => (
+            <div key={s.n} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+              <div className="text-xs font-mono text-white/40">{s.n}</div>
+              <div className="mt-3 text-sm font-semibold">{s.title}</div>
+              <p className="mt-2 text-xs leading-relaxed text-white/60">{s.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function RevenueSplitSection() {
+  return (
+    <section id="revenue" className="border-y border-white/10 bg-white/[0.02] py-24 md:py-32">
+      <div className="mx-auto max-w-7xl px-6">
+        <SectionHeader eyebrow="Revenue Sharing" title="Transparent revenue sharing" />
+        <div className="mt-14 grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:items-center">
+          <div className="rounded-3xl border border-white/10 bg-black p-8">
+            <div className="text-xs font-medium uppercase tracking-widest text-white/50">Net revenue split</div>
+            <div className="mt-6 h-4 w-full overflow-hidden rounded-full border border-white/10 bg-white/5">
+              <div className="flex h-full">
+                <div className="flex h-full items-center justify-end bg-white pr-3 text-[10px] font-semibold text-black" style={{ width: "95%" }}>
+                  95%
+                </div>
+                <div className="flex h-full items-center justify-center bg-white/25 text-[10px] font-semibold text-white" style={{ width: "5%" }}>
+                  5%
+                </div>
+              </div>
+            </div>
+            <div className="mt-6 grid grid-cols-2 gap-4">
+              <div className="rounded-2xl border border-white/10 bg-white p-5 text-black">
+                <div className="text-xs font-semibold uppercase tracking-widest text-black/60">Franchise Partner</div>
+                <div className="mt-3 text-4xl font-semibold">95%</div>
+                <div className="mt-1 text-xs text-black/60">of net revenue</div>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
+                <div className="text-xs font-semibold uppercase tracking-widest text-white/50">SONAR.EV</div>
+                <div className="mt-3 text-4xl font-semibold">5%</div>
+                <div className="mt-1 text-xs text-white/50">of net revenue</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+              Net revenue means net — nothing hidden.
+            </h3>
+            <p className="mt-4 text-white/60">
+              The revenue share is calculated <span className="text-white">after</span> electricity charges,
+              payment gateway fees, applicable taxes, and other approved operating expenses — ensuring a
+              transparent and sustainable partnership for both sides.
+            </p>
+            <ul className="mt-6 space-y-2 text-sm text-white/70">
+              {[
+                "Automated monthly reconciliation",
+                "Live revenue dashboard, per station",
+                "Payments directly to your bank account",
+                "Full audit trail on every session",
+              ].map((t) => (
+                <li key={t} className="flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-white" /> {t}
+                </li>
+              ))}
+            </ul>
+            <Link to="/calculator" className={`${btnSecondary} mt-8`}>
+              Model your earnings <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProvidesSection() {
+  return (
+    <section id="provides" className="py-24 md:py-32">
+      <div className="mx-auto max-w-7xl px-6">
+        <SectionHeader
+          eyebrow="What SONAR.EV Provides"
+          title="Everything except the land and the local ops"
+          sub="One accountable partner across hardware, software, installation, support, and marketing."
+        />
+        <div className="mt-14 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+          {provides.map((t) => (
+            <div key={t} className="flex items-start gap-2.5 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3.5">
+              <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-white" />
+              <span className="text-sm text-white/85">{t}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ResponsibilitiesSection() {
+  return (
+    <section className="border-y border-white/10 bg-white/[0.02] py-24 md:py-32">
+      <div className="mx-auto max-w-7xl px-6">
+        <SectionHeader
+          eyebrow="Franchise Partner Responsibilities"
+          title="What you bring to the table"
+          sub="Your role is site, ownership, and local presence. Everything else is on us."
+        />
+        <div className="mt-14 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {responsibilities.map(({ icon: Icon, t }) => (
+            <div key={t} className="flex items-center gap-3 rounded-2xl border border-white/10 bg-black p-5">
+              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-white/15 bg-white/5">
+                <Icon className="h-5 w-5 text-white" />
+              </div>
+              <span className="text-sm font-medium">{t}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function AmcSection() {
+  const items = [
+    "Scheduled Preventive Maintenance",
+    "Emergency Breakdown Support",
+    "Software Updates & Firmware",
+    "Remote Diagnostics",
+    "Performance Monitoring",
+    "Technical Hotline",
+    "Spare Parts Supply",
+    "Charger Availability Monitoring",
+    "Fault Resolution SLAs",
+    "Annual Maintenance Contracts",
+  ];
+  return (
+    <section className="py-24 md:py-32">
+      <div className="mx-auto grid max-w-7xl gap-14 px-6 lg:grid-cols-2 lg:items-center">
+        <div className="relative">
+          <div className="absolute -inset-4 -z-10 rounded-3xl bg-white/5 blur-2xl" />
+          <img src={plazaImg} alt="SONAR.EV field service" loading="lazy" width={1600} height={912} className="w-full rounded-2xl border border-white/10 object-cover" />
+        </div>
+        <div>
+          <div className="text-xs font-medium uppercase tracking-[0.2em] text-white/50">Operations & Maintenance</div>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
+            Complete AMC & technical support
+          </h2>
+          <p className="mt-4 text-white/60">
+            SONAR.EV keeps the tech running so you can focus on running the site. Our engineering
+            network delivers proactive maintenance, remote diagnostics, and rapid on-ground response.
+          </p>
+          <ul className="mt-8 grid gap-2 sm:grid-cols-2">
+            {items.map((t) => (
+              <li key={t} className="flex items-center gap-2 text-sm text-white/75">
+                <CheckCircle2 className="h-4 w-4 text-white" /> {t}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ContractSection() {
+  const cards = [
+    {
+      title: "Franchise Agreement",
+      items: ["Duration: 5 years, renewable", "Revenue share: 95% partner / 5% SONAR.EV", "Termination clauses", "Performance requirements", "Brand guidelines", "Expansion rights"],
+    },
+    {
+      title: "Warranty",
+      items: ["Standard hardware warranty", "Extended warranty options", "Replacement policy", "Defined support response times"],
+    },
+    {
+      title: "AMC",
+      items: ["Scheduled preventive visits", "Emergency support", "Remote monitoring", "Software & firmware maintenance", "Spare-parts coverage"],
+    },
+    {
+      title: "Service Level Agreement",
+      items: ["99.9% uptime target", "Issue priority levels", "Defined response times", "Escalation matrix", "Multi-channel support"],
+    },
+  ];
+  return (
+    <section id="contract" className="border-y border-white/10 bg-white/[0.02] py-24 md:py-32">
+      <div className="mx-auto max-w-7xl px-6">
+        <SectionHeader eyebrow="Contract Overview" title="Clear, professional, partner-first agreements" />
+        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {cards.map((c) => (
+            <details key={c.title} className="group rounded-2xl border border-white/10 bg-black p-6 open:border-white/25">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-3">
+                <span className="text-base font-semibold">{c.title}</span>
+                <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-white/15 text-white/60 transition-transform group-open:rotate-45">+</span>
+              </summary>
+              <ul className="mt-4 space-y-2 text-sm text-white/70">
+                {c.items.map((it) => (
+                  <li key={it} className="flex items-start gap-2">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-white/80" /> {it}
+                  </li>
+                ))}
+              </ul>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function WhySection() {
+  return (
+    <section className="py-24 md:py-32">
+      <div className="mx-auto max-w-7xl px-6">
+        <SectionHeader eyebrow="Why SONAR.EV" title="Built to make franchise partners win" />
         <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {whyCards.map(({ icon: Icon, title, body }) => (
-            <div key={title} className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-7 transition-colors hover:border-white/25">
+            <div key={title} className="group rounded-2xl border border-white/10 bg-white/[0.03] p-7 transition-colors hover:border-white/25">
               <div className="grid h-10 w-10 place-items-center rounded-lg border border-white/15 bg-white/5">
                 <Icon className="h-5 w-5 text-white" />
               </div>
@@ -181,236 +422,32 @@ function WhySection() {
   );
 }
 
-function ChargerSection() {
-  return (
-    <section id="chargers" className="relative border-y border-white/10 bg-white/[0.02] py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
-          <div>
-            <SectionHeader eyebrow="Product Line" title="From 30kW to 240kW — DC fast chargers for every site" />
-            <p className="mt-6 text-white/60">
-              Commercial-grade, OCPP-compliant, engineered for Indian grid conditions. Custom power configurations available on request.
-            </p>
-            <Link to="/chargers" className={`${btnSecondary} mt-6`}>
-              View full specifications <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-          <div className="relative mx-auto w-full max-w-md">
-            <div className="absolute -inset-8 -z-10 rounded-full bg-white/5 blur-3xl" />
-            <img src={chargerImg} alt="Sonar EV DC fast charger" loading="lazy" width={1024} height={1408} className="mx-auto h-auto w-full object-contain" />
-          </div>
-        </div>
-
-        <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-          {chargers.map((c) => (
-            <div key={c.power} className="group flex flex-col rounded-2xl border border-white/10 bg-black p-6 transition-all hover:-translate-y-1 hover:border-white/30">
-              <div className="flex items-baseline gap-1">
-                <span className="text-4xl font-semibold tracking-tight">{c.power}</span>
-                <span className="text-sm text-white/50">kW</span>
-              </div>
-              <div className="mt-1 text-xs font-medium uppercase tracking-wider text-white/50">{c.tag}</div>
-              <p className="mt-3 text-sm text-white/60">{c.use}</p>
-              <ul className="mt-4 space-y-1.5 text-xs text-white/60">
-                {c.features.map((f) => (
-                  <li key={f} className="flex items-center gap-1.5">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-white/80" /> {f}
-                  </li>
-                ))}
-              </ul>
-              <Link to="/chargers" hash={c.power} className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-white transition-transform group-hover:translate-x-0.5">
-                View details <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function UseCasesSection() {
-  return (
-    <section id="industries" className="py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-6">
-        <SectionHeader
-          eyebrow="Industries Served"
-          title="Where Sonar EV chargers get deployed"
-          sub="If your property has parking, footfall, or fleet movement — it's a charging opportunity."
-        />
-        <div className="mt-16 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-          {useCases.map(({ icon: Icon, title }) => (
-            <div key={title} className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-5 transition-colors hover:border-white/25 hover:bg-white/[0.06]">
-              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-white/15 bg-white/5">
-                <Icon className="h-5 w-5 text-white" />
-              </div>
-              <span className="text-sm font-medium">{title}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ProcessSection() {
-  return (
-    <section id="process" className="relative border-y border-white/10 bg-white/[0.02] py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-6">
-        <SectionHeader eyebrow="How It Works" title="From site to station — a simple, premium journey" />
-        <div className="mt-16 grid gap-4 md:grid-cols-5">
-          {processSteps.map((p) => (
-            <div key={p.n} className="rounded-2xl border border-white/10 bg-black p-6">
-              <div className="text-xs font-mono text-white/40">{p.n}</div>
-              <div className="mt-3 text-sm font-semibold">{p.title}</div>
-              <p className="mt-2 text-xs leading-relaxed text-white/60">{p.body}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function RoiSection() {
-  const stats = [
-    { n: "18–36", u: "months", t: "Typical payback window" },
-    { n: "99.9%", u: "", t: "Target charger uptime" },
-    { n: "24/7", u: "", t: "Remote monitoring & support" },
-  ];
-  return (
-    <section id="roi" className="py-24 md:py-32">
-      <div className="mx-auto grid max-w-7xl gap-14 px-6 lg:grid-cols-2 lg:items-center">
-        <div className="relative order-2 lg:order-1">
-          <div className="absolute -inset-4 -z-10 rounded-3xl bg-white/5 blur-2xl" />
-          <img src={plazaImg} alt="Premium EV charging plaza" loading="lazy" width={1600} height={912} className="w-full rounded-2xl border border-white/10 object-cover" />
-        </div>
-        <div className="order-1 lg:order-2">
-          <div className="text-xs font-medium uppercase tracking-[0.2em] text-white/50">Business Opportunity</div>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">Turn idle parking into recurring revenue</h2>
-          <p className="mt-5 text-white/60">
-            EV adoption in India is scaling fast. Property owners, fuel retailers, and fleet operators who deploy charging infrastructure today capture location, brand, and revenue advantage.
-          </p>
-          <div className="mt-8 grid grid-cols-3 gap-4">
-            {stats.map((s) => (
-              <div key={s.t} className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
-                <div className="flex items-baseline gap-1">
-                  <span className="text-2xl font-semibold">{s.n}</span>
-                  {s.u && <span className="text-xs text-white/50">{s.u}</span>}
-                </div>
-                <div className="mt-1 text-xs text-white/50">{s.t}</div>
-              </div>
-            ))}
-          </div>
-          <Link to="/contact" className={`${btnPrimary} mt-8`}>
-            Request a Proposal <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function SoftwareSection() {
-  const feats = [
-    { icon: BarChart3, t: "Revenue & usage analytics" },
-    { icon: Activity, t: "Charger health & uptime" },
-    { icon: Gauge, t: "Live session tracking" },
-    { icon: Smartphone, t: "Free driver mobile app" },
-  ];
-  return (
-    <section id="software" className="border-y border-white/10 bg-white/[0.02] py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-6">
-        <SectionHeader eyebrow="Software" title="Not just hardware. A complete platform." sub="Every Sonar EV deployment includes our management dashboard and mobile app — free, forever." />
-        <div className="mt-16 grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
-          <div className="relative">
-            <div className="absolute -inset-6 -z-10 rounded-3xl bg-white/5 blur-3xl" />
-            <div className="overflow-hidden rounded-2xl border border-white/10">
-              <img src={dashboardImg} alt="Sonar EV charging management dashboard" loading="lazy" width={1600} height={1000} className="w-full" />
-            </div>
-          </div>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-            {feats.map(({ icon: Icon, t }) => (
-              <div key={t} className="flex items-start gap-3 rounded-xl border border-white/10 bg-black p-4">
-                <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-white/15 bg-white/5">
-                  <Icon className="h-4 w-4 text-white" />
-                </div>
-                <div>
-                  <div className="text-sm font-semibold">{t}</div>
-                  <div className="mt-0.5 text-xs text-white/50">Enterprise-grade tooling included with every station.</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function TrustSection() {
-  const items = [
-    { icon: ShieldCheck, t: "Certified & compliant", d: "OCPP 1.6J, IEC 61851-1/-23, IEC 62196, CE." },
-    { icon: Wrench, t: "Engineering depth", d: "In-house deployment and service network." },
-    { icon: Activity, t: "Uptime SLA", d: "Targeted 99.9%+ uptime across the fleet." },
-    { icon: Cpu, t: "Modern architecture", d: "Cloud-native, secure, remotely upgradable." },
-  ];
-  return (
-    <section className="py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-6">
-        <SectionHeader eyebrow="Trust & Quality" title="Built to power infrastructure for decades" />
-        <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {items.map(({ icon: Icon, t, d }) => (
-            <div key={t} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-              <Icon className="h-6 w-6 text-white" />
-              <div className="mt-4 text-base font-semibold">{t}</div>
-              <p className="mt-1.5 text-sm text-white/60">{d}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function PartnersSection() {
-  const logos = ["Signature Hotels", "Metro Fleet", "Urban Malls", "Highway 6", "GreenPark", "EcoStay"];
-  return (
-    <section className="border-y border-white/10 bg-white/[0.02] py-16">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="text-center text-xs font-medium uppercase tracking-[0.2em] text-white/40">
-          Trusted by forward-thinking operators
-        </div>
-        <div className="mt-8 grid grid-cols-2 gap-6 opacity-60 sm:grid-cols-3 lg:grid-cols-6">
-          {logos.map((l) => (
-            <div key={l} className="text-center text-sm font-semibold tracking-tight text-white/70">{l}</div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function LeadSection() {
   return (
-    <section id="enquire" className="py-24 md:py-32">
+    <section id="apply" className="py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6">
         <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.04] to-transparent p-8 sm:p-12 lg:p-16">
           <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr]">
             <div>
-              <div className="text-xs font-medium uppercase tracking-[0.2em] text-white/50">Talk to Sonar EV</div>
+              <div className="text-xs font-medium uppercase tracking-[0.2em] text-white/50">Become a Franchise Partner</div>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
-                Ready to build your EV charging business?
+                Apply for a SONAR.EV franchise.
               </h2>
               <p className="mt-4 max-w-md text-white/60">
-                Share a few details and our team will get back within 24 hours with a site plan and proposal.
+                Share a few details and a franchise specialist will reach out within 24 hours with a
+                tailored proposal for your city and site.
               </p>
               <ul className="mt-8 space-y-3 text-sm">
-                {["Free site consultation", "Custom hardware + ROI proposal", "Software, app & AMC included"].map((t) => (
+                {["Free site & feasibility consultation", "ROI model tailored to your site", "Hardware + software + AMC included", "5-year renewable agreement"].map((t) => (
                   <li key={t} className="flex items-center gap-2 text-white/70">
                     <CheckCircle2 className="h-4 w-4 text-white" /> {t}
                   </li>
                 ))}
               </ul>
+              <div className="mt-8 rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-xs text-white/50">
+                Note: Financial examples anywhere on this site are illustrative estimates based on your
+                inputs. Actual results depend on utilization, tariffs, local demand, and operating costs.
+              </div>
             </div>
             <EnquiryForm />
           </div>
@@ -424,7 +461,7 @@ function FaqSection() {
   return (
     <section id="faq" className="border-t border-white/10 bg-white/[0.02] py-24 md:py-32">
       <div className="mx-auto max-w-4xl px-6">
-        <SectionHeader eyebrow="FAQ" title="Answers to common questions" />
+        <SectionHeader eyebrow="FAQ" title="Franchise questions, answered" />
         <div className="mt-14 divide-y divide-white/10 rounded-2xl border border-white/10 bg-black">
           {faqs.map((f) => (
             <details key={f.q} className="group px-6 py-5">
@@ -440,3 +477,6 @@ function FaqSection() {
     </section>
   );
 }
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const _icons = { PlugZap, Handshake, Smartphone, BarChart3 };

@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Mail, MessageCircle, Phone, Menu, X, Calculator } from "lucide-react";
+import { ArrowRight, Mail, MessageCircle, Phone, Menu, X, Handshake } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import logoAsset from "@/assets/sonar-logo.png.asset.json";
 
@@ -34,8 +34,9 @@ export function Logo({ className = "h-7" }: { className?: string }) {
 
 const NAV_LINKS: Array<{ label: string; to?: string; href?: string }> = [
   { label: "Home", to: "/" },
-  { label: "DC Fast Chargers", to: "/chargers" },
-  { label: "Profit Calculator", to: "/calculator" },
+  { label: "Franchise Model", to: "/chargers" },
+  { label: "Earnings Calculator", to: "/calculator" },
+  { label: "Contact", to: "/contact" },
 ];
 
 export function Nav() {
@@ -68,10 +69,10 @@ export function Nav() {
         </nav>
         <div className="flex items-center gap-2">
           <Link
-            to="/calculator"
+            to="/contact"
             className="inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-xs font-semibold text-black transition-all hover:bg-white/90 hover:shadow-[0_0_25px_-8px_rgba(255,255,255,0.7)]"
           >
-            <Calculator className="h-3.5 w-3.5" /> Profit Calculator
+            <Handshake className="h-3.5 w-3.5" /> Become a Partner
           </Link>
           <button
             onClick={() => setOpen((v) => !v)}
@@ -123,11 +124,12 @@ export function Footer() {
           <div className="lg:col-span-2">
             <Logo className="h-8" />
             <p className="mt-5 max-w-sm text-sm text-white/60">
-              Sonar EV builds end-to-end EV charging infrastructure for India's
-              businesses, properties, and fleets. Powering your future.
+              SONAR.EV powers India's EV charging future. We build, operate and
+              support the infrastructure — you own the station, run the site, and
+              earn recurring revenue.
             </p>
             <Link to="/contact" className={`${btnPrimary} mt-6`}>
-              Enquire now <ArrowRight className="h-4 w-4" />
+              Become a Partner <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
           <div>
@@ -139,10 +141,10 @@ export function Footer() {
                 <Link to="/" className="text-white/60 hover:text-white">Home</Link>
               </li>
               <li>
-                <Link to="/chargers" className="text-white/60 hover:text-white">DC Fast Chargers</Link>
+                <Link to="/chargers" className="text-white/60 hover:text-white">Franchise Model</Link>
               </li>
               <li>
-                <Link to="/calculator" className="text-white/60 hover:text-white">Profit Calculator</Link>
+                <Link to="/calculator" className="text-white/60 hover:text-white">Earnings Calculator</Link>
               </li>
               <li>
                 <Link to="/blog" className="text-white/60 hover:text-white">Blog</Link>
@@ -248,9 +250,9 @@ export function EnquiryForm({ compact = false }: { compact?: boolean }) {
       <div className="mx-auto grid h-14 w-14 place-items-center rounded-full border border-white/20 bg-white text-black">
         ✓
       </div>
-      <h3 className="mt-5 text-xl font-semibold text-white">Request received</h3>
+      <h3 className="mt-5 text-xl font-semibold text-white">Application received</h3>
       <p className="mt-2 text-sm text-white/60">
-        A Sonar EV specialist will reach out within 24 hours.
+        A SONAR.EV franchise specialist will reach out within 24 hours.
       </p>
     </div>
   ) : (
@@ -264,39 +266,89 @@ export function EnquiryForm({ compact = false }: { compact?: boolean }) {
       <Field label="Full name" name="name" required />
       <Field label="Phone" name="phone" type="tel" placeholder="+91" required />
       <Field label="Email" name="email" type="email" required />
+      <Field label="Company (optional)" name="company" />
+      <Field label="State" name="state" required />
       <Field label="City" name="city" required />
       <div className={compact ? "" : "sm:col-span-2"}>
         <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-white/50">
-          Business / property type
+          Land availability
         </label>
         <select
           required
-          name="business"
+          name="land"
           className="w-full rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white outline-none transition-colors focus:border-white/40"
         >
-          <option className="bg-black">Hotel / Resort</option>
-          <option className="bg-black">Highway / Fuel Station</option>
-          <option className="bg-black">Apartment / Residential</option>
-          <option className="bg-black">Office / Commercial</option>
-          <option className="bg-black">Mall / Retail</option>
-          <option className="bg-black">Fleet Operator</option>
-          <option className="bg-black">Dealership</option>
-          <option className="bg-black">Other</option>
+          <option className="bg-black">I own suitable land</option>
+          <option className="bg-black">I have leased land</option>
+          <option className="bg-black">Identifying a site</option>
+          <option className="bg-black">Need help sourcing land</option>
+        </select>
+      </div>
+      <div>
+        <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-white/50">
+          Investment budget
+        </label>
+        <select
+          required
+          name="budget"
+          className="w-full rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white outline-none transition-colors focus:border-white/40"
+        >
+          <option className="bg-black">Under ₹15 L</option>
+          <option className="bg-black">₹15 L – ₹30 L</option>
+          <option className="bg-black">₹30 L – ₹60 L</option>
+          <option className="bg-black">₹60 L – ₹1 Cr</option>
+          <option className="bg-black">₹1 Cr+</option>
+        </select>
+      </div>
+      <div>
+        <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-white/50">
+          Preferred charger capacity
+        </label>
+        <select
+          required
+          name="capacity"
+          className="w-full rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white outline-none transition-colors focus:border-white/40"
+        >
+          <option className="bg-black">30 kW</option>
+          <option className="bg-black">60 kW</option>
+          <option className="bg-black">120 kW</option>
+          <option className="bg-black">180 kW</option>
+          <option className="bg-black">240 kW</option>
+          <option className="bg-black">Not sure — recommend for me</option>
+        </select>
+      </div>
+      <div>
+        <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-white/50">
+          Timeline to launch
+        </label>
+        <select
+          required
+          name="timeline"
+          className="w-full rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white outline-none transition-colors focus:border-white/40"
+        >
+          <option className="bg-black">Within 1 month</option>
+          <option className="bg-black">1 – 3 months</option>
+          <option className="bg-black">3 – 6 months</option>
+          <option className="bg-black">6+ months</option>
         </select>
       </div>
       <div className={compact ? "" : "sm:col-span-2"}>
         <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-white/50">
-          Project requirement
+          Business experience & notes
         </label>
         <textarea
-          name="req"
+          name="notes"
           rows={3}
-          placeholder="Tell us about your site, expected usage, or goals..."
+          placeholder="Tell us about your background, site details, or questions..."
           className="w-full rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white outline-none transition-colors focus:border-white/40"
         />
       </div>
+      <label className={`flex items-start gap-2 text-xs text-white/60 ${compact ? "" : "sm:col-span-2"}`}>
+        <input type="checkbox" required className="mt-0.5 h-4 w-4 accent-white" />
+        <span>I agree to be contacted by SONAR.EV about franchise opportunities.</span>
+      </label>
       <button type="submit" className={`${btnPrimary} ${compact ? "" : "sm:col-span-2"}`}>
-        Get My Consultation <ArrowRight className="h-4 w-4" />
+        Request Franchise Consultation <ArrowRight className="h-4 w-4" />
       </button>
     </form>
   );
