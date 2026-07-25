@@ -1,17 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ArrowRight, PenSquare, Calendar, User } from "lucide-react";
-import {
-  Nav,
-  Footer,
-  FloatingCTAs,
-  ContactStrip,
-} from "@/components/site";
-import {
-  loadPosts,
-  formatDate,
-  type BlogPost,
-} from "@/lib/blog";
+import { Nav, Footer, FloatingCTAs, ContactStrip } from "@/components/site";
+import { loadPosts, formatDate, type BlogPost } from "@/lib/blog";
 
 export const Route = createFileRoute("/blog")({
   component: BlogIndex,
@@ -26,8 +17,7 @@ export const Route = createFileRoute("/blog")({
       { property: "og:title", content: "Blog — Sonar EV" },
       {
         property: "og:description",
-        content:
-          "Insights, guides and case studies on EV charging infrastructure in India.",
+        content: "Insights, guides and case studies on EV charging infrastructure in India.",
       },
     ],
   }),
@@ -48,16 +38,17 @@ function BlogIndex() {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_0%,rgba(255,255,255,0.08),transparent_70%)]" />
         <div className="relative mx-auto max-w-7xl px-6 py-20 md:py-24">
           <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/70">
-                <PenSquare className="h-3.5 w-3.5" /> Sonar EV Journal
-              </div>
-              <h1 className="mt-6 text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
-                Insights on EV charging <br />
-                <span className="text-white/50">infrastructure & business</span>
-              </h1>
-              <p className="mt-5 max-w-xl text-white/60">
-                Field notes, sizing guides and business playbooks from the team building India's next EV charging network.
-              </p>
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/70">
+              <PenSquare className="h-3.5 w-3.5" /> Sonar EV Journal
+            </div>
+            <h1 className="mt-6 text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
+              Insights on EV charging <br />
+              <span className="text-white/50">infrastructure & business</span>
+            </h1>
+            <p className="mt-5 max-w-xl text-white/60">
+              Field notes, sizing guides and business playbooks from the team building India's next
+              EV charging network.
+            </p>
           </div>
         </div>
       </section>
@@ -94,12 +85,8 @@ function BlogIndex() {
                         {p.author}
                       </span>
                     </div>
-                    <h2 className="mt-3 text-lg font-semibold leading-snug">
-                      {p.title}
-                    </h2>
-                    <p className="mt-2 flex-1 text-sm leading-relaxed text-white/60">
-                      {p.excerpt}
-                    </p>
+                    <h2 className="mt-3 text-lg font-semibold leading-snug">{p.title}</h2>
+                    <p className="mt-2 flex-1 text-sm leading-relaxed text-white/60">{p.excerpt}</p>
                     <div className="mt-5 flex items-center justify-between">
                       <Link
                         to="/blog/$slug"

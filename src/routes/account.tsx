@@ -12,14 +12,7 @@ import {
   FileText,
 } from "lucide-react";
 import { btnPrimary, btnSecondary, Logo } from "@/components/site";
-import {
-  currentUser,
-  login,
-  logout,
-  signup,
-  updateProfile,
-  type User,
-} from "@/lib/auth";
+import { currentUser, login, logout, signup, updateProfile, type User } from "@/lib/auth";
 import {
   addPost,
   deletePost,
@@ -59,9 +52,7 @@ function AccountPage() {
 
   if (!ready) {
     return (
-      <div className="grid min-h-screen place-items-center bg-black text-white/50">
-        Loading…
-      </div>
+      <div className="grid min-h-screen place-items-center bg-black text-white/50">Loading…</div>
     );
   }
 
@@ -70,9 +61,7 @@ function AccountPage() {
       <header className="border-b border-white/10">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
           <Logo />
-          <div className="text-xs uppercase tracking-widest text-white/40">
-            Private · Account
-          </div>
+          <div className="text-xs uppercase tracking-widest text-white/40">Private · Account</div>
         </div>
       </header>
 
@@ -97,10 +86,7 @@ function AuthPanel({ onAuthed }: { onAuthed: (u: User) => void }) {
   function submit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
-    const res =
-      mode === "login"
-        ? login(email, password)
-        : signup({ email, name, password });
+    const res = mode === "login" ? login(email, password) : signup({ email, name, password });
     if (!res.ok) {
       setError(res.error);
       return;
@@ -122,12 +108,7 @@ function AuthPanel({ onAuthed }: { onAuthed: (u: User) => void }) {
 
         <form onSubmit={submit} className="mt-6 space-y-4">
           {mode === "signup" && (
-            <AuthField
-              label="Name"
-              value={name}
-              onChange={setName}
-              placeholder="Your name"
-            />
+            <AuthField label="Name" value={name} onChange={setName} placeholder="Your name" />
           )}
           <AuthField
             label="Email"
@@ -187,8 +168,7 @@ function AuthPanel({ onAuthed }: { onAuthed: (u: User) => void }) {
         </div>
       </div>
       <p className="mt-6 text-center text-xs text-white/30">
-        This is a private area. It is not indexed and not linked from the public
-        site.
+        This is a private area. It is not indexed and not linked from the public site.
       </p>
     </main>
   );
@@ -259,12 +239,8 @@ function Dashboard({
     <main className="mx-auto max-w-6xl px-6 py-10">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <div className="text-xs uppercase tracking-widest text-white/40">
-            Welcome back
-          </div>
-          <h1 className="mt-1 text-2xl font-semibold tracking-tight">
-            {user.name}
-          </h1>
+          <div className="text-xs uppercase tracking-widest text-white/40">Welcome back</div>
+          <h1 className="mt-1 text-2xl font-semibold tracking-tight">{user.name}</h1>
           <div className="text-sm text-white/50">{user.email}</div>
         </div>
         <button
@@ -303,10 +279,7 @@ function Dashboard({
           ) : (
             <ul className="mt-6 divide-y divide-white/10 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02]">
               {posts.map((p) => (
-                <li
-                  key={p.id}
-                  className="flex items-center justify-between gap-4 px-5 py-4"
-                >
+                <li key={p.id} className="flex items-center justify-between gap-4 px-5 py-4">
                   <div className="min-w-0">
                     <div className="truncate font-medium">{p.title}</div>
                     <div className="mt-0.5 text-xs text-white/40">
@@ -373,9 +346,7 @@ function TabButton({
     <button
       onClick={onClick}
       className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-medium transition-colors ${
-        active
-          ? "bg-white text-black"
-          : "text-white/60 hover:text-white"
+        active ? "bg-white text-black" : "text-white/60 hover:text-white"
       }`}
     >
       {children}
@@ -385,13 +356,7 @@ function TabButton({
 
 /* -------------------------------- Profile -------------------------------- */
 
-function ProfilePanel({
-  user,
-  onUser,
-}: {
-  user: User;
-  onUser: (u: User) => void;
-}) {
+function ProfilePanel({ user, onUser }: { user: User; onUser: (u: User) => void }) {
   const [name, setName] = useState(user.name);
   const [password, setPassword] = useState("");
   const [saved, setSaved] = useState(false);
@@ -445,9 +410,7 @@ function ProfilePanel({
           <button type="submit" className={btnPrimary}>
             <Save className="h-4 w-4" /> Save changes
           </button>
-          {saved && (
-            <span className="text-xs text-emerald-300">Saved.</span>
-          )}
+          {saved && <span className="text-xs text-emerald-300">Saved.</span>}
         </div>
       </form>
     </section>
@@ -473,10 +436,7 @@ function PostEditor({
   const [cover, setCover] = useState(post?.cover ?? "");
   const [body, setBody] = useState(post?.body ?? "");
 
-  const heading = useMemo(
-    () => (editingId ? "Edit post" : "Publish a new post"),
-    [editingId],
-  );
+  const heading = useMemo(() => (editingId ? "Edit post" : "Publish a new post"), [editingId]);
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
@@ -547,8 +507,7 @@ function PostEditor({
               Cancel
             </button>
             <button type="submit" className={btnPrimary}>
-              {editingId ? "Save changes" : "Publish post"}{" "}
-              <ArrowRight className="h-4 w-4" />
+              {editingId ? "Save changes" : "Publish post"} <ArrowRight className="h-4 w-4" />
             </button>
           </div>
         </form>

@@ -1,13 +1,7 @@
 import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ArrowLeft, Calendar, User } from "lucide-react";
-import {
-  Nav,
-  Footer,
-  FloatingCTAs,
-  ContactStrip,
-  btnSecondary,
-} from "@/components/site";
+import { Nav, Footer, FloatingCTAs, ContactStrip, btnSecondary } from "@/components/site";
 import { getPost, formatDate, type BlogPost } from "@/lib/blog";
 
 export const Route = createFileRoute("/blog/$slug")({
@@ -73,9 +67,7 @@ function BlogPostPage() {
               {post.title}
             </h1>
             {post.excerpt && (
-              <p className="mt-5 text-lg leading-relaxed text-white/70">
-                {post.excerpt}
-              </p>
+              <p className="mt-5 text-lg leading-relaxed text-white/70">{post.excerpt}</p>
             )}
             {post.cover && (
               <img
