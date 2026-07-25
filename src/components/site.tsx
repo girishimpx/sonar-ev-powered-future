@@ -124,9 +124,8 @@ export function Footer() {
           <div className="lg:col-span-2">
             <Logo className="h-8" />
             <p className="mt-5 max-w-sm text-sm text-white/60">
-              SONAR.EV powers India's EV charging future. We build, operate and
-              support the infrastructure — you own the station, run the site, and
-              earn recurring revenue.
+              SONAR.EV powers India's EV charging future. We build, operate and support the
+              infrastructure — you own the station, run the site, and earn recurring revenue.
             </p>
             <Link to="/contact" className={`${btnPrimary} mt-6`}>
               Become a Partner <ArrowRight className="h-4 w-4" />
@@ -138,19 +137,29 @@ export function Footer() {
             </div>
             <ul className="mt-4 space-y-2 text-sm">
               <li>
-                <Link to="/" className="text-white/60 hover:text-white">Home</Link>
+                <Link to="/" className="text-white/60 hover:text-white">
+                  Home
+                </Link>
               </li>
               <li>
-                <Link to="/chargers" className="text-white/60 hover:text-white">Franchise Model</Link>
+                <Link to="/chargers" className="text-white/60 hover:text-white">
+                  Franchise Model
+                </Link>
               </li>
               <li>
-                <Link to="/calculator" className="text-white/60 hover:text-white">Earnings Calculator</Link>
+                <Link to="/calculator" className="text-white/60 hover:text-white">
+                  Earnings Calculator
+                </Link>
               </li>
               <li>
-                <Link to="/blog" className="text-white/60 hover:text-white">Blog</Link>
+                <Link to="/blog" className="text-white/60 hover:text-white">
+                  Blog
+                </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-white/60 hover:text-white">Contact</Link>
+                <Link to="/contact" className="text-white/60 hover:text-white">
+                  Contact
+                </Link>
               </li>
             </ul>
           </div>
@@ -174,8 +183,12 @@ export function Footer() {
         <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 text-xs text-white/40 sm:flex-row sm:items-center">
           <div>© {new Date().getFullYear()} Sonar EV. Powering your future.</div>
           <div className="flex gap-5">
-            <a href="#" className="hover:text-white">Privacy</a>
-            <a href="#" className="hover:text-white">Terms</a>
+            <a href="#" className="hover:text-white">
+              Privacy
+            </a>
+            <a href="#" className="hover:text-white">
+              Terms
+            </a>
           </div>
         </div>
       </div>
@@ -343,7 +356,9 @@ export function EnquiryForm({ compact = false }: { compact?: boolean }) {
           className="w-full rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white outline-none transition-colors focus:border-white/40"
         />
       </div>
-      <label className={`flex items-start gap-2 text-xs text-white/60 ${compact ? "" : "sm:col-span-2"}`}>
+      <label
+        className={`flex items-start gap-2 text-xs text-white/60 ${compact ? "" : "sm:col-span-2"}`}
+      >
         <input type="checkbox" required className="mt-0.5 h-4 w-4 accent-white" />
         <span>I agree to be contacted by SONAR.EV about franchise opportunities.</span>
       </label>
@@ -369,7 +384,10 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={name} className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-white/50">
+      <label
+        htmlFor={name}
+        className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-white/50"
+      >
         {label}
       </label>
       <input

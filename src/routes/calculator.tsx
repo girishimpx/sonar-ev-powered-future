@@ -1,6 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { ArrowRight, Zap, Plug, Battery, IndianRupee, TrendingUp, Percent, Clock } from "lucide-react";
+import {
+  ArrowRight,
+  Zap,
+  Plug,
+  Battery,
+  IndianRupee,
+  TrendingUp,
+  Percent,
+  Clock,
+} from "lucide-react";
 import { Nav, Footer, FloatingCTAs, btnPrimary, btnSecondary } from "@/components/site";
 
 export const Route = createFileRoute("/calculator")({
@@ -14,7 +23,10 @@ export const Route = createFileRoute("/calculator")({
           "Estimate monthly revenue, net revenue, franchise earnings (95%), ROI, and payback period for your SONAR.EV charging station. Illustrative — actual results vary by location and utilization.",
       },
       { property: "og:title", content: "Franchise Earnings Calculator | SONAR.EV" },
-      { property: "og:description", content: "Model your SONAR.EV franchise earnings — 95% partner / 5% SONAR.EV." },
+      {
+        property: "og:description",
+        content: "Model your SONAR.EV franchise earnings — 95% partner / 5% SONAR.EV.",
+      },
       { property: "og:type", content: "website" },
     ],
   }),
@@ -83,7 +95,8 @@ function CalculatorPage() {
             </span>
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-white/60">
-            Adjust the inputs to estimate monthly revenue, net revenue, your 95% partner share, ROI, and payback period.
+            Adjust the inputs to estimate monthly revenue, net revenue, your 95% partner share, ROI,
+            and payback period.
           </p>
         </div>
       </section>
@@ -92,60 +105,180 @@ function CalculatorPage() {
         <div className="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-[1fr_1.1fr]">
           {/* Inputs */}
           <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
-            <div className="text-xs font-medium uppercase tracking-[0.2em] text-white/50">Configure your station</div>
+            <div className="text-xs font-medium uppercase tracking-[0.2em] text-white/50">
+              Configure your station
+            </div>
             <div className="mt-8 space-y-8">
-              <SliderInput icon={<Plug className="h-4 w-4" />} label="Number of chargers" value={chargers} onChange={setChargers} min={1} max={20} step={1} display={`${chargers}`} />
-              <SliderInput icon={<Clock className="h-4 w-4" />} label="Sessions per charger / day" value={sessions} onChange={setSessions} min={1} max={20} step={1} display={`${sessions}`} />
-              <SliderInput icon={<Battery className="h-4 w-4" />} label="Average kWh per session" value={kwhPerSession} onChange={setKwhPerSession} min={5} max={80} step={1} display={`${kwhPerSession} kWh`} />
-              <SliderInput icon={<IndianRupee className="h-4 w-4" />} label="Selling price (tariff)" value={tariff} onChange={setTariff} min={12} max={40} step={0.5} display={`₹${tariff}/kWh`} />
-              <SliderInput icon={<Zap className="h-4 w-4" />} label="Electricity cost" value={electricity} onChange={setElectricity} min={4} max={15} step={0.5} display={`₹${electricity}/kWh`} />
-              <SliderInput icon={<TrendingUp className="h-4 w-4" />} label="Monthly operating expenses" value={opex} onChange={setOpex} min={0} max={300000} step={5000} display={inr(opex)} hint="Rent, staff, internet, and misc" />
-              <SliderInput icon={<IndianRupee className="h-4 w-4" />} label="Total station investment" value={investment} onChange={setInvestment} min={500000} max={20000000} step={100000} display={inr(investment)} hint="Chargers, civil work, electrical setup" />
+              <SliderInput
+                icon={<Plug className="h-4 w-4" />}
+                label="Number of chargers"
+                value={chargers}
+                onChange={setChargers}
+                min={1}
+                max={20}
+                step={1}
+                display={`${chargers}`}
+              />
+              <SliderInput
+                icon={<Clock className="h-4 w-4" />}
+                label="Sessions per charger / day"
+                value={sessions}
+                onChange={setSessions}
+                min={1}
+                max={20}
+                step={1}
+                display={`${sessions}`}
+              />
+              <SliderInput
+                icon={<Battery className="h-4 w-4" />}
+                label="Average kWh per session"
+                value={kwhPerSession}
+                onChange={setKwhPerSession}
+                min={5}
+                max={80}
+                step={1}
+                display={`${kwhPerSession} kWh`}
+              />
+              <SliderInput
+                icon={<IndianRupee className="h-4 w-4" />}
+                label="Selling price (tariff)"
+                value={tariff}
+                onChange={setTariff}
+                min={12}
+                max={40}
+                step={0.5}
+                display={`₹${tariff}/kWh`}
+              />
+              <SliderInput
+                icon={<Zap className="h-4 w-4" />}
+                label="Electricity cost"
+                value={electricity}
+                onChange={setElectricity}
+                min={4}
+                max={15}
+                step={0.5}
+                display={`₹${electricity}/kWh`}
+              />
+              <SliderInput
+                icon={<TrendingUp className="h-4 w-4" />}
+                label="Monthly operating expenses"
+                value={opex}
+                onChange={setOpex}
+                min={0}
+                max={300000}
+                step={5000}
+                display={inr(opex)}
+                hint="Rent, staff, internet, and misc"
+              />
+              <SliderInput
+                icon={<IndianRupee className="h-4 w-4" />}
+                label="Total station investment"
+                value={investment}
+                onChange={setInvestment}
+                min={500000}
+                max={20000000}
+                step={100000}
+                display={inr(investment)}
+                hint="Chargers, civil work, electrical setup"
+              />
             </div>
           </div>
 
           {/* Outputs */}
           <div className="space-y-6">
             <div className="grid grid-cols-2 gap-4">
-              <StatCard icon={<Zap className="h-4 w-4" />} label="Units delivered / day" value={`${Math.round(stats.kwhPerDay)} kWh`} />
-              <StatCard icon={<IndianRupee className="h-4 w-4" />} label="Revenue / day" value={inr(stats.revenueDay)} />
-              <StatCard icon={<IndianRupee className="h-4 w-4" />} label="Monthly revenue" value={inr(stats.revenueMonth)} />
-              <StatCard icon={<TrendingUp className="h-4 w-4" />} label="Monthly expenses" value={inr(stats.totalExpensesMonth)} />
+              <StatCard
+                icon={<Zap className="h-4 w-4" />}
+                label="Units delivered / day"
+                value={`${Math.round(stats.kwhPerDay)} kWh`}
+              />
+              <StatCard
+                icon={<IndianRupee className="h-4 w-4" />}
+                label="Revenue / day"
+                value={inr(stats.revenueDay)}
+              />
+              <StatCard
+                icon={<IndianRupee className="h-4 w-4" />}
+                label="Monthly revenue"
+                value={inr(stats.revenueMonth)}
+              />
+              <StatCard
+                icon={<TrendingUp className="h-4 w-4" />}
+                label="Monthly expenses"
+                value={inr(stats.totalExpensesMonth)}
+              />
             </div>
 
             <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-transparent p-6 sm:p-8">
-              <div className="text-xs font-medium uppercase tracking-[0.2em] text-white/50">Net revenue split</div>
-              <div className="mt-4 text-3xl font-semibold">{inr(stats.netRevenueMonth)}<span className="ml-2 text-sm text-white/50">/ month</span></div>
+              <div className="text-xs font-medium uppercase tracking-[0.2em] text-white/50">
+                Net revenue split
+              </div>
+              <div className="mt-4 text-3xl font-semibold">
+                {inr(stats.netRevenueMonth)}
+                <span className="ml-2 text-sm text-white/50">/ month</span>
+              </div>
               <div className="mt-6 h-4 w-full overflow-hidden rounded-full border border-white/10 bg-white/5">
                 <div className="flex h-full">
-                  <div className="flex h-full items-center justify-end bg-white pr-2 text-[10px] font-semibold text-black" style={{ width: "95%" }}>95%</div>
-                  <div className="flex h-full items-center justify-center bg-white/25 text-[10px] font-semibold text-white" style={{ width: "5%" }}>5%</div>
+                  <div
+                    className="flex h-full items-center justify-end bg-white pr-2 text-[10px] font-semibold text-black"
+                    style={{ width: "95%" }}
+                  >
+                    95%
+                  </div>
+                  <div
+                    className="flex h-full items-center justify-center bg-white/25 text-[10px] font-semibold text-white"
+                    style={{ width: "5%" }}
+                  >
+                    5%
+                  </div>
                 </div>
               </div>
               <div className="mt-6 grid grid-cols-2 gap-4">
                 <div className="rounded-2xl bg-white p-5 text-black">
-                  <div className="text-xs font-semibold uppercase tracking-widest text-black/60">Franchise partner (95%)</div>
-                  <div className="mt-2 text-2xl font-semibold">{inr(stats.partnerShare)}<span className="ml-1 text-xs text-black/60">/mo</span></div>
-                  <div className="mt-1 text-xs text-black/60">{inr(stats.partnerAnnual)} / year</div>
+                  <div className="text-xs font-semibold uppercase tracking-widest text-black/60">
+                    Franchise partner (95%)
+                  </div>
+                  <div className="mt-2 text-2xl font-semibold">
+                    {inr(stats.partnerShare)}
+                    <span className="ml-1 text-xs text-black/60">/mo</span>
+                  </div>
+                  <div className="mt-1 text-xs text-black/60">
+                    {inr(stats.partnerAnnual)} / year
+                  </div>
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-black p-5">
-                  <div className="text-xs font-semibold uppercase tracking-widest text-white/50">SONAR.EV (5%)</div>
-                  <div className="mt-2 text-2xl font-semibold">{inr(stats.sonarShare)}<span className="ml-1 text-xs text-white/50">/mo</span></div>
+                  <div className="text-xs font-semibold uppercase tracking-widest text-white/50">
+                    SONAR.EV (5%)
+                  </div>
+                  <div className="mt-2 text-2xl font-semibold">
+                    {inr(stats.sonarShare)}
+                    <span className="ml-1 text-xs text-white/50">/mo</span>
+                  </div>
                 </div>
               </div>
 
               <div className="mt-6 grid grid-cols-2 gap-4">
-                <StatCard icon={<Percent className="h-4 w-4" />} label="Annual ROI" value={`${stats.roi.toFixed(1)}%`} highlight />
+                <StatCard
+                  icon={<Percent className="h-4 w-4" />}
+                  label="Annual ROI"
+                  value={`${stats.roi.toFixed(1)}%`}
+                  highlight
+                />
                 <StatCard
                   icon={<Clock className="h-4 w-4" />}
                   label="Payback period"
-                  value={isFinite(stats.paybackMonths) ? `${(stats.paybackMonths / 12).toFixed(1)} yrs` : "—"}
+                  value={
+                    isFinite(stats.paybackMonths)
+                      ? `${(stats.paybackMonths / 12).toFixed(1)} yrs`
+                      : "—"
+                  }
                 />
               </div>
 
               <p className="mt-6 text-xs text-white/40">
-                Illustrative estimate based on your inputs. Actual results depend on utilization, tariffs, local demand, and operating costs.
-                Net revenue is calculated after electricity, payment gateway fees (~2%), and approved operating expenses.
+                Illustrative estimate based on your inputs. Actual results depend on utilization,
+                tariffs, local demand, and operating costs. Net revenue is calculated after
+                electricity, payment gateway fees (~2%), and approved operating expenses.
               </p>
             </div>
 
@@ -175,28 +308,52 @@ function CalculatorPage() {
 }
 
 function SliderInput({
-  icon, label, value, onChange, min, max, step, display, hint,
+  icon,
+  label,
+  value,
+  onChange,
+  min,
+  max,
+  step,
+  display,
+  hint,
 }: {
-  icon: React.ReactNode; label: string; value: number; onChange: (n: number) => void;
-  min: number; max: number; step: number; display: string; hint?: string;
+  icon: React.ReactNode;
+  label: string;
+  value: number;
+  onChange: (n: number) => void;
+  min: number;
+  max: number;
+  step: number;
+  display: string;
+  hint?: string;
 }) {
   const pct = ((value - min) / (max - min)) * 100;
   return (
     <div>
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-2 text-sm font-medium text-white">
-          <span className="grid h-7 w-7 place-items-center rounded-md border border-white/15 bg-white/5">{icon}</span>
+          <span className="grid h-7 w-7 place-items-center rounded-md border border-white/15 bg-white/5">
+            {icon}
+          </span>
           {label}
         </div>
-        <div className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-semibold text-white">{display}</div>
+        <div className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-semibold text-white">
+          {display}
+        </div>
       </div>
       <input
-        type="range" min={min} max={max} step={step} value={value}
+        type="range"
+        min={min}
+        max={max}
+        step={step}
+        value={value}
         onChange={(e) => onChange(Number(e.target.value))}
         className="mt-4 w-full appearance-none bg-transparent [&::-webkit-slider-thumb]:mt-[-7px] [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border [&::-webkit-slider-thumb]:border-white/30 [&::-webkit-slider-thumb]:bg-white [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-white"
         style={{
           background: `linear-gradient(to right, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.9) ${pct}%, rgba(255,255,255,0.1) ${pct}%, rgba(255,255,255,0.1) 100%)`,
-          borderRadius: 999, height: 6,
+          borderRadius: 999,
+          height: 6,
         }}
       />
       {hint && <div className="mt-2 text-xs text-white/40">{hint}</div>}
@@ -205,13 +362,23 @@ function SliderInput({
 }
 
 function StatCard({
-  icon, label, value, highlight = false,
+  icon,
+  label,
+  value,
+  highlight = false,
 }: {
-  icon: React.ReactNode; label: string; value: string; highlight?: boolean;
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+  highlight?: boolean;
 }) {
   return (
-    <div className={`rounded-2xl border p-5 ${highlight ? "border-white/30 bg-white text-black" : "border-white/10 bg-white/[0.03] text-white"}`}>
-      <div className={`flex items-center gap-2 text-xs uppercase tracking-wider ${highlight ? "text-black/60" : "text-white/50"}`}>
+    <div
+      className={`rounded-2xl border p-5 ${highlight ? "border-white/30 bg-white text-black" : "border-white/10 bg-white/[0.03] text-white"}`}
+    >
+      <div
+        className={`flex items-center gap-2 text-xs uppercase tracking-wider ${highlight ? "text-black/60" : "text-white/50"}`}
+      >
         {icon} {label}
       </div>
       <div className="mt-3 text-2xl font-semibold tracking-tight">{value}</div>

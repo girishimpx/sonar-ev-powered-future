@@ -19,8 +19,7 @@ const SEED: BlogPost[] = [
     title: "Why EV Charging Is India's Next Big Infrastructure Bet",
     excerpt:
       "The EV market is scaling faster than anyone predicted. Here's why charging infrastructure is the real business opportunity.",
-    body:
-      "India's EV adoption is entering a hockey-stick moment. Two-wheelers, three-wheelers, fleets and premium four-wheelers are all electrifying at once.\n\nThe bottleneck isn't the cars — it's the chargers. Property owners, fuel retailers and fleet operators who deploy DC fast charging today will own the location, the brand and the recurring revenue tomorrow.\n\nAt Sonar EV, we've engineered a stack — 30kW to 240kW hardware, OCPP-compliant software, turnkey installation and free AMC — designed for operators who want to move fast without becoming an engineering company themselves.",
+    body: "India's EV adoption is entering a hockey-stick moment. Two-wheelers, three-wheelers, fleets and premium four-wheelers are all electrifying at once.\n\nThe bottleneck isn't the cars — it's the chargers. Property owners, fuel retailers and fleet operators who deploy DC fast charging today will own the location, the brand and the recurring revenue tomorrow.\n\nAt Sonar EV, we've engineered a stack — 30kW to 240kW hardware, OCPP-compliant software, turnkey installation and free AMC — designed for operators who want to move fast without becoming an engineering company themselves.",
     author: "Sonar EV Team",
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 6,
   },
@@ -30,8 +29,7 @@ const SEED: BlogPost[] = [
     title: "Sizing Your First DC Fast Charger: 30kW vs 60kW vs 120kW",
     excerpt:
       "A practical guide to picking the right charger power for hotels, highways, malls and fleet depots.",
-    body:
-      "The right charger is the one that matches your traffic pattern, your grid capacity and your ROI horizon.\n\n30kW works beautifully for dealerships, boutique hotels and destination charging where guests stay for 45+ minutes.\n\n60kW is the workhorse for offices, malls and mid-tier highway plazas — fast enough to feel premium, cheap enough to scale.\n\n120kW and above belong on highways, transit corridors and fleet depots where throughput is the whole business model.\n\nUse the Sonar EV profit calculator to pressure-test the numbers before you commit.",
+    body: "The right charger is the one that matches your traffic pattern, your grid capacity and your ROI horizon.\n\n30kW works beautifully for dealerships, boutique hotels and destination charging where guests stay for 45+ minutes.\n\n60kW is the workhorse for offices, malls and mid-tier highway plazas — fast enough to feel premium, cheap enough to scale.\n\n120kW and above belong on highways, transit corridors and fleet depots where throughput is the whole business model.\n\nUse the Sonar EV profit calculator to pressure-test the numbers before you commit.",
     author: "Sonar EV Team",
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 2,
   },
@@ -42,13 +40,15 @@ function isBrowser() {
 }
 
 export function slugify(s: string) {
-  return s
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-")
-    .slice(0, 80) || `post-${Date.now()}`;
+  return (
+    s
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9\s-]/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-")
+      .slice(0, 80) || `post-${Date.now()}`
+  );
 }
 
 export function loadPosts(): BlogPost[] {
