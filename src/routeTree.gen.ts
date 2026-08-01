@@ -15,6 +15,11 @@ import { Route as CalculatorRouteImport } from './routes/calculator'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SolutionsProjectReportRouteImport } from './routes/solutions.project-report'
+import { Route as SolutionsPostInstallationInspectionRouteImport } from './routes/solutions.post-installation-inspection'
+import { Route as SolutionsLandSurveyRouteImport } from './routes/solutions.land-survey'
+import { Route as SolutionsInstallationRouteImport } from './routes/solutions.installation'
+import { Route as SolutionsBusinessConsultancyRouteImport } from './routes/solutions.business-consultancy'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
 const ContactRoute = ContactRouteImport.update({
@@ -47,6 +52,33 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SolutionsProjectReportRoute = SolutionsProjectReportRouteImport.update({
+  id: '/solutions/project-report',
+  path: '/solutions/project-report',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SolutionsPostInstallationInspectionRoute =
+  SolutionsPostInstallationInspectionRouteImport.update({
+    id: '/solutions/post-installation-inspection',
+    path: '/solutions/post-installation-inspection',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SolutionsLandSurveyRoute = SolutionsLandSurveyRouteImport.update({
+  id: '/solutions/land-survey',
+  path: '/solutions/land-survey',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SolutionsInstallationRoute = SolutionsInstallationRouteImport.update({
+  id: '/solutions/installation',
+  path: '/solutions/installation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SolutionsBusinessConsultancyRoute =
+  SolutionsBusinessConsultancyRouteImport.update({
+    id: '/solutions/business-consultancy',
+    path: '/solutions/business-consultancy',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -61,6 +93,11 @@ export interface FileRoutesByFullPath {
   '/chargers': typeof ChargersRoute
   '/contact': typeof ContactRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/solutions/business-consultancy': typeof SolutionsBusinessConsultancyRoute
+  '/solutions/installation': typeof SolutionsInstallationRoute
+  '/solutions/land-survey': typeof SolutionsLandSurveyRoute
+  '/solutions/post-installation-inspection': typeof SolutionsPostInstallationInspectionRoute
+  '/solutions/project-report': typeof SolutionsProjectReportRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -70,6 +107,11 @@ export interface FileRoutesByTo {
   '/chargers': typeof ChargersRoute
   '/contact': typeof ContactRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/solutions/business-consultancy': typeof SolutionsBusinessConsultancyRoute
+  '/solutions/installation': typeof SolutionsInstallationRoute
+  '/solutions/land-survey': typeof SolutionsLandSurveyRoute
+  '/solutions/post-installation-inspection': typeof SolutionsPostInstallationInspectionRoute
+  '/solutions/project-report': typeof SolutionsProjectReportRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -80,6 +122,11 @@ export interface FileRoutesById {
   '/chargers': typeof ChargersRoute
   '/contact': typeof ContactRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/solutions/business-consultancy': typeof SolutionsBusinessConsultancyRoute
+  '/solutions/installation': typeof SolutionsInstallationRoute
+  '/solutions/land-survey': typeof SolutionsLandSurveyRoute
+  '/solutions/post-installation-inspection': typeof SolutionsPostInstallationInspectionRoute
+  '/solutions/project-report': typeof SolutionsProjectReportRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -91,6 +138,11 @@ export interface FileRouteTypes {
     | '/chargers'
     | '/contact'
     | '/blog/$slug'
+    | '/solutions/business-consultancy'
+    | '/solutions/installation'
+    | '/solutions/land-survey'
+    | '/solutions/post-installation-inspection'
+    | '/solutions/project-report'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -100,6 +152,11 @@ export interface FileRouteTypes {
     | '/chargers'
     | '/contact'
     | '/blog/$slug'
+    | '/solutions/business-consultancy'
+    | '/solutions/installation'
+    | '/solutions/land-survey'
+    | '/solutions/post-installation-inspection'
+    | '/solutions/project-report'
   id:
     | '__root__'
     | '/'
@@ -109,6 +166,11 @@ export interface FileRouteTypes {
     | '/chargers'
     | '/contact'
     | '/blog/$slug'
+    | '/solutions/business-consultancy'
+    | '/solutions/installation'
+    | '/solutions/land-survey'
+    | '/solutions/post-installation-inspection'
+    | '/solutions/project-report'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -118,6 +180,11 @@ export interface RootRouteChildren {
   CalculatorRoute: typeof CalculatorRoute
   ChargersRoute: typeof ChargersRoute
   ContactRoute: typeof ContactRoute
+  SolutionsBusinessConsultancyRoute: typeof SolutionsBusinessConsultancyRoute
+  SolutionsInstallationRoute: typeof SolutionsInstallationRoute
+  SolutionsLandSurveyRoute: typeof SolutionsLandSurveyRoute
+  SolutionsPostInstallationInspectionRoute: typeof SolutionsPostInstallationInspectionRoute
+  SolutionsProjectReportRoute: typeof SolutionsProjectReportRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -164,6 +231,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/solutions/project-report': {
+      id: '/solutions/project-report'
+      path: '/solutions/project-report'
+      fullPath: '/solutions/project-report'
+      preLoaderRoute: typeof SolutionsProjectReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/solutions/post-installation-inspection': {
+      id: '/solutions/post-installation-inspection'
+      path: '/solutions/post-installation-inspection'
+      fullPath: '/solutions/post-installation-inspection'
+      preLoaderRoute: typeof SolutionsPostInstallationInspectionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/solutions/land-survey': {
+      id: '/solutions/land-survey'
+      path: '/solutions/land-survey'
+      fullPath: '/solutions/land-survey'
+      preLoaderRoute: typeof SolutionsLandSurveyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/solutions/installation': {
+      id: '/solutions/installation'
+      path: '/solutions/installation'
+      fullPath: '/solutions/installation'
+      preLoaderRoute: typeof SolutionsInstallationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/solutions/business-consultancy': {
+      id: '/solutions/business-consultancy'
+      path: '/solutions/business-consultancy'
+      fullPath: '/solutions/business-consultancy'
+      preLoaderRoute: typeof SolutionsBusinessConsultancyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/$slug': {
       id: '/blog/$slug'
       path: '/$slug'
@@ -191,6 +293,12 @@ const rootRouteChildren: RootRouteChildren = {
   CalculatorRoute: CalculatorRoute,
   ChargersRoute: ChargersRoute,
   ContactRoute: ContactRoute,
+  SolutionsBusinessConsultancyRoute: SolutionsBusinessConsultancyRoute,
+  SolutionsInstallationRoute: SolutionsInstallationRoute,
+  SolutionsLandSurveyRoute: SolutionsLandSurveyRoute,
+  SolutionsPostInstallationInspectionRoute:
+    SolutionsPostInstallationInspectionRoute,
+  SolutionsProjectReportRoute: SolutionsProjectReportRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
