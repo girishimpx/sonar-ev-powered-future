@@ -208,6 +208,75 @@ function ModelSection() {
 }
 
 function RevenueSplitSection() {
+  return <RevenueSplitSectionInner />;
+}
+
+const businessModels = [
+  {
+    code: "COCO",
+    name: "Company Owned, Company Operated",
+    body: "SONAR.EV invests, owns and operates the station end to end. Ideal for strategic, high-traffic locations where we control the full experience.",
+    points: ["100% SONAR.EV capital", "SONAR.EV operations team", "Site owner earns lease/rental"],
+  },
+  {
+    code: "FOCO",
+    name: "Franchise Owned, Company Operated",
+    body: "You invest in the station, SONAR.EV runs day-to-day operations. Hands-off ownership with professional operations and monitoring.",
+    points: ["Partner capital, SONAR.EV operations", "Managed staffing and upkeep", "Predictable, passive earnings"],
+  },
+  {
+    code: "FOFO",
+    name: "Franchise Owned, Franchise Operated",
+    body: "You own and operate the station with our hardware, software and support behind you — and keep 95% of net revenue.",
+    points: ["Highest earning potential", "Full operational control", "SONAR.EV tech, AMC and training"],
+  },
+  {
+    code: "Capital Circle",
+    name: "Investor Capital Model",
+    body: "Invest capital into SONAR.EV-managed charging assets without owning land or running operations. Participate in the network's growth.",
+    points: ["No land or staffing needed", "Portfolio of managed stations", "Structured, agreement-backed returns"],
+  },
+];
+
+function BusinessModelsSection() {
+  return (
+    <section id="business-models" className="border-y border-white/10 py-24 md:py-32">
+      <div className="mx-auto max-w-7xl px-6">
+        <SectionHeader
+          eyebrow="Business Models"
+          title="Four ways to partner with SONAR.EV"
+          sub="Choose the ownership and operating structure that matches your capital, land and appetite for day-to-day involvement."
+        />
+        <div className="mt-16 grid gap-4 md:grid-cols-2">
+          {businessModels.map((m) => (
+            <div
+              key={m.code}
+              className="group rounded-3xl border border-white/10 bg-white/[0.03] p-8 transition-all duration-300 hover:-translate-y-1 hover:border-white/30 hover:bg-white/[0.06]"
+            >
+              <div className="flex items-baseline justify-between gap-4">
+                <div className="text-2xl font-semibold tracking-tight">{m.code}</div>
+                <div className="text-right text-xs uppercase tracking-widest text-white/40">{m.name}</div>
+              </div>
+              <p className="mt-4 text-sm leading-relaxed text-white/60">{m.body}</p>
+              <ul className="mt-6 space-y-2">
+                {m.points.map((p) => (
+                  <li key={p} className="flex items-start gap-2 text-sm text-white/70">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-white" /> {p}
+                  </li>
+                ))}
+              </ul>
+              <Link to="/contact" className="mt-7 inline-flex items-center gap-1 text-sm font-medium text-white">
+                Discuss this model <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function RevenueSplitSectionInner() {
   return (
     <section id="revenue" className="border-y border-white/10 bg-white/[0.02] py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6">
