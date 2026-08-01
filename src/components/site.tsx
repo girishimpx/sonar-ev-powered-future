@@ -1,5 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Mail, MessageCircle, Phone, Menu, X, Handshake } from "lucide-react";
+import {
+  ArrowRight, Mail, MessageCircle, Phone, Menu, X, Handshake, ChevronDown,
+  Briefcase, MapPinned, FileBarChart2, Wrench, ShieldCheck,
+} from "lucide-react";
 import { useState, type ReactNode } from "react";
 import logoAsset from "@/assets/sonar-logo.png.asset.json";
 
@@ -39,14 +42,64 @@ const NAV_LINKS: Array<{ label: string; to?: string; href?: string }> = [
   { label: "Contact", to: "/contact" },
 ];
 
+export const SOLUTION_LINKS = [
+  { label: "Business Consultancy", to: "/solutions/business-consultancy", desc: "Feasibility, ROI and model selection", icon: Briefcase },
+  { label: "Land Survey", to: "/solutions/land-survey", desc: "Technical + commercial site assessment", icon: MapPinned },
+  { label: "Project Report", to: "/solutions/project-report", desc: "Full cost estimation and break-even", icon: FileBarChart2 },
+  { label: "Installation", to: "/solutions/installation", desc: "Turnkey execution and commissioning", icon: Wrench },
+  { label: "Post-Installation Inspection", to: "/solutions/post-installation-inspection", desc: "Safety audits and preventive upkeep", icon: ShieldCheck },
+] as const;
+
 export function Nav() {
   const [open, setOpen] = useState(false);
+  const [solOpen, setSolOpen] = useState(false);
   return (
     <header className="sticky top-0 z-50 border-b border-white/5 bg-black/70 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         <Logo />
         <nav className="hidden items-center gap-7 lg:flex">
-          {NAV_LINKS.map((l) =>
+          {NAV_LINKS.map((l) => (
+            <span key={l.label} className="contents">
+              {l.label === "Earnings Calculator" && (
+                <div
+                  className="relative"
+                  onMouseEnter={() => setSolOpen(true)}
+                  onMouseLeave={() => setSolOpen(false)}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setSolOpen((v) => !v)}
+                    aria-expanded={solOpen}
+                    className="inline-flex items-center gap-1 text-sm text-white/60 transition-colors hover:text-white"
+                  >
+                    Solutions
+                    <ChevronDown className={`h-3.5 w-3.5 transition-transform ${solOpen ? "rotate-180" : ""}`} />
+                  </button>
+                  {solOpen && (
+                    <div className="absolute left-1/2 top-full z-50 w-[22rem] -translate-x-1/2 pt-4">
+                      <div className="overflow-hidden rounded-2xl border border-white/10 bg-black/95 p-2 shadow-[0_20px_60px_-20px_rgba(255,255,255,0.15)] backdrop-blur-xl">
+                        {SOLUTION_LINKS.map(({ label, to, desc, icon: Icon }) => (
+                          <Link
+                            key={to}
+                            to={to}
+                            onClick={() => setSolOpen(false)}
+                            className="flex gap-3 rounded-xl p-3 transition-colors hover:bg-white/5"
+                          >
+                            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-white/15 bg-white/5">
+                              <Icon className="h-4 w-4 text-white" />
+                            </span>
+                            <span>
+                              <span className="block text-sm font-medium text-white">{label}</span>
+                              <span className="block text-xs text-white/50">{desc}</span>
+                            </span>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+              {
             l.to ? (
               <Link
                 key={l.label}
@@ -64,8 +117,9 @@ export function Nav() {
               >
                 {l.label}
               </a>
-            ),
-          )}
+            )}
+            </span>
+          ))}
         </nav>
         <div className="flex items-center gap-2">
           <Link
@@ -107,6 +161,19 @@ export function Nav() {
                 </a>
               ),
             )}
+            <div className="mt-2 border-t border-white/10 pt-3">
+              <div className="text-xs font-semibold uppercase tracking-widest text-white/40">Solutions</div>
+              {SOLUTION_LINKS.map(({ label, to }) => (
+                <Link
+                  key={to}
+                  to={to}
+                  onClick={() => setOpen(false)}
+                  className="block py-3 text-sm text-white/70 hover:text-white"
+                >
+                  {label}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       )}
