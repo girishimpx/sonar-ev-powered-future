@@ -16,6 +16,7 @@ import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SolutionsProjectReportRouteImport } from './routes/solutions.project-report'
+import { Route as SolutionsPostInstallationInspectionRouteImport } from './routes/solutions.post-installation-inspection'
 import { Route as SolutionsLandSurveyRouteImport } from './routes/solutions.land-survey'
 import { Route as SolutionsInstallationRouteImport } from './routes/solutions.installation'
 import { Route as SolutionsBusinessConsultancyRouteImport } from './routes/solutions.business-consultancy'
@@ -56,6 +57,12 @@ const SolutionsProjectReportRoute = SolutionsProjectReportRouteImport.update({
   path: '/solutions/project-report',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SolutionsPostInstallationInspectionRoute =
+  SolutionsPostInstallationInspectionRouteImport.update({
+    id: '/solutions/post-installation-inspection',
+    path: '/solutions/post-installation-inspection',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const SolutionsLandSurveyRoute = SolutionsLandSurveyRouteImport.update({
   id: '/solutions/land-survey',
   path: '/solutions/land-survey',
@@ -89,6 +96,7 @@ export interface FileRoutesByFullPath {
   '/solutions/business-consultancy': typeof SolutionsBusinessConsultancyRoute
   '/solutions/installation': typeof SolutionsInstallationRoute
   '/solutions/land-survey': typeof SolutionsLandSurveyRoute
+  '/solutions/post-installation-inspection': typeof SolutionsPostInstallationInspectionRoute
   '/solutions/project-report': typeof SolutionsProjectReportRoute
 }
 export interface FileRoutesByTo {
@@ -102,6 +110,7 @@ export interface FileRoutesByTo {
   '/solutions/business-consultancy': typeof SolutionsBusinessConsultancyRoute
   '/solutions/installation': typeof SolutionsInstallationRoute
   '/solutions/land-survey': typeof SolutionsLandSurveyRoute
+  '/solutions/post-installation-inspection': typeof SolutionsPostInstallationInspectionRoute
   '/solutions/project-report': typeof SolutionsProjectReportRoute
 }
 export interface FileRoutesById {
@@ -116,6 +125,7 @@ export interface FileRoutesById {
   '/solutions/business-consultancy': typeof SolutionsBusinessConsultancyRoute
   '/solutions/installation': typeof SolutionsInstallationRoute
   '/solutions/land-survey': typeof SolutionsLandSurveyRoute
+  '/solutions/post-installation-inspection': typeof SolutionsPostInstallationInspectionRoute
   '/solutions/project-report': typeof SolutionsProjectReportRoute
 }
 export interface FileRouteTypes {
@@ -131,6 +141,7 @@ export interface FileRouteTypes {
     | '/solutions/business-consultancy'
     | '/solutions/installation'
     | '/solutions/land-survey'
+    | '/solutions/post-installation-inspection'
     | '/solutions/project-report'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -144,6 +155,7 @@ export interface FileRouteTypes {
     | '/solutions/business-consultancy'
     | '/solutions/installation'
     | '/solutions/land-survey'
+    | '/solutions/post-installation-inspection'
     | '/solutions/project-report'
   id:
     | '__root__'
@@ -157,6 +169,7 @@ export interface FileRouteTypes {
     | '/solutions/business-consultancy'
     | '/solutions/installation'
     | '/solutions/land-survey'
+    | '/solutions/post-installation-inspection'
     | '/solutions/project-report'
   fileRoutesById: FileRoutesById
 }
@@ -170,6 +183,7 @@ export interface RootRouteChildren {
   SolutionsBusinessConsultancyRoute: typeof SolutionsBusinessConsultancyRoute
   SolutionsInstallationRoute: typeof SolutionsInstallationRoute
   SolutionsLandSurveyRoute: typeof SolutionsLandSurveyRoute
+  SolutionsPostInstallationInspectionRoute: typeof SolutionsPostInstallationInspectionRoute
   SolutionsProjectReportRoute: typeof SolutionsProjectReportRoute
 }
 
@@ -224,6 +238,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SolutionsProjectReportRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/solutions/post-installation-inspection': {
+      id: '/solutions/post-installation-inspection'
+      path: '/solutions/post-installation-inspection'
+      fullPath: '/solutions/post-installation-inspection'
+      preLoaderRoute: typeof SolutionsPostInstallationInspectionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/solutions/land-survey': {
       id: '/solutions/land-survey'
       path: '/solutions/land-survey'
@@ -275,6 +296,8 @@ const rootRouteChildren: RootRouteChildren = {
   SolutionsBusinessConsultancyRoute: SolutionsBusinessConsultancyRoute,
   SolutionsInstallationRoute: SolutionsInstallationRoute,
   SolutionsLandSurveyRoute: SolutionsLandSurveyRoute,
+  SolutionsPostInstallationInspectionRoute:
+    SolutionsPostInstallationInspectionRoute,
   SolutionsProjectReportRoute: SolutionsProjectReportRoute,
 }
 export const routeTree = rootRouteImport
