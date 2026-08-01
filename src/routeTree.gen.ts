@@ -17,6 +17,7 @@ import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SolutionsProjectReportRouteImport } from './routes/solutions.project-report'
 import { Route as SolutionsLandSurveyRouteImport } from './routes/solutions.land-survey'
+import { Route as SolutionsInstallationRouteImport } from './routes/solutions.installation'
 import { Route as SolutionsBusinessConsultancyRouteImport } from './routes/solutions.business-consultancy'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
@@ -60,6 +61,11 @@ const SolutionsLandSurveyRoute = SolutionsLandSurveyRouteImport.update({
   path: '/solutions/land-survey',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SolutionsInstallationRoute = SolutionsInstallationRouteImport.update({
+  id: '/solutions/installation',
+  path: '/solutions/installation',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SolutionsBusinessConsultancyRoute =
   SolutionsBusinessConsultancyRouteImport.update({
     id: '/solutions/business-consultancy',
@@ -81,6 +87,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/solutions/business-consultancy': typeof SolutionsBusinessConsultancyRoute
+  '/solutions/installation': typeof SolutionsInstallationRoute
   '/solutions/land-survey': typeof SolutionsLandSurveyRoute
   '/solutions/project-report': typeof SolutionsProjectReportRoute
 }
@@ -93,6 +100,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/solutions/business-consultancy': typeof SolutionsBusinessConsultancyRoute
+  '/solutions/installation': typeof SolutionsInstallationRoute
   '/solutions/land-survey': typeof SolutionsLandSurveyRoute
   '/solutions/project-report': typeof SolutionsProjectReportRoute
 }
@@ -106,6 +114,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/solutions/business-consultancy': typeof SolutionsBusinessConsultancyRoute
+  '/solutions/installation': typeof SolutionsInstallationRoute
   '/solutions/land-survey': typeof SolutionsLandSurveyRoute
   '/solutions/project-report': typeof SolutionsProjectReportRoute
 }
@@ -120,6 +129,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/blog/$slug'
     | '/solutions/business-consultancy'
+    | '/solutions/installation'
     | '/solutions/land-survey'
     | '/solutions/project-report'
   fileRoutesByTo: FileRoutesByTo
@@ -132,6 +142,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/blog/$slug'
     | '/solutions/business-consultancy'
+    | '/solutions/installation'
     | '/solutions/land-survey'
     | '/solutions/project-report'
   id:
@@ -144,6 +155,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/blog/$slug'
     | '/solutions/business-consultancy'
+    | '/solutions/installation'
     | '/solutions/land-survey'
     | '/solutions/project-report'
   fileRoutesById: FileRoutesById
@@ -156,6 +168,7 @@ export interface RootRouteChildren {
   ChargersRoute: typeof ChargersRoute
   ContactRoute: typeof ContactRoute
   SolutionsBusinessConsultancyRoute: typeof SolutionsBusinessConsultancyRoute
+  SolutionsInstallationRoute: typeof SolutionsInstallationRoute
   SolutionsLandSurveyRoute: typeof SolutionsLandSurveyRoute
   SolutionsProjectReportRoute: typeof SolutionsProjectReportRoute
 }
@@ -218,6 +231,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SolutionsLandSurveyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/solutions/installation': {
+      id: '/solutions/installation'
+      path: '/solutions/installation'
+      fullPath: '/solutions/installation'
+      preLoaderRoute: typeof SolutionsInstallationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/solutions/business-consultancy': {
       id: '/solutions/business-consultancy'
       path: '/solutions/business-consultancy'
@@ -253,6 +273,7 @@ const rootRouteChildren: RootRouteChildren = {
   ChargersRoute: ChargersRoute,
   ContactRoute: ContactRoute,
   SolutionsBusinessConsultancyRoute: SolutionsBusinessConsultancyRoute,
+  SolutionsInstallationRoute: SolutionsInstallationRoute,
   SolutionsLandSurveyRoute: SolutionsLandSurveyRoute,
   SolutionsProjectReportRoute: SolutionsProjectReportRoute,
 }
