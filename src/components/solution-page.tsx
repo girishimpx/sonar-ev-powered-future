@@ -10,9 +10,16 @@ export type SolutionGroup = { title: string; items: string[] };
 export type SolutionStep = { n: string; t: string; d: string };
 export type SolutionFaq = { q: string; a: string };
 
+export type SolutionPath =
+  | "/solutions/business-consultancy"
+  | "/solutions/land-survey"
+  | "/solutions/project-report"
+  | "/solutions/installation"
+  | "/solutions/post-installation-inspection";
+
 export type Solution = {
   slug: string;
-  path: string;
+  path: SolutionPath;
   title: string;
   short: string;
   intro: string;
