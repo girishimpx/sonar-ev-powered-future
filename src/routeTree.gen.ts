@@ -15,6 +15,7 @@ import { Route as CalculatorRouteImport } from './routes/calculator'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SolutionsProjectReportRouteImport } from './routes/solutions.project-report'
 import { Route as SolutionsLandSurveyRouteImport } from './routes/solutions.land-survey'
 import { Route as SolutionsBusinessConsultancyRouteImport } from './routes/solutions.business-consultancy'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
@@ -49,6 +50,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SolutionsProjectReportRoute = SolutionsProjectReportRouteImport.update({
+  id: '/solutions/project-report',
+  path: '/solutions/project-report',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SolutionsLandSurveyRoute = SolutionsLandSurveyRouteImport.update({
   id: '/solutions/land-survey',
   path: '/solutions/land-survey',
@@ -76,6 +82,7 @@ export interface FileRoutesByFullPath {
   '/blog/$slug': typeof BlogSlugRoute
   '/solutions/business-consultancy': typeof SolutionsBusinessConsultancyRoute
   '/solutions/land-survey': typeof SolutionsLandSurveyRoute
+  '/solutions/project-report': typeof SolutionsProjectReportRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -87,6 +94,7 @@ export interface FileRoutesByTo {
   '/blog/$slug': typeof BlogSlugRoute
   '/solutions/business-consultancy': typeof SolutionsBusinessConsultancyRoute
   '/solutions/land-survey': typeof SolutionsLandSurveyRoute
+  '/solutions/project-report': typeof SolutionsProjectReportRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -99,6 +107,7 @@ export interface FileRoutesById {
   '/blog/$slug': typeof BlogSlugRoute
   '/solutions/business-consultancy': typeof SolutionsBusinessConsultancyRoute
   '/solutions/land-survey': typeof SolutionsLandSurveyRoute
+  '/solutions/project-report': typeof SolutionsProjectReportRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -112,6 +121,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/solutions/business-consultancy'
     | '/solutions/land-survey'
+    | '/solutions/project-report'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -123,6 +133,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/solutions/business-consultancy'
     | '/solutions/land-survey'
+    | '/solutions/project-report'
   id:
     | '__root__'
     | '/'
@@ -134,6 +145,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/solutions/business-consultancy'
     | '/solutions/land-survey'
+    | '/solutions/project-report'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -145,6 +157,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   SolutionsBusinessConsultancyRoute: typeof SolutionsBusinessConsultancyRoute
   SolutionsLandSurveyRoute: typeof SolutionsLandSurveyRoute
+  SolutionsProjectReportRoute: typeof SolutionsProjectReportRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -191,6 +204,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/solutions/project-report': {
+      id: '/solutions/project-report'
+      path: '/solutions/project-report'
+      fullPath: '/solutions/project-report'
+      preLoaderRoute: typeof SolutionsProjectReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/solutions/land-survey': {
       id: '/solutions/land-survey'
       path: '/solutions/land-survey'
@@ -234,6 +254,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   SolutionsBusinessConsultancyRoute: SolutionsBusinessConsultancyRoute,
   SolutionsLandSurveyRoute: SolutionsLandSurveyRoute,
+  SolutionsProjectReportRoute: SolutionsProjectReportRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
