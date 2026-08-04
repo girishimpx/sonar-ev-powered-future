@@ -84,8 +84,8 @@ function Index() {
       <Nav />
       <Hero />
       <TrustStrip />
-      <ModelSection />
       <BusinessModelsSection />
+      <ModelSection />
       <RevenueSplitSection />
       <ProvidesSection />
       <ResponsibilitiesSection />
