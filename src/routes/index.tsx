@@ -241,36 +241,66 @@ const businessModels = [
 
 function BusinessModelsSection() {
   return (
-    <section id="business-models" className="border-y border-white/10 py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-6">
-        <SectionHeader
-          eyebrow="Business Models"
-          title="Four ways to partner with SONAR.EV"
-          sub="Choose the ownership and operating structure that matches your capital, land and appetite for day-to-day involvement."
-        />
-        <div className="mt-16 grid gap-4 md:grid-cols-2">
-          {businessModels.map((m) => (
-            <div
-              key={m.code}
-              className="group rounded-3xl border border-white/10 bg-white/[0.03] p-8 transition-all duration-300 hover:-translate-y-1 hover:border-white/30 hover:bg-white/[0.06]"
-            >
-              <div className="flex items-baseline justify-between gap-4">
-                <div className="text-2xl font-semibold tracking-tight">{m.code}</div>
-                <div className="text-right text-xs uppercase tracking-widest text-white/40">{m.name}</div>
-              </div>
-              <p className="mt-4 text-sm leading-relaxed text-white/60">{m.body}</p>
-              <ul className="mt-6 space-y-2">
-                {m.points.map((p) => (
-                  <li key={p} className="flex items-start gap-2 text-sm text-white/70">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-white" /> {p}
-                  </li>
-                ))}
-              </ul>
-              <Link to="/contact" className="mt-7 inline-flex items-center gap-1 text-sm font-medium text-white">
-                Discuss this model <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
+    <section id="business-models" className="relative overflow-hidden border-y border-white/10 bg-white/[0.02] py-20 md:py-28">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_40%_at_50%_0%,rgba(255,255,255,0.06),transparent_60%)]" />
+      <div className="relative mx-auto max-w-7xl px-6">
+        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+          <div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/70">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-white" />
+              Business Models
             </div>
-          ))}
+            <h2 className="mt-5 text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl">
+              Four ways to <span className="text-white/40">partner.</span>
+            </h2>
+            <p className="mt-5 max-w-md text-base leading-relaxed text-white/55">
+              Choose the ownership and operating structure that matches your capital, land and appetite for day-to-day involvement.
+            </p>
+            <div className="mt-8 hidden overflow-hidden rounded-2xl border border-white/10 lg:block">
+              <img
+                src={chargerLineupImg}
+                alt="SONAR.EV charging station lineup"
+                width={1200}
+                height={800}
+                className="h-72 w-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {businessModels.map((m, i) => (
+              <div
+                key={m.code}
+                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-black p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/30 hover:bg-white/[0.04] sm:min-h-[260px]"
+              >
+                <div className="absolute top-0 right-0 -mt-3 -mr-3 h-20 w-20 rounded-full bg-white/5 blur-2xl transition-opacity group-hover:bg-white/10" />
+                <div className="relative">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="text-3xl font-bold tracking-tighter text-white">{m.code}</div>
+                    <span className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-white/60">
+                      0{i + 1}
+                    </span>
+                  </div>
+                  <div className="mt-3 text-xs font-medium uppercase tracking-widest text-white/40">{m.name}</div>
+                  <p className="mt-3 text-sm leading-relaxed text-white/60">{m.body}</p>
+                  <ul className="mt-5 space-y-1.5">
+                    {m.points.slice(0, 2).map((p) => (
+                      <li key={p} className="flex items-start gap-2 text-xs text-white/70">
+                        <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-white" /> {p}
+                      </li>
+                    ))}
+                  </ul>
+                  <Link
+                    to="/contact"
+                    className="mt-6 inline-flex items-center gap-1 text-xs font-semibold text-white transition-colors hover:text-white/80"
+                  >
+                    Discuss this model <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
