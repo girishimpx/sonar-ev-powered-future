@@ -215,24 +215,28 @@ function RevenueSplitSection() {
 const businessModels = [
   {
     code: "COCO",
+    to: "/models/coco" as const,
     name: "Company Owned, Company Operated",
     body: "SONAR.EV invests, owns and operates the station end to end. Ideal for strategic, high-traffic locations where we control the full experience.",
     points: ["100% SONAR.EV capital", "SONAR.EV operations team", "Site owner earns lease/rental"],
   },
   {
     code: "FOCO",
+    to: "/models/foco" as const,
     name: "Franchise Owned, Company Operated",
     body: "You invest in the station, SONAR.EV runs day-to-day operations. Hands-off ownership with professional operations and monitoring.",
     points: ["Partner capital, SONAR.EV operations", "Managed staffing and upkeep", "Predictable, passive earnings"],
   },
   {
     code: "FOFO",
+    to: "/models/fofo" as const,
     name: "Franchise Owned, Franchise Operated",
     body: "You own and operate the station with our hardware, software and support behind you — and keep 95% of net revenue.",
     points: ["Highest earning potential", "Full operational control", "SONAR.EV tech, AMC and training"],
   },
   {
     code: "Capital Circle",
+    to: "/models/capital-circle" as const,
     name: "Investor Capital Model",
     body: "Invest capital into SONAR.EV-managed charging assets without owning land or running operations. Participate in the network's growth.",
     points: ["No land or staffing needed", "Portfolio of managed stations", "Structured, agreement-backed returns"],
@@ -292,10 +296,10 @@ function BusinessModelsSection() {
                     ))}
                   </ul>
                   <Link
-                    to="/contact"
+                    to={m.to}
                     className="mt-6 inline-flex items-center gap-1 text-xs font-semibold text-white transition-colors hover:text-white/80"
                   >
-                    Discuss this model <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                    Explore {m.code} <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                   </Link>
                 </div>
               </div>

@@ -20,6 +20,10 @@ import { Route as SolutionsPostInstallationInspectionRouteImport } from './route
 import { Route as SolutionsLandSurveyRouteImport } from './routes/solutions.land-survey'
 import { Route as SolutionsInstallationRouteImport } from './routes/solutions.installation'
 import { Route as SolutionsBusinessConsultancyRouteImport } from './routes/solutions.business-consultancy'
+import { Route as ModelsFofoRouteImport } from './routes/models.fofo'
+import { Route as ModelsFocoRouteImport } from './routes/models.foco'
+import { Route as ModelsCocoRouteImport } from './routes/models.coco'
+import { Route as ModelsCapitalCircleRouteImport } from './routes/models.capital-circle'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
 const ContactRoute = ContactRouteImport.update({
@@ -79,6 +83,26 @@ const SolutionsBusinessConsultancyRoute =
     path: '/solutions/business-consultancy',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ModelsFofoRoute = ModelsFofoRouteImport.update({
+  id: '/models/fofo',
+  path: '/models/fofo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ModelsFocoRoute = ModelsFocoRouteImport.update({
+  id: '/models/foco',
+  path: '/models/foco',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ModelsCocoRoute = ModelsCocoRouteImport.update({
+  id: '/models/coco',
+  path: '/models/coco',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ModelsCapitalCircleRoute = ModelsCapitalCircleRouteImport.update({
+  id: '/models/capital-circle',
+  path: '/models/capital-circle',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -93,6 +117,10 @@ export interface FileRoutesByFullPath {
   '/chargers': typeof ChargersRoute
   '/contact': typeof ContactRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/models/capital-circle': typeof ModelsCapitalCircleRoute
+  '/models/coco': typeof ModelsCocoRoute
+  '/models/foco': typeof ModelsFocoRoute
+  '/models/fofo': typeof ModelsFofoRoute
   '/solutions/business-consultancy': typeof SolutionsBusinessConsultancyRoute
   '/solutions/installation': typeof SolutionsInstallationRoute
   '/solutions/land-survey': typeof SolutionsLandSurveyRoute
@@ -107,6 +135,10 @@ export interface FileRoutesByTo {
   '/chargers': typeof ChargersRoute
   '/contact': typeof ContactRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/models/capital-circle': typeof ModelsCapitalCircleRoute
+  '/models/coco': typeof ModelsCocoRoute
+  '/models/foco': typeof ModelsFocoRoute
+  '/models/fofo': typeof ModelsFofoRoute
   '/solutions/business-consultancy': typeof SolutionsBusinessConsultancyRoute
   '/solutions/installation': typeof SolutionsInstallationRoute
   '/solutions/land-survey': typeof SolutionsLandSurveyRoute
@@ -122,6 +154,10 @@ export interface FileRoutesById {
   '/chargers': typeof ChargersRoute
   '/contact': typeof ContactRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/models/capital-circle': typeof ModelsCapitalCircleRoute
+  '/models/coco': typeof ModelsCocoRoute
+  '/models/foco': typeof ModelsFocoRoute
+  '/models/fofo': typeof ModelsFofoRoute
   '/solutions/business-consultancy': typeof SolutionsBusinessConsultancyRoute
   '/solutions/installation': typeof SolutionsInstallationRoute
   '/solutions/land-survey': typeof SolutionsLandSurveyRoute
@@ -138,6 +174,10 @@ export interface FileRouteTypes {
     | '/chargers'
     | '/contact'
     | '/blog/$slug'
+    | '/models/capital-circle'
+    | '/models/coco'
+    | '/models/foco'
+    | '/models/fofo'
     | '/solutions/business-consultancy'
     | '/solutions/installation'
     | '/solutions/land-survey'
@@ -152,6 +192,10 @@ export interface FileRouteTypes {
     | '/chargers'
     | '/contact'
     | '/blog/$slug'
+    | '/models/capital-circle'
+    | '/models/coco'
+    | '/models/foco'
+    | '/models/fofo'
     | '/solutions/business-consultancy'
     | '/solutions/installation'
     | '/solutions/land-survey'
@@ -166,6 +210,10 @@ export interface FileRouteTypes {
     | '/chargers'
     | '/contact'
     | '/blog/$slug'
+    | '/models/capital-circle'
+    | '/models/coco'
+    | '/models/foco'
+    | '/models/fofo'
     | '/solutions/business-consultancy'
     | '/solutions/installation'
     | '/solutions/land-survey'
@@ -180,6 +228,10 @@ export interface RootRouteChildren {
   CalculatorRoute: typeof CalculatorRoute
   ChargersRoute: typeof ChargersRoute
   ContactRoute: typeof ContactRoute
+  ModelsCapitalCircleRoute: typeof ModelsCapitalCircleRoute
+  ModelsCocoRoute: typeof ModelsCocoRoute
+  ModelsFocoRoute: typeof ModelsFocoRoute
+  ModelsFofoRoute: typeof ModelsFofoRoute
   SolutionsBusinessConsultancyRoute: typeof SolutionsBusinessConsultancyRoute
   SolutionsInstallationRoute: typeof SolutionsInstallationRoute
   SolutionsLandSurveyRoute: typeof SolutionsLandSurveyRoute
@@ -266,6 +318,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SolutionsBusinessConsultancyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/models/fofo': {
+      id: '/models/fofo'
+      path: '/models/fofo'
+      fullPath: '/models/fofo'
+      preLoaderRoute: typeof ModelsFofoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/models/foco': {
+      id: '/models/foco'
+      path: '/models/foco'
+      fullPath: '/models/foco'
+      preLoaderRoute: typeof ModelsFocoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/models/coco': {
+      id: '/models/coco'
+      path: '/models/coco'
+      fullPath: '/models/coco'
+      preLoaderRoute: typeof ModelsCocoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/models/capital-circle': {
+      id: '/models/capital-circle'
+      path: '/models/capital-circle'
+      fullPath: '/models/capital-circle'
+      preLoaderRoute: typeof ModelsCapitalCircleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/$slug': {
       id: '/blog/$slug'
       path: '/$slug'
@@ -293,6 +373,10 @@ const rootRouteChildren: RootRouteChildren = {
   CalculatorRoute: CalculatorRoute,
   ChargersRoute: ChargersRoute,
   ContactRoute: ContactRoute,
+  ModelsCapitalCircleRoute: ModelsCapitalCircleRoute,
+  ModelsCocoRoute: ModelsCocoRoute,
+  ModelsFocoRoute: ModelsFocoRoute,
+  ModelsFofoRoute: ModelsFofoRoute,
   SolutionsBusinessConsultancyRoute: SolutionsBusinessConsultancyRoute,
   SolutionsInstallationRoute: SolutionsInstallationRoute,
   SolutionsLandSurveyRoute: SolutionsLandSurveyRoute,
