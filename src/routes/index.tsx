@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import heroImg from "@/assets/hero-charger.jpg";
 import plazaImg from "@/assets/plaza.jpg";
+import chargerLineupImg from "@/assets/charger-lineup.jpg";
 import {
   Nav, Footer, FloatingCTAs, ContactStrip, EnquiryForm,
   btnPrimary, btnSecondary,
