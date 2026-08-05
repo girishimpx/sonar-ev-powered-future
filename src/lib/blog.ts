@@ -114,11 +114,16 @@ export async function updatePost(
   id: string,
   patch: { title?: string; excerpt?: string; body?: string; cover?: string },
 ): Promise<void> {
-  const payload: Record<string, unknown> = {};
-  if (patch.title !== undefined) payload["title"] = patch.title.trim();
-  if (patch.excerpt !== undefined) payload["excerpt"] = patch.excerpt.trim();
-  if (patch.body !== undefined) payload["body"] = patch.body.trim();
-  if (patch.cover !== undefined) payload["cover"] = patch.cover.trim() || null;
+  const payload: {
+    title?: string;
+    excerpt?: string;
+    body?: string;
+    cover?: string | null;
+  } = {};
+  if (patch.title !== undefined) payload.title = patch.title.trim();
+  if (patch.excerpt !== undefined) payload.excerpt = patch.excerpt.trim();
+  if (patch.body !== undefined) payload.body = patch.body.trim();
+  if (patch.cover !== undefined) payload.cover = patch.cover.trim() || null;
   const { error } = await supabase.from("blog_posts").update(payload).eq("id", id);
   if (error) throw error;
 }
