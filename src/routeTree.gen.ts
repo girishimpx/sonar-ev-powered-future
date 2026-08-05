@@ -15,6 +15,7 @@ import { Route as CalculatorRouteImport } from './routes/calculator'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EliteIndexRouteImport } from './routes/elite.index'
 import { Route as SolutionsProjectReportRouteImport } from './routes/solutions.project-report'
 import { Route as SolutionsPostInstallationInspectionRouteImport } from './routes/solutions.post-installation-inspection'
 import { Route as SolutionsLandSurveyRouteImport } from './routes/solutions.land-survey'
@@ -54,6 +55,11 @@ const AccountRoute = AccountRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EliteIndexRoute = EliteIndexRouteImport.update({
+  id: '/elite/',
+  path: '/elite/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SolutionsProjectReportRoute = SolutionsProjectReportRouteImport.update({
@@ -126,6 +132,7 @@ export interface FileRoutesByFullPath {
   '/solutions/land-survey': typeof SolutionsLandSurveyRoute
   '/solutions/post-installation-inspection': typeof SolutionsPostInstallationInspectionRoute
   '/solutions/project-report': typeof SolutionsProjectReportRoute
+  '/elite/': typeof EliteIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -144,6 +151,7 @@ export interface FileRoutesByTo {
   '/solutions/land-survey': typeof SolutionsLandSurveyRoute
   '/solutions/post-installation-inspection': typeof SolutionsPostInstallationInspectionRoute
   '/solutions/project-report': typeof SolutionsProjectReportRoute
+  '/elite': typeof EliteIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -163,6 +171,7 @@ export interface FileRoutesById {
   '/solutions/land-survey': typeof SolutionsLandSurveyRoute
   '/solutions/post-installation-inspection': typeof SolutionsPostInstallationInspectionRoute
   '/solutions/project-report': typeof SolutionsProjectReportRoute
+  '/elite/': typeof EliteIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -183,6 +192,7 @@ export interface FileRouteTypes {
     | '/solutions/land-survey'
     | '/solutions/post-installation-inspection'
     | '/solutions/project-report'
+    | '/elite/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -201,6 +211,7 @@ export interface FileRouteTypes {
     | '/solutions/land-survey'
     | '/solutions/post-installation-inspection'
     | '/solutions/project-report'
+    | '/elite'
   id:
     | '__root__'
     | '/'
@@ -219,6 +230,7 @@ export interface FileRouteTypes {
     | '/solutions/land-survey'
     | '/solutions/post-installation-inspection'
     | '/solutions/project-report'
+    | '/elite/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -237,6 +249,7 @@ export interface RootRouteChildren {
   SolutionsLandSurveyRoute: typeof SolutionsLandSurveyRoute
   SolutionsPostInstallationInspectionRoute: typeof SolutionsPostInstallationInspectionRoute
   SolutionsProjectReportRoute: typeof SolutionsProjectReportRoute
+  EliteIndexRoute: typeof EliteIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -281,6 +294,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/elite/': {
+      id: '/elite/'
+      path: '/elite'
+      fullPath: '/elite/'
+      preLoaderRoute: typeof EliteIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/solutions/project-report': {
@@ -383,17 +403,8 @@ const rootRouteChildren: RootRouteChildren = {
   SolutionsPostInstallationInspectionRoute:
     SolutionsPostInstallationInspectionRoute,
   SolutionsProjectReportRoute: SolutionsProjectReportRoute,
+  EliteIndexRoute: EliteIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
