@@ -65,76 +65,115 @@ export const SOLUTION_LINKS = [
   { label: "Post-Installation Inspection", to: "/solutions/post-installation-inspection", desc: "Safety audits and preventive upkeep", icon: ShieldCheck },
 ] as const;
 
+type DropItem = { label: string; to: string; desc: string; icon: any; featured?: boolean };
+
+function DropdownMenu({
+  title,
+  groups,
+}: {
+  title: string;
+  groups: Array<{ heading?: string; items: readonly DropItem[] }>;
+}) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        className="inline-flex items-center gap-1 text-sm text-white/60 transition-colors hover:text-white"
+      >
+        {title}
+        <ChevronDown className={`h-3.5 w-3.5 transition-transform ${open ? "rotate-180" : ""}`} />
+      </button>
+      {open && (
+        <div className="absolute left-1/2 top-full z-50 w-[24rem] -translate-x-1/2 pt-4">
+          <div className="overflow-hidden rounded-2xl border border-white/10 bg-black/95 p-2 shadow-[0_20px_60px_-20px_rgba(255,255,255,0.15)] backdrop-blur-xl">
+            {groups.map((g, gi) => (
+              <div key={g.heading ?? gi} className={gi > 0 ? "mt-1 border-t border-white/10 pt-2" : ""}>
+                {g.heading && (
+                  <div className="px-3 pb-1 pt-2 text-[10px] font-semibold uppercase tracking-widest text-white/35">
+                    {g.heading}
+                  </div>
+                )}
+                {g.items.map(({ label, to, desc, icon: Icon, featured }) => (
+                  <Link
+                    key={to}
+                    to={to}
+                    onClick={() => setOpen(false)}
+                    className={`flex gap-3 rounded-xl p-3 transition-colors ${
+                      featured
+                        ? "border border-white/25 bg-white/[0.07] hover:bg-white/[0.12]"
+                        : "hover:bg-white/5"
+                    }`}
+                  >
+                    <span
+                      className={`grid h-9 w-9 shrink-0 place-items-center rounded-lg border ${
+                        featured ? "border-white/40 bg-white text-black" : "border-white/15 bg-white/5 text-white"
+                      }`}
+                    >
+                      <Icon className="h-4 w-4" />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="flex items-center gap-2 text-sm font-medium text-white">
+                        {label}
+                        {featured && (
+                          <span className="rounded-full bg-white px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-widest text-black">
+                            Flagship
+                          </span>
+                        )}
+                      </span>
+                      <span className="block text-xs text-white/50">{desc}</span>
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function Nav() {
   const [open, setOpen] = useState(false);
-  const [solOpen, setSolOpen] = useState(false);
   return (
     <header className="sticky top-0 z-50 border-b border-white/5 bg-black/70 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         <Logo />
         <nav className="hidden items-center gap-7 lg:flex">
-          {NAV_LINKS.map((l) => (
-            <span key={l.label} className="contents">
-              {l.label === "Earnings Calculator" && (
-                <div
-                  className="relative"
-                  onMouseEnter={() => setSolOpen(true)}
-                  onMouseLeave={() => setSolOpen(false)}
-                >
-                  <button
-                    type="button"
-                    onClick={() => setSolOpen((v) => !v)}
-                    aria-expanded={solOpen}
-                    className="inline-flex items-center gap-1 text-sm text-white/60 transition-colors hover:text-white"
-                  >
-                    Solutions
-                    <ChevronDown className={`h-3.5 w-3.5 transition-transform ${solOpen ? "rotate-180" : ""}`} />
-                  </button>
-                  {solOpen && (
-                    <div className="absolute left-1/2 top-full z-50 w-[22rem] -translate-x-1/2 pt-4">
-                      <div className="overflow-hidden rounded-2xl border border-white/10 bg-black/95 p-2 shadow-[0_20px_60px_-20px_rgba(255,255,255,0.15)] backdrop-blur-xl">
-                        {SOLUTION_LINKS.map(({ label, to, desc, icon: Icon }) => (
-                          <Link
-                            key={to}
-                            to={to}
-                            onClick={() => setSolOpen(false)}
-                            className="flex gap-3 rounded-xl p-3 transition-colors hover:bg-white/5"
-                          >
-                            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-white/15 bg-white/5">
-                              <Icon className="h-4 w-4 text-white" />
-                            </span>
-                            <span>
-                              <span className="block text-sm font-medium text-white">{label}</span>
-                              <span className="block text-xs text-white/50">{desc}</span>
-                            </span>
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
-              {
-            l.to ? (
-              <Link
-                key={l.label}
-                to={l.to}
-                className="text-sm text-white/60 transition-colors hover:text-white [&.active]:text-white"
-                activeOptions={{ exact: l.to === "/" }}
-              >
-                {l.label}
-              </Link>
-            ) : (
-              <a
-                key={l.label}
-                href={l.href}
-                className="text-sm text-white/60 transition-colors hover:text-white"
-              >
-                {l.label}
-              </a>
-            )}
-            </span>
-          ))}
+          <Link
+            to="/"
+            className="text-sm text-white/60 transition-colors hover:text-white [&.active]:text-white"
+            activeOptions={{ exact: true }}
+          >
+            Home
+          </Link>
+
+          <DropdownMenu title="Products" groups={[{ items: PRODUCT_LINKS as readonly DropItem[] }]} />
+
+          <DropdownMenu
+            title="Solutions"
+            groups={[
+              { heading: "Services", items: SOLUTION_LINKS as readonly DropItem[] },
+              { heading: "Business Models", items: MODEL_LINKS as readonly DropItem[] },
+            ]}
+          />
+
+          <Link to="/franchise" className="text-sm text-white/60 transition-colors hover:text-white [&.active]:text-white">
+            Franchise
+          </Link>
+          <Link to="/calculator" className="text-sm text-white/60 transition-colors hover:text-white [&.active]:text-white">
+            Earnings Calculator
+          </Link>
+          <Link to="/contact" className="text-sm text-white/60 transition-colors hover:text-white [&.active]:text-white">
+            Contact
+          </Link>
         </nav>
         <div className="flex items-center gap-2">
           <Link
@@ -155,44 +194,49 @@ export function Nav() {
       {open && (
         <div className="border-t border-white/5 bg-black lg:hidden">
           <div className="mx-auto flex max-w-7xl flex-col px-6 py-4">
-            {NAV_LINKS.map((l) =>
-              l.to ? (
-                <Link
-                  key={l.label}
-                  to={l.to}
-                  onClick={() => setOpen(false)}
-                  className="py-3 text-sm text-white/70 hover:text-white"
-                >
-                  {l.label}
-                </Link>
-              ) : (
-                <a
-                  key={l.label}
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className="py-3 text-sm text-white/70 hover:text-white"
-                >
-                  {l.label}
-                </a>
-              ),
-            )}
-            <div className="mt-2 border-t border-white/10 pt-3">
-              <div className="text-xs font-semibold uppercase tracking-widest text-white/40">Solutions</div>
-              {SOLUTION_LINKS.map(({ label, to }) => (
-                <Link
-                  key={to}
-                  to={to}
-                  onClick={() => setOpen(false)}
-                  className="block py-3 text-sm text-white/70 hover:text-white"
-                >
-                  {label}
-                </Link>
-              ))}
-            </div>
+            {NAV_LINKS.map((l) => (
+              <Link
+                key={l.label}
+                to={l.to!}
+                onClick={() => setOpen(false)}
+                className="py-3 text-sm text-white/70 hover:text-white"
+              >
+                {l.label}
+              </Link>
+            ))}
+            <MobileGroup title="Products" items={PRODUCT_LINKS as readonly DropItem[]} onNavigate={() => setOpen(false)} />
+            <MobileGroup title="Solutions" items={SOLUTION_LINKS as readonly DropItem[]} onNavigate={() => setOpen(false)} />
+            <MobileGroup title="Business Models" items={MODEL_LINKS as readonly DropItem[]} onNavigate={() => setOpen(false)} />
           </div>
         </div>
       )}
     </header>
+  );
+}
+
+function MobileGroup({
+  title,
+  items,
+  onNavigate,
+}: {
+  title: string;
+  items: readonly DropItem[];
+  onNavigate: () => void;
+}) {
+  return (
+    <div className="mt-2 border-t border-white/10 pt-3">
+      <div className="text-xs font-semibold uppercase tracking-widest text-white/40">{title}</div>
+      {items.map(({ label, to, featured }) => (
+        <Link
+          key={to}
+          to={to}
+          onClick={onNavigate}
+          className={`block py-3 text-sm hover:text-white ${featured ? "font-semibold text-white" : "text-white/70"}`}
+        >
+          {label}
+        </Link>
+      ))}
+    </div>
   );
 }
 
