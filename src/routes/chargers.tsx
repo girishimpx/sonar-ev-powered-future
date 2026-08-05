@@ -10,7 +10,9 @@ import lineupImg from "@/assets/charger-lineup.jpg";
 export const Route = createFileRoute("/chargers")({
   component: FranchiseModel,
   head: () => ({
+    links: [{ rel: "canonical", href: "https://sonar-ev-powered-future.lovable.app/chargers" }],
     meta: [
+      { property: "og:url", content: "https://sonar-ev-powered-future.lovable.app/chargers" },
       { title: "Franchise Model | SONAR.EV" },
       { name: "description", content: "How the SONAR.EV franchise works: 5-step model, 95/5 revenue share, chargers from 30kW to 240kW, software and AMC included." },
       { property: "og:title", content: "Franchise Model | SONAR.EV" },

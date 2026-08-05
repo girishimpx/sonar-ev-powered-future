@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as FranchiseRouteImport } from './routes/franchise'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ChargersRouteImport } from './routes/chargers'
@@ -42,6 +43,11 @@ import { Route as EliteCommunityRouteImport } from './routes/elite.community'
 import { Route as EliteAiRouteImport } from './routes/elite.ai'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FranchiseRoute = FranchiseRouteImport.update({
   id: '/franchise',
   path: '/franchise',
@@ -213,6 +219,7 @@ export interface FileRoutesByFullPath {
   '/chargers': typeof ChargersRoute
   '/contact': typeof ContactRoute
   '/franchise': typeof FranchiseRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/elite/ai': typeof EliteAiRoute
   '/elite/community': typeof EliteCommunityRoute
@@ -247,6 +254,7 @@ export interface FileRoutesByTo {
   '/chargers': typeof ChargersRoute
   '/contact': typeof ContactRoute
   '/franchise': typeof FranchiseRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/elite/ai': typeof EliteAiRoute
   '/elite/community': typeof EliteCommunityRoute
@@ -282,6 +290,7 @@ export interface FileRoutesById {
   '/chargers': typeof ChargersRoute
   '/contact': typeof ContactRoute
   '/franchise': typeof FranchiseRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/elite/ai': typeof EliteAiRoute
   '/elite/community': typeof EliteCommunityRoute
@@ -318,6 +327,7 @@ export interface FileRouteTypes {
     | '/chargers'
     | '/contact'
     | '/franchise'
+    | '/sitemap.xml'
     | '/blog/$slug'
     | '/elite/ai'
     | '/elite/community'
@@ -352,6 +362,7 @@ export interface FileRouteTypes {
     | '/chargers'
     | '/contact'
     | '/franchise'
+    | '/sitemap.xml'
     | '/blog/$slug'
     | '/elite/ai'
     | '/elite/community'
@@ -386,6 +397,7 @@ export interface FileRouteTypes {
     | '/chargers'
     | '/contact'
     | '/franchise'
+    | '/sitemap.xml'
     | '/blog/$slug'
     | '/elite/ai'
     | '/elite/community'
@@ -421,6 +433,7 @@ export interface RootRouteChildren {
   ChargersRoute: typeof ChargersRoute
   ContactRoute: typeof ContactRoute
   FranchiseRoute: typeof FranchiseRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   EliteAiRoute: typeof EliteAiRoute
   EliteCommunityRoute: typeof EliteCommunityRoute
   EliteDashboardRoute: typeof EliteDashboardRoute
@@ -449,6 +462,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/franchise': {
       id: '/franchise'
       path: '/franchise'
@@ -694,6 +714,7 @@ const rootRouteChildren: RootRouteChildren = {
   ChargersRoute: ChargersRoute,
   ContactRoute: ContactRoute,
   FranchiseRoute: FranchiseRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   EliteAiRoute: EliteAiRoute,
   EliteCommunityRoute: EliteCommunityRoute,
   EliteDashboardRoute: EliteDashboardRoute,

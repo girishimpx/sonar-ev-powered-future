@@ -6,7 +6,9 @@ import { Nav, Footer, FloatingCTAs, btnPrimary, btnSecondary } from "@/component
 export const Route = createFileRoute("/calculator")({
   component: CalculatorPage,
   head: () => ({
+    links: [{ rel: "canonical", href: "https://sonar-ev-powered-future.lovable.app/calculator" }],
     meta: [
+      { property: "og:url", content: "https://sonar-ev-powered-future.lovable.app/calculator" },
       { title: "Franchise Earnings Calculator | SONAR.EV" },
       {
         name: "description",

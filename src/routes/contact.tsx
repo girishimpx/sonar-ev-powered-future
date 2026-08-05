@@ -5,7 +5,9 @@ import { Nav, Footer, FloatingCTAs, EnquiryForm } from "@/components/site";
 export const Route = createFileRoute("/contact")({
   component: ContactPage,
   head: () => ({
+    links: [{ rel: "canonical", href: "https://sonar-ev-powered-future.lovable.app/contact" }],
     meta: [
+      { property: "og:url", content: "https://sonar-ev-powered-future.lovable.app/contact" },
       { title: "Become a SONAR.EV Franchise Partner" },
       { name: "description", content: "Apply for a SONAR.EV EV charging franchise. Talk to a specialist about site feasibility, investment, and launching your station in India." },
       { property: "og:title", content: "Become a SONAR.EV Franchise Partner" },

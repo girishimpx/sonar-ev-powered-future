@@ -15,7 +15,9 @@ import type { PlanId } from "@/lib/plans";
 
 export const Route = createFileRoute("/elite/")({
   head: () => ({
+    links: [{ rel: "canonical", href: "https://sonar-ev-powered-future.lovable.app/elite" }],
     meta: [
+      { property: "og:url", content: "https://sonar-ev-powered-future.lovable.app/elite" },
       { title: "SonarEV Elite — The Business OS for Land, Investment & Growth" },
       { name: "description", content: "One membership for verified land, investors, business partners, legal experts, contractors, AI advisors and everything needed to build your next project." },
       { property: "og:title", content: "SonarEV Elite — The Business Operating System" },

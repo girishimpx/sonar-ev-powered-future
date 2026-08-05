@@ -16,7 +16,9 @@ import {
 export const Route = createFileRoute("/blog")({
   component: BlogIndex,
   head: () => ({
+    links: [{ rel: "canonical", href: "https://sonar-ev-powered-future.lovable.app/blog" }],
     meta: [
+      { property: "og:url", content: "https://sonar-ev-powered-future.lovable.app/blog" },
       { title: "Blog — Sonar EV" },
       {
         name: "description",
