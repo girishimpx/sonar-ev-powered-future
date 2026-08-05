@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
+import type { User } from "@supabase/supabase-js";
 import {
   ArrowRight,
   LogOut,
@@ -12,18 +13,12 @@ import {
   FileText,
 } from "lucide-react";
 import { btnPrimary, btnSecondary, Logo } from "@/components/site";
-import {
-  currentUser,
-  login,
-  logout,
-  signup,
-  updateProfile,
-  type User,
-} from "@/lib/auth";
+import { supabase } from "@/integrations/supabase/client";
+import { lovable } from "@/integrations/lovable/index";
+import { useAuth } from "@/hooks/useAuth";
 import {
   addPost,
   deletePost,
-  loadPosts,
   postsByAuthor,
   updatePost,
   formatDate,
@@ -49,15 +44,9 @@ export const Route = createFileRoute("/account")({
 });
 
 function AccountPage() {
-  const [ready, setReady] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
+  const { user, loading } = useAuth();
 
-  useEffect(() => {
-    setUser(currentUser());
-    setReady(true);
-  }, []);
-
-  if (!ready) {
+  if (loading) {
     return (
       <div className="grid min-h-screen place-items-center bg-black text-white/50">
         Loading…
@@ -76,36 +65,58 @@ function AccountPage() {
         </div>
       </header>
 
-      {user ? (
-        <Dashboard user={user} onUser={setUser} onSignOut={() => setUser(null)} />
-      ) : (
-        <AuthPanel onAuthed={setUser} />
-      )}
+      {user ? <Dashboard user={user} /> : <AuthPanel />}
     </div>
   );
 }
 
 /* --------------------------------- Auth ---------------------------------- */
 
-function AuthPanel({ onAuthed }: { onAuthed: (u: User) => void }) {
+function AuthPanel() {
   const [mode, setMode] = useState<"login" | "signup">("login");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
 
-  function submit(e: React.FormEvent) {
+  async function submit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
-    const res =
-      mode === "login"
-        ? login(email, password)
-        : signup({ email, name, password });
-    if (!res.ok) {
-      setError(res.error);
-      return;
+    setNotice(null);
+    setBusy(true);
+    try {
+      if (mode === "login") {
+        const { error } = await supabase.auth.signInWithPassword({
+          email: email.trim(),
+          password,
+        });
+        if (error) setError(error.message);
+      } else {
+        const { data, error } = await supabase.auth.signUp({
+          email: email.trim(),
+          password,
+          options: {
+            emailRedirectTo: `${window.location.origin}/account`,
+            data: { full_name: name.trim() || email.split("@")[0] },
+          },
+        });
+        if (error) setError(error.message);
+        else if (!data.session)
+          setNotice("Check your email to confirm your account, then sign in.");
+      }
+    } finally {
+      setBusy(false);
     }
-    onAuthed(res.user);
+  }
+
+  async function google() {
+    setError(null);
+    const result = await lovable.auth.signInWithOAuth("google", {
+      redirect_uri: `${window.location.origin}/account`,
+    });
+    if (result.error) setError("Google sign-in failed. Please try again.");
   }
 
   return (
@@ -120,7 +131,19 @@ function AuthPanel({ onAuthed }: { onAuthed: (u: User) => void }) {
             : "Set up a contributor account to publish posts."}
         </p>
 
-        <form onSubmit={submit} className="mt-6 space-y-4">
+        <button
+          onClick={google}
+          className={`${btnSecondary} mt-6 w-full justify-center`}
+          type="button"
+        >
+          Continue with Google
+        </button>
+
+        <div className="my-5 flex items-center gap-3 text-[11px] uppercase tracking-widest text-white/30">
+          <span className="h-px flex-1 bg-white/10" /> or <span className="h-px flex-1 bg-white/10" />
+        </div>
+
+        <form onSubmit={submit} className="space-y-4">
           {mode === "signup" && (
             <AuthField
               label="Name"
@@ -150,7 +173,12 @@ function AuthPanel({ onAuthed }: { onAuthed: (u: User) => void }) {
               {error}
             </div>
           )}
-          <button type="submit" className={`${btnPrimary} w-full`}>
+          {notice && (
+            <div className="rounded-lg border border-white/20 bg-white/5 px-3 py-2 text-xs text-white/70">
+              {notice}
+            </div>
+          )}
+          <button type="submit" disabled={busy} className={`${btnPrimary} w-full disabled:opacity-60`}>
             {mode === "login" ? "Sign in" : "Create account"}
             <ArrowRight className="h-4 w-4" />
           </button>
@@ -201,6 +229,7 @@ function AuthField({
   type = "text",
   placeholder,
   required,
+  disabled,
 }: {
   label: string;
   value: string;
@@ -208,6 +237,7 @@ function AuthField({
   type?: string;
   placeholder?: string;
   required?: boolean;
+  disabled?: boolean;
 }) {
   return (
     <div>
@@ -220,7 +250,8 @@ function AuthField({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         required={required}
-        className="w-full rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white outline-none transition-colors focus:border-white/40"
+        disabled={disabled}
+        className="w-full rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white outline-none transition-colors focus:border-white/40 disabled:cursor-not-allowed disabled:text-white/40"
       />
     </div>
   );
@@ -230,27 +261,29 @@ function AuthField({
 
 type Tab = "posts" | "profile";
 
-function Dashboard({
-  user,
-  onUser,
-  onSignOut,
-}: {
-  user: User;
-  onUser: (u: User) => void;
-  onSignOut: () => void;
-}) {
+function displayNameOf(user: User) {
+  return (
+    (user.user_metadata?.["full_name"] as string | undefined) ||
+    (user.user_metadata?.["name"] as string | undefined) ||
+    user.email?.split("@")[0] ||
+    "Member"
+  );
+}
+
+function Dashboard({ user }: { user: User }) {
   const [tab, setTab] = useState<Tab>("posts");
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [editing, setEditing] = useState<BlogPost | null>(null);
   const [creating, setCreating] = useState(false);
+  const [name, setName] = useState(displayNameOf(user));
 
   function refresh() {
-    setPosts(postsByAuthor(user.id));
+    postsByAuthor(user.id)
+      .then(setPosts)
+      .catch(() => setPosts([]));
   }
 
   useEffect(() => {
-    // Migration: seed posts are shown for context but only user's own are editable.
-    loadPosts();
     refresh();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user.id]);
@@ -262,15 +295,12 @@ function Dashboard({
           <div className="text-xs uppercase tracking-widest text-white/40">
             Welcome back
           </div>
-          <h1 className="mt-1 text-2xl font-semibold tracking-tight">
-            {user.name}
-          </h1>
+          <h1 className="mt-1 text-2xl font-semibold tracking-tight">{name}</h1>
           <div className="text-sm text-white/50">{user.email}</div>
         </div>
         <button
-          onClick={() => {
-            logout();
-            onSignOut();
+          onClick={async () => {
+            await supabase.auth.signOut();
           }}
           className={btnSecondary}
         >
@@ -278,7 +308,7 @@ function Dashboard({
         </button>
       </div>
 
-      <div className="mt-8 flex gap-1 rounded-full border border-white/10 bg-white/[0.02] p-1 w-fit">
+      <div className="mt-8 flex w-fit gap-1 rounded-full border border-white/10 bg-white/[0.02] p-1">
         <TabButton active={tab === "posts"} onClick={() => setTab("posts")}>
           <FileText className="h-3.5 w-3.5" /> My posts
         </TabButton>
@@ -321,9 +351,9 @@ function Dashboard({
                       <Pencil className="h-3.5 w-3.5" /> Edit
                     </button>
                     <button
-                      onClick={() => {
+                      onClick={async () => {
                         if (confirm(`Delete "${p.title}"?`)) {
-                          deletePost(p.id);
+                          await deletePost(p.id);
                           refresh();
                         }
                       }}
@@ -339,11 +369,14 @@ function Dashboard({
         </section>
       )}
 
-      {tab === "profile" && <ProfilePanel user={user} onUser={onUser} />}
+      {tab === "profile" && (
+        <ProfilePanel user={user} name={name} onName={setName} />
+      )}
 
       {(creating || editing) && (
         <PostEditor
           user={user}
+          authorName={name}
           post={editing}
           onClose={() => {
             setCreating(false);
@@ -373,9 +406,7 @@ function TabButton({
     <button
       onClick={onClick}
       className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-medium transition-colors ${
-        active
-          ? "bg-white text-black"
-          : "text-white/60 hover:text-white"
+        active ? "bg-white text-black" : "text-white/60 hover:text-white"
       }`}
     >
       {children}
@@ -387,48 +418,61 @@ function TabButton({
 
 function ProfilePanel({
   user,
-  onUser,
+  name,
+  onName,
 }: {
   user: User;
-  onUser: (u: User) => void;
+  name: string;
+  onName: (v: string) => void;
 }) {
-  const [name, setName] = useState(user.name);
+  const [draft, setDraft] = useState(name);
   const [password, setPassword] = useState("");
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
 
   return (
     <section className="mt-8 max-w-lg">
       <h2 className="text-lg font-semibold">Profile</h2>
       <form
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
           setError(null);
           if (password && password.length < 6) {
             setError("Password must be at least 6 characters.");
             return;
           }
-          const updated = updateProfile({ name, password: password || undefined });
-          if (updated) {
-            onUser(updated);
+          setBusy(true);
+          try {
+            const { error: authError } = await supabase.auth.updateUser({
+              data: { full_name: draft.trim() || name },
+              ...(password ? { password } : {}),
+            });
+            if (authError) {
+              setError(authError.message);
+              return;
+            }
+            await supabase
+              .from("profiles")
+              .update({ full_name: draft.trim() || name })
+              .eq("id", user.id);
+            onName(draft.trim() || name);
             setPassword("");
             setSaved(true);
             setTimeout(() => setSaved(false), 2000);
+          } finally {
+            setBusy(false);
           }
         }}
         className="mt-4 space-y-4 rounded-2xl border border-white/10 bg-white/[0.02] p-6"
       >
-        <AuthField label="Display name" value={name} onChange={setName} />
-        <div>
-          <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-white/50">
-            Email
-          </label>
-          <input
-            value={user.email}
-            disabled
-            className="w-full cursor-not-allowed rounded-lg border border-white/10 bg-white/[0.02] px-4 py-3 text-sm text-white/50 outline-none"
-          />
-        </div>
+        <AuthField label="Display name" value={draft} onChange={setDraft} />
+        <AuthField
+          label="Email"
+          value={user.email ?? ""}
+          onChange={() => {}}
+          disabled
+        />
         <AuthField
           label="New password (optional)"
           type="password"
@@ -442,12 +486,10 @@ function ProfilePanel({
           </div>
         )}
         <div className="flex items-center gap-3">
-          <button type="submit" className={btnPrimary}>
+          <button type="submit" disabled={busy} className={`${btnPrimary} disabled:opacity-60`}>
             <Save className="h-4 w-4" /> Save changes
           </button>
-          {saved && (
-            <span className="text-xs text-emerald-300">Saved.</span>
-          )}
+          {saved && <span className="text-xs text-emerald-300">Saved.</span>}
         </div>
       </form>
     </section>
@@ -458,11 +500,13 @@ function ProfilePanel({
 
 function PostEditor({
   user,
+  authorName,
   post,
   onClose,
   onSaved,
 }: {
   user: User;
+  authorName: string;
   post: BlogPost | null;
   onClose: () => void;
   onSaved: () => void;
@@ -472,6 +516,8 @@ function PostEditor({
   const [excerpt, setExcerpt] = useState(post?.excerpt ?? "");
   const [cover, setCover] = useState(post?.cover ?? "");
   const [body, setBody] = useState(post?.body ?? "");
+  const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
 
   const heading = useMemo(
     () => (editingId ? "Edit post" : "Publish a new post"),
@@ -492,34 +538,44 @@ function PostEditor({
           </button>
         </div>
         <form
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
             if (!title.trim() || !body.trim()) return;
-            if (editingId) {
-              updatePost(editingId, {
-                title,
-                excerpt: excerpt || body.slice(0, 140),
-                body,
-                cover,
-              });
-            } else {
-              addPost({
-                title,
-                author: user.name,
-                authorId: user.id,
-                excerpt: excerpt || body.slice(0, 140),
-                body,
-                cover,
-              });
+            setError(null);
+            setBusy(true);
+            try {
+              if (editingId) {
+                await updatePost(editingId, {
+                  title,
+                  excerpt: excerpt || body.slice(0, 140),
+                  body,
+                  cover,
+                });
+              } else {
+                await addPost({
+                  title,
+                  author: authorName,
+                  authorId: user.id,
+                  excerpt: excerpt || body.slice(0, 140),
+                  body,
+                  cover,
+                });
+              }
+              onSaved();
+            } catch (err) {
+              setError(
+                err instanceof Error ? err.message : "Could not save the post.",
+              );
+            } finally {
+              setBusy(false);
             }
-            onSaved();
           }}
           className="max-h-[70vh] space-y-4 overflow-y-auto p-6"
         >
           <AuthField label="Title" value={title} onChange={setTitle} required />
           <AuthField
             label="Cover image URL (optional)"
-            value={cover}
+            value={cover ?? ""}
             onChange={setCover}
             placeholder="https://..."
           />
@@ -542,11 +598,16 @@ function PostEditor({
               className="w-full rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white outline-none transition-colors focus:border-white/40"
             />
           </div>
+          {error && (
+            <div className="rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-xs text-red-200">
+              {error}
+            </div>
+          )}
           <div className="flex flex-wrap items-center justify-end gap-2 pt-2">
             <button type="button" onClick={onClose} className={btnSecondary}>
               Cancel
             </button>
-            <button type="submit" className={btnPrimary}>
+            <button type="submit" disabled={busy} className={`${btnPrimary} disabled:opacity-60`}>
               {editingId ? "Save changes" : "Publish post"}{" "}
               <ArrowRight className="h-4 w-4" />
             </button>
