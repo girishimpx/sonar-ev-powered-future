@@ -13,9 +13,9 @@ export const Route = createFileRoute("/chargers")({
     links: [{ rel: "canonical", href: "https://sonar-ev-powered-future.lovable.app/chargers" }],
     meta: [
       { property: "og:url", content: "https://sonar-ev-powered-future.lovable.app/chargers" },
-      { title: "Franchise Model | SONAR.EV" },
-      { name: "description", content: "How the SONAR.EV franchise works: 5-step model, 95/5 revenue share, chargers from 30kW to 240kW, software and AMC included." },
-      { property: "og:title", content: "Franchise Model | SONAR.EV" },
+      { title: "DC Fast Chargers 30kW–240kW | SONAR.EV" },
+      { name: "description", content: "Configure a SONAR.EV DC fast charger from 30kW to 240kW: guns, connectors, use case and full technical specs, with instant WhatsApp quotes." },
+      { property: "og:title", content: "DC Fast Chargers 30kW–240kW | SONAR.EV" },
       { property: "og:description", content: "SONAR.EV supplies chargers, software, and support. You own the site and earn 95% of net revenue." },
       { property: "og:type", content: "website" },
     ],
