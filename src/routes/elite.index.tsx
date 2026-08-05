@@ -184,7 +184,7 @@ function EliteLanding() {
 
       {/* AI */}
       <section id="ai" className="relative overflow-hidden border-t border-white/5 py-24">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_50%_at_50%_0%,rgba(0,230,118,0.12),transparent_70%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_50%_at_50%_0%,rgba(255,255,255,0.10),transparent_70%)]" />
         <div className="relative mx-auto grid max-w-7xl gap-14 px-6 lg:grid-cols-[1fr_1.15fr] lg:items-center">
           <Reveal>
             <EliteBadge>Sonar AI</EliteBadge>
@@ -205,7 +205,7 @@ function EliteLanding() {
             <motion.div
               animate={{ y: [0, -12, 0] }}
               transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-              className={`${glass} overflow-hidden p-2 shadow-[0_40px_120px_-40px_rgba(0,230,118,0.35)]`}
+              className={`${glass} overflow-hidden p-2 shadow-[0_40px_120px_-40px_rgba(255,255,255,0.25)]`}
             >
               <img src={aiDashboard} alt="Sonar AI dashboard interface" loading="lazy" width={1440} height={960} className="w-full rounded-[18px]" />
             </motion.div>
