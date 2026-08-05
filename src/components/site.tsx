@@ -39,6 +39,7 @@ const NAV_LINKS: Array<{ label: string; to?: string; href?: string }> = [
   { label: "Home", to: "/" },
   { label: "Franchise Model", to: "/chargers" },
   { label: "Earnings Calculator", to: "/calculator" },
+  { label: "Elite", to: "/elite" },
   { label: "Contact", to: "/contact" },
 ];
 
@@ -215,6 +216,9 @@ export function Footer() {
               </li>
               <li>
                 <Link to="/blog" className="text-white/60 hover:text-white">Blog</Link>
+              </li>
+              <li>
+                <Link to="/elite" className="text-white/60 hover:text-white">SonarEV Elite</Link>
               </li>
               <li>
                 <Link to="/contact" className="text-white/60 hover:text-white">Contact</Link>
