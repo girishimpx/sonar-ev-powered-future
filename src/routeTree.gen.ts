@@ -16,12 +16,15 @@ import { Route as CalculatorRouteImport } from './routes/calculator'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductsIndexRouteImport } from './routes/products.index'
 import { Route as EliteIndexRouteImport } from './routes/elite.index'
 import { Route as SolutionsProjectReportRouteImport } from './routes/solutions.project-report'
 import { Route as SolutionsPostInstallationInspectionRouteImport } from './routes/solutions.post-installation-inspection'
 import { Route as SolutionsLandSurveyRouteImport } from './routes/solutions.land-survey'
 import { Route as SolutionsInstallationRouteImport } from './routes/solutions.installation'
 import { Route as SolutionsBusinessConsultancyRouteImport } from './routes/solutions.business-consultancy'
+import { Route as ProductsSoftwareRouteImport } from './routes/products.software'
+import { Route as ProductsCmsRouteImport } from './routes/products.cms'
 import { Route as ModelsFofoRouteImport } from './routes/models.fofo'
 import { Route as ModelsFocoRouteImport } from './routes/models.foco'
 import { Route as ModelsCocoRouteImport } from './routes/models.coco'
@@ -74,6 +77,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductsIndexRoute = ProductsIndexRouteImport.update({
+  id: '/products/',
+  path: '/products/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EliteIndexRoute = EliteIndexRouteImport.update({
   id: '/elite/',
   path: '/elite/',
@@ -106,6 +114,16 @@ const SolutionsBusinessConsultancyRoute =
     path: '/solutions/business-consultancy',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ProductsSoftwareRoute = ProductsSoftwareRouteImport.update({
+  id: '/products/software',
+  path: '/products/software',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsCmsRoute = ProductsCmsRouteImport.update({
+  id: '/products/cms',
+  path: '/products/cms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ModelsFofoRoute = ModelsFofoRouteImport.update({
   id: '/models/fofo',
   path: '/models/fofo',
@@ -211,12 +229,15 @@ export interface FileRoutesByFullPath {
   '/models/coco': typeof ModelsCocoRoute
   '/models/foco': typeof ModelsFocoRoute
   '/models/fofo': typeof ModelsFofoRoute
+  '/products/cms': typeof ProductsCmsRoute
+  '/products/software': typeof ProductsSoftwareRoute
   '/solutions/business-consultancy': typeof SolutionsBusinessConsultancyRoute
   '/solutions/installation': typeof SolutionsInstallationRoute
   '/solutions/land-survey': typeof SolutionsLandSurveyRoute
   '/solutions/post-installation-inspection': typeof SolutionsPostInstallationInspectionRoute
   '/solutions/project-report': typeof SolutionsProjectReportRoute
   '/elite/': typeof EliteIndexRoute
+  '/products/': typeof ProductsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -242,12 +263,15 @@ export interface FileRoutesByTo {
   '/models/coco': typeof ModelsCocoRoute
   '/models/foco': typeof ModelsFocoRoute
   '/models/fofo': typeof ModelsFofoRoute
+  '/products/cms': typeof ProductsCmsRoute
+  '/products/software': typeof ProductsSoftwareRoute
   '/solutions/business-consultancy': typeof SolutionsBusinessConsultancyRoute
   '/solutions/installation': typeof SolutionsInstallationRoute
   '/solutions/land-survey': typeof SolutionsLandSurveyRoute
   '/solutions/post-installation-inspection': typeof SolutionsPostInstallationInspectionRoute
   '/solutions/project-report': typeof SolutionsProjectReportRoute
   '/elite': typeof EliteIndexRoute
+  '/products': typeof ProductsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -274,12 +298,15 @@ export interface FileRoutesById {
   '/models/coco': typeof ModelsCocoRoute
   '/models/foco': typeof ModelsFocoRoute
   '/models/fofo': typeof ModelsFofoRoute
+  '/products/cms': typeof ProductsCmsRoute
+  '/products/software': typeof ProductsSoftwareRoute
   '/solutions/business-consultancy': typeof SolutionsBusinessConsultancyRoute
   '/solutions/installation': typeof SolutionsInstallationRoute
   '/solutions/land-survey': typeof SolutionsLandSurveyRoute
   '/solutions/post-installation-inspection': typeof SolutionsPostInstallationInspectionRoute
   '/solutions/project-report': typeof SolutionsProjectReportRoute
   '/elite/': typeof EliteIndexRoute
+  '/products/': typeof ProductsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -307,12 +334,15 @@ export interface FileRouteTypes {
     | '/models/coco'
     | '/models/foco'
     | '/models/fofo'
+    | '/products/cms'
+    | '/products/software'
     | '/solutions/business-consultancy'
     | '/solutions/installation'
     | '/solutions/land-survey'
     | '/solutions/post-installation-inspection'
     | '/solutions/project-report'
     | '/elite/'
+    | '/products/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -338,12 +368,15 @@ export interface FileRouteTypes {
     | '/models/coco'
     | '/models/foco'
     | '/models/fofo'
+    | '/products/cms'
+    | '/products/software'
     | '/solutions/business-consultancy'
     | '/solutions/installation'
     | '/solutions/land-survey'
     | '/solutions/post-installation-inspection'
     | '/solutions/project-report'
     | '/elite'
+    | '/products'
   id:
     | '__root__'
     | '/'
@@ -369,12 +402,15 @@ export interface FileRouteTypes {
     | '/models/coco'
     | '/models/foco'
     | '/models/fofo'
+    | '/products/cms'
+    | '/products/software'
     | '/solutions/business-consultancy'
     | '/solutions/installation'
     | '/solutions/land-survey'
     | '/solutions/post-installation-inspection'
     | '/solutions/project-report'
     | '/elite/'
+    | '/products/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -400,12 +436,15 @@ export interface RootRouteChildren {
   ModelsCocoRoute: typeof ModelsCocoRoute
   ModelsFocoRoute: typeof ModelsFocoRoute
   ModelsFofoRoute: typeof ModelsFofoRoute
+  ProductsCmsRoute: typeof ProductsCmsRoute
+  ProductsSoftwareRoute: typeof ProductsSoftwareRoute
   SolutionsBusinessConsultancyRoute: typeof SolutionsBusinessConsultancyRoute
   SolutionsInstallationRoute: typeof SolutionsInstallationRoute
   SolutionsLandSurveyRoute: typeof SolutionsLandSurveyRoute
   SolutionsPostInstallationInspectionRoute: typeof SolutionsPostInstallationInspectionRoute
   SolutionsProjectReportRoute: typeof SolutionsProjectReportRoute
   EliteIndexRoute: typeof EliteIndexRoute
+  ProductsIndexRoute: typeof ProductsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -459,6 +498,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/products/': {
+      id: '/products/'
+      path: '/products'
+      fullPath: '/products/'
+      preLoaderRoute: typeof ProductsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/elite/': {
       id: '/elite/'
       path: '/elite'
@@ -499,6 +545,20 @@ declare module '@tanstack/react-router' {
       path: '/solutions/business-consultancy'
       fullPath: '/solutions/business-consultancy'
       preLoaderRoute: typeof SolutionsBusinessConsultancyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/software': {
+      id: '/products/software'
+      path: '/products/software'
+      fullPath: '/products/software'
+      preLoaderRoute: typeof ProductsSoftwareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/cms': {
+      id: '/products/cms'
+      path: '/products/cms'
+      fullPath: '/products/cms'
+      preLoaderRoute: typeof ProductsCmsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/models/fofo': {
@@ -649,6 +709,8 @@ const rootRouteChildren: RootRouteChildren = {
   ModelsCocoRoute: ModelsCocoRoute,
   ModelsFocoRoute: ModelsFocoRoute,
   ModelsFofoRoute: ModelsFofoRoute,
+  ProductsCmsRoute: ProductsCmsRoute,
+  ProductsSoftwareRoute: ProductsSoftwareRoute,
   SolutionsBusinessConsultancyRoute: SolutionsBusinessConsultancyRoute,
   SolutionsInstallationRoute: SolutionsInstallationRoute,
   SolutionsLandSurveyRoute: SolutionsLandSurveyRoute,
@@ -656,7 +718,18 @@ const rootRouteChildren: RootRouteChildren = {
     SolutionsPostInstallationInspectionRoute,
   SolutionsProjectReportRoute: SolutionsProjectReportRoute,
   EliteIndexRoute: EliteIndexRoute,
+  ProductsIndexRoute: ProductsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
