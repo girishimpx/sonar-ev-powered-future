@@ -218,6 +218,9 @@ export function Footer() {
                 <Link to="/blog" className="text-white/60 hover:text-white">Blog</Link>
               </li>
               <li>
+                <Link to="/elite" className="text-white/60 hover:text-white">SonarEV Elite</Link>
+              </li>
+              <li>
                 <Link to="/contact" className="text-white/60 hover:text-white">Contact</Link>
               </li>
             </ul>
