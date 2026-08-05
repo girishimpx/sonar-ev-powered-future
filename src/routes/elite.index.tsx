@@ -10,6 +10,8 @@ import {
   eliteBtn, eliteBtnGhost, glass, glassHover,
 } from "@/components/elite";
 import aiDashboard from "@/assets/elite-ai-dashboard.jpg";
+import { SubscribeButton } from "@/components/elite-subscribe";
+import type { PlanId } from "@/lib/plans";
 
 export const Route = createFileRoute("/elite/")({
   head: () => ({
@@ -59,15 +61,15 @@ const AI_CAPS = [
 
 const PLANS = [
   {
-    name: "Starter", price: "₹999", tag: "Basic access.", highlight: false,
+    id: "starter" as PlanId, name: "Starter", price: "₹999", tag: "Basic access.", highlight: false,
     features: ["Land marketplace browsing", "Community read access", "Basic ROI calculator", "2 project drafts", "Email support"],
   },
   {
-    name: "Professional", price: "₹4,999", tag: "Everything needed for professionals.", highlight: false,
+    id: "professional" as PlanId, name: "Professional", price: "₹4,999", tag: "Everything needed for professionals.", highlight: false,
     features: ["Unlimited land access", "Verified investor network", "10 projects", "AI Business Advisor", "Funding Hub", "Government Schemes", "Project Dashboard"],
   },
   {
-    name: "Elite", price: "₹9,999", tag: "The full ecosystem.", highlight: true,
+    id: "elite" as PlanId, name: "Elite", price: "₹9,999", tag: "The full ecosystem.", highlight: true,
     features: [
       "Unlimited land access", "Verified investor network", "Unlimited project creation",
       "AI Business Advisor", "Funding Hub", "Legal Assistance", "Government Schemes",
@@ -251,9 +253,13 @@ function EliteLanding() {
                       </li>
                     ))}
                   </ul>
-                  <Link to="/elite/dashboard" className={`${p.highlight ? eliteBtn : eliteBtnGhost} mt-8 w-full`}>
-                    Become Elite <ArrowRight className="h-4 w-4" />
-                  </Link>
+                  <div className="mt-8">
+                    <SubscribeButton
+                      plan={p.id}
+                      className={p.highlight ? eliteBtn : eliteBtnGhost}
+                      label={`Get ${p.name}`}
+                    />
+                  </div>
                 </div>
               </Reveal>
             ))}
