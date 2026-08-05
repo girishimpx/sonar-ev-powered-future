@@ -37,7 +37,9 @@ function BlogIndex() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
 
   useEffect(() => {
-    setPosts(loadPosts());
+    loadPosts()
+      .then(setPosts)
+      .catch(() => setPosts([]));
   }, []);
 
   return (
