@@ -15,6 +15,7 @@ import { Route as CalculatorRouteImport } from './routes/calculator'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EliteIndexRouteImport } from './routes/elite.index'
 import { Route as SolutionsProjectReportRouteImport } from './routes/solutions.project-report'
 import { Route as SolutionsPostInstallationInspectionRouteImport } from './routes/solutions.post-installation-inspection'
 import { Route as SolutionsLandSurveyRouteImport } from './routes/solutions.land-survey'
@@ -24,6 +25,17 @@ import { Route as ModelsFofoRouteImport } from './routes/models.fofo'
 import { Route as ModelsFocoRouteImport } from './routes/models.foco'
 import { Route as ModelsCocoRouteImport } from './routes/models.coco'
 import { Route as ModelsCapitalCircleRouteImport } from './routes/models.capital-circle'
+import { Route as EliteSettingsRouteImport } from './routes/elite.settings'
+import { Route as EliteProjectsRouteImport } from './routes/elite.projects'
+import { Route as ElitePartnersRouteImport } from './routes/elite.partners'
+import { Route as EliteMarketplaceRouteImport } from './routes/elite.marketplace'
+import { Route as EliteLandRouteImport } from './routes/elite.land'
+import { Route as EliteInvestorsRouteImport } from './routes/elite.investors'
+import { Route as EliteFundingRouteImport } from './routes/elite.funding'
+import { Route as EliteDocumentsRouteImport } from './routes/elite.documents'
+import { Route as EliteDashboardRouteImport } from './routes/elite.dashboard'
+import { Route as EliteCommunityRouteImport } from './routes/elite.community'
+import { Route as EliteAiRouteImport } from './routes/elite.ai'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
 const ContactRoute = ContactRouteImport.update({
@@ -54,6 +66,11 @@ const AccountRoute = AccountRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EliteIndexRoute = EliteIndexRouteImport.update({
+  id: '/elite/',
+  path: '/elite/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SolutionsProjectReportRoute = SolutionsProjectReportRouteImport.update({
@@ -103,6 +120,61 @@ const ModelsCapitalCircleRoute = ModelsCapitalCircleRouteImport.update({
   path: '/models/capital-circle',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EliteSettingsRoute = EliteSettingsRouteImport.update({
+  id: '/elite/settings',
+  path: '/elite/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EliteProjectsRoute = EliteProjectsRouteImport.update({
+  id: '/elite/projects',
+  path: '/elite/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ElitePartnersRoute = ElitePartnersRouteImport.update({
+  id: '/elite/partners',
+  path: '/elite/partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EliteMarketplaceRoute = EliteMarketplaceRouteImport.update({
+  id: '/elite/marketplace',
+  path: '/elite/marketplace',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EliteLandRoute = EliteLandRouteImport.update({
+  id: '/elite/land',
+  path: '/elite/land',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EliteInvestorsRoute = EliteInvestorsRouteImport.update({
+  id: '/elite/investors',
+  path: '/elite/investors',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EliteFundingRoute = EliteFundingRouteImport.update({
+  id: '/elite/funding',
+  path: '/elite/funding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EliteDocumentsRoute = EliteDocumentsRouteImport.update({
+  id: '/elite/documents',
+  path: '/elite/documents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EliteDashboardRoute = EliteDashboardRouteImport.update({
+  id: '/elite/dashboard',
+  path: '/elite/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EliteCommunityRoute = EliteCommunityRouteImport.update({
+  id: '/elite/community',
+  path: '/elite/community',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EliteAiRoute = EliteAiRouteImport.update({
+  id: '/elite/ai',
+  path: '/elite/ai',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -117,6 +189,17 @@ export interface FileRoutesByFullPath {
   '/chargers': typeof ChargersRoute
   '/contact': typeof ContactRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/elite/ai': typeof EliteAiRoute
+  '/elite/community': typeof EliteCommunityRoute
+  '/elite/dashboard': typeof EliteDashboardRoute
+  '/elite/documents': typeof EliteDocumentsRoute
+  '/elite/funding': typeof EliteFundingRoute
+  '/elite/investors': typeof EliteInvestorsRoute
+  '/elite/land': typeof EliteLandRoute
+  '/elite/marketplace': typeof EliteMarketplaceRoute
+  '/elite/partners': typeof ElitePartnersRoute
+  '/elite/projects': typeof EliteProjectsRoute
+  '/elite/settings': typeof EliteSettingsRoute
   '/models/capital-circle': typeof ModelsCapitalCircleRoute
   '/models/coco': typeof ModelsCocoRoute
   '/models/foco': typeof ModelsFocoRoute
@@ -126,6 +209,7 @@ export interface FileRoutesByFullPath {
   '/solutions/land-survey': typeof SolutionsLandSurveyRoute
   '/solutions/post-installation-inspection': typeof SolutionsPostInstallationInspectionRoute
   '/solutions/project-report': typeof SolutionsProjectReportRoute
+  '/elite/': typeof EliteIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -135,6 +219,17 @@ export interface FileRoutesByTo {
   '/chargers': typeof ChargersRoute
   '/contact': typeof ContactRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/elite/ai': typeof EliteAiRoute
+  '/elite/community': typeof EliteCommunityRoute
+  '/elite/dashboard': typeof EliteDashboardRoute
+  '/elite/documents': typeof EliteDocumentsRoute
+  '/elite/funding': typeof EliteFundingRoute
+  '/elite/investors': typeof EliteInvestorsRoute
+  '/elite/land': typeof EliteLandRoute
+  '/elite/marketplace': typeof EliteMarketplaceRoute
+  '/elite/partners': typeof ElitePartnersRoute
+  '/elite/projects': typeof EliteProjectsRoute
+  '/elite/settings': typeof EliteSettingsRoute
   '/models/capital-circle': typeof ModelsCapitalCircleRoute
   '/models/coco': typeof ModelsCocoRoute
   '/models/foco': typeof ModelsFocoRoute
@@ -144,6 +239,7 @@ export interface FileRoutesByTo {
   '/solutions/land-survey': typeof SolutionsLandSurveyRoute
   '/solutions/post-installation-inspection': typeof SolutionsPostInstallationInspectionRoute
   '/solutions/project-report': typeof SolutionsProjectReportRoute
+  '/elite': typeof EliteIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -154,6 +250,17 @@ export interface FileRoutesById {
   '/chargers': typeof ChargersRoute
   '/contact': typeof ContactRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/elite/ai': typeof EliteAiRoute
+  '/elite/community': typeof EliteCommunityRoute
+  '/elite/dashboard': typeof EliteDashboardRoute
+  '/elite/documents': typeof EliteDocumentsRoute
+  '/elite/funding': typeof EliteFundingRoute
+  '/elite/investors': typeof EliteInvestorsRoute
+  '/elite/land': typeof EliteLandRoute
+  '/elite/marketplace': typeof EliteMarketplaceRoute
+  '/elite/partners': typeof ElitePartnersRoute
+  '/elite/projects': typeof EliteProjectsRoute
+  '/elite/settings': typeof EliteSettingsRoute
   '/models/capital-circle': typeof ModelsCapitalCircleRoute
   '/models/coco': typeof ModelsCocoRoute
   '/models/foco': typeof ModelsFocoRoute
@@ -163,6 +270,7 @@ export interface FileRoutesById {
   '/solutions/land-survey': typeof SolutionsLandSurveyRoute
   '/solutions/post-installation-inspection': typeof SolutionsPostInstallationInspectionRoute
   '/solutions/project-report': typeof SolutionsProjectReportRoute
+  '/elite/': typeof EliteIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -174,6 +282,17 @@ export interface FileRouteTypes {
     | '/chargers'
     | '/contact'
     | '/blog/$slug'
+    | '/elite/ai'
+    | '/elite/community'
+    | '/elite/dashboard'
+    | '/elite/documents'
+    | '/elite/funding'
+    | '/elite/investors'
+    | '/elite/land'
+    | '/elite/marketplace'
+    | '/elite/partners'
+    | '/elite/projects'
+    | '/elite/settings'
     | '/models/capital-circle'
     | '/models/coco'
     | '/models/foco'
@@ -183,6 +302,7 @@ export interface FileRouteTypes {
     | '/solutions/land-survey'
     | '/solutions/post-installation-inspection'
     | '/solutions/project-report'
+    | '/elite/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -192,6 +312,17 @@ export interface FileRouteTypes {
     | '/chargers'
     | '/contact'
     | '/blog/$slug'
+    | '/elite/ai'
+    | '/elite/community'
+    | '/elite/dashboard'
+    | '/elite/documents'
+    | '/elite/funding'
+    | '/elite/investors'
+    | '/elite/land'
+    | '/elite/marketplace'
+    | '/elite/partners'
+    | '/elite/projects'
+    | '/elite/settings'
     | '/models/capital-circle'
     | '/models/coco'
     | '/models/foco'
@@ -201,6 +332,7 @@ export interface FileRouteTypes {
     | '/solutions/land-survey'
     | '/solutions/post-installation-inspection'
     | '/solutions/project-report'
+    | '/elite'
   id:
     | '__root__'
     | '/'
@@ -210,6 +342,17 @@ export interface FileRouteTypes {
     | '/chargers'
     | '/contact'
     | '/blog/$slug'
+    | '/elite/ai'
+    | '/elite/community'
+    | '/elite/dashboard'
+    | '/elite/documents'
+    | '/elite/funding'
+    | '/elite/investors'
+    | '/elite/land'
+    | '/elite/marketplace'
+    | '/elite/partners'
+    | '/elite/projects'
+    | '/elite/settings'
     | '/models/capital-circle'
     | '/models/coco'
     | '/models/foco'
@@ -219,6 +362,7 @@ export interface FileRouteTypes {
     | '/solutions/land-survey'
     | '/solutions/post-installation-inspection'
     | '/solutions/project-report'
+    | '/elite/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -228,6 +372,17 @@ export interface RootRouteChildren {
   CalculatorRoute: typeof CalculatorRoute
   ChargersRoute: typeof ChargersRoute
   ContactRoute: typeof ContactRoute
+  EliteAiRoute: typeof EliteAiRoute
+  EliteCommunityRoute: typeof EliteCommunityRoute
+  EliteDashboardRoute: typeof EliteDashboardRoute
+  EliteDocumentsRoute: typeof EliteDocumentsRoute
+  EliteFundingRoute: typeof EliteFundingRoute
+  EliteInvestorsRoute: typeof EliteInvestorsRoute
+  EliteLandRoute: typeof EliteLandRoute
+  EliteMarketplaceRoute: typeof EliteMarketplaceRoute
+  ElitePartnersRoute: typeof ElitePartnersRoute
+  EliteProjectsRoute: typeof EliteProjectsRoute
+  EliteSettingsRoute: typeof EliteSettingsRoute
   ModelsCapitalCircleRoute: typeof ModelsCapitalCircleRoute
   ModelsCocoRoute: typeof ModelsCocoRoute
   ModelsFocoRoute: typeof ModelsFocoRoute
@@ -237,6 +392,7 @@ export interface RootRouteChildren {
   SolutionsLandSurveyRoute: typeof SolutionsLandSurveyRoute
   SolutionsPostInstallationInspectionRoute: typeof SolutionsPostInstallationInspectionRoute
   SolutionsProjectReportRoute: typeof SolutionsProjectReportRoute
+  EliteIndexRoute: typeof EliteIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -281,6 +437,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/elite/': {
+      id: '/elite/'
+      path: '/elite'
+      fullPath: '/elite/'
+      preLoaderRoute: typeof EliteIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/solutions/project-report': {
@@ -346,6 +509,83 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ModelsCapitalCircleRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/elite/settings': {
+      id: '/elite/settings'
+      path: '/elite/settings'
+      fullPath: '/elite/settings'
+      preLoaderRoute: typeof EliteSettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/elite/projects': {
+      id: '/elite/projects'
+      path: '/elite/projects'
+      fullPath: '/elite/projects'
+      preLoaderRoute: typeof EliteProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/elite/partners': {
+      id: '/elite/partners'
+      path: '/elite/partners'
+      fullPath: '/elite/partners'
+      preLoaderRoute: typeof ElitePartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/elite/marketplace': {
+      id: '/elite/marketplace'
+      path: '/elite/marketplace'
+      fullPath: '/elite/marketplace'
+      preLoaderRoute: typeof EliteMarketplaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/elite/land': {
+      id: '/elite/land'
+      path: '/elite/land'
+      fullPath: '/elite/land'
+      preLoaderRoute: typeof EliteLandRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/elite/investors': {
+      id: '/elite/investors'
+      path: '/elite/investors'
+      fullPath: '/elite/investors'
+      preLoaderRoute: typeof EliteInvestorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/elite/funding': {
+      id: '/elite/funding'
+      path: '/elite/funding'
+      fullPath: '/elite/funding'
+      preLoaderRoute: typeof EliteFundingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/elite/documents': {
+      id: '/elite/documents'
+      path: '/elite/documents'
+      fullPath: '/elite/documents'
+      preLoaderRoute: typeof EliteDocumentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/elite/dashboard': {
+      id: '/elite/dashboard'
+      path: '/elite/dashboard'
+      fullPath: '/elite/dashboard'
+      preLoaderRoute: typeof EliteDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/elite/community': {
+      id: '/elite/community'
+      path: '/elite/community'
+      fullPath: '/elite/community'
+      preLoaderRoute: typeof EliteCommunityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/elite/ai': {
+      id: '/elite/ai'
+      path: '/elite/ai'
+      fullPath: '/elite/ai'
+      preLoaderRoute: typeof EliteAiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/$slug': {
       id: '/blog/$slug'
       path: '/$slug'
@@ -373,6 +613,17 @@ const rootRouteChildren: RootRouteChildren = {
   CalculatorRoute: CalculatorRoute,
   ChargersRoute: ChargersRoute,
   ContactRoute: ContactRoute,
+  EliteAiRoute: EliteAiRoute,
+  EliteCommunityRoute: EliteCommunityRoute,
+  EliteDashboardRoute: EliteDashboardRoute,
+  EliteDocumentsRoute: EliteDocumentsRoute,
+  EliteFundingRoute: EliteFundingRoute,
+  EliteInvestorsRoute: EliteInvestorsRoute,
+  EliteLandRoute: EliteLandRoute,
+  EliteMarketplaceRoute: EliteMarketplaceRoute,
+  ElitePartnersRoute: ElitePartnersRoute,
+  EliteProjectsRoute: EliteProjectsRoute,
+  EliteSettingsRoute: EliteSettingsRoute,
   ModelsCapitalCircleRoute: ModelsCapitalCircleRoute,
   ModelsCocoRoute: ModelsCocoRoute,
   ModelsFocoRoute: ModelsFocoRoute,
@@ -383,6 +634,7 @@ const rootRouteChildren: RootRouteChildren = {
   SolutionsPostInstallationInspectionRoute:
     SolutionsPostInstallationInspectionRoute,
   SolutionsProjectReportRoute: SolutionsProjectReportRoute,
+  EliteIndexRoute: EliteIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
