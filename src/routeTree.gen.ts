@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as FranchiseRouteImport } from './routes/franchise'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ChargersRouteImport } from './routes/chargers'
 import { Route as CalculatorRouteImport } from './routes/calculator'
@@ -38,6 +39,11 @@ import { Route as EliteCommunityRouteImport } from './routes/elite.community'
 import { Route as EliteAiRouteImport } from './routes/elite.ai'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
+const FranchiseRoute = FranchiseRouteImport.update({
+  id: '/franchise',
+  path: '/franchise',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -188,6 +194,7 @@ export interface FileRoutesByFullPath {
   '/calculator': typeof CalculatorRoute
   '/chargers': typeof ChargersRoute
   '/contact': typeof ContactRoute
+  '/franchise': typeof FranchiseRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/elite/ai': typeof EliteAiRoute
   '/elite/community': typeof EliteCommunityRoute
@@ -218,6 +225,7 @@ export interface FileRoutesByTo {
   '/calculator': typeof CalculatorRoute
   '/chargers': typeof ChargersRoute
   '/contact': typeof ContactRoute
+  '/franchise': typeof FranchiseRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/elite/ai': typeof EliteAiRoute
   '/elite/community': typeof EliteCommunityRoute
@@ -249,6 +257,7 @@ export interface FileRoutesById {
   '/calculator': typeof CalculatorRoute
   '/chargers': typeof ChargersRoute
   '/contact': typeof ContactRoute
+  '/franchise': typeof FranchiseRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/elite/ai': typeof EliteAiRoute
   '/elite/community': typeof EliteCommunityRoute
@@ -281,6 +290,7 @@ export interface FileRouteTypes {
     | '/calculator'
     | '/chargers'
     | '/contact'
+    | '/franchise'
     | '/blog/$slug'
     | '/elite/ai'
     | '/elite/community'
@@ -311,6 +321,7 @@ export interface FileRouteTypes {
     | '/calculator'
     | '/chargers'
     | '/contact'
+    | '/franchise'
     | '/blog/$slug'
     | '/elite/ai'
     | '/elite/community'
@@ -341,6 +352,7 @@ export interface FileRouteTypes {
     | '/calculator'
     | '/chargers'
     | '/contact'
+    | '/franchise'
     | '/blog/$slug'
     | '/elite/ai'
     | '/elite/community'
@@ -372,6 +384,7 @@ export interface RootRouteChildren {
   CalculatorRoute: typeof CalculatorRoute
   ChargersRoute: typeof ChargersRoute
   ContactRoute: typeof ContactRoute
+  FranchiseRoute: typeof FranchiseRoute
   EliteAiRoute: typeof EliteAiRoute
   EliteCommunityRoute: typeof EliteCommunityRoute
   EliteDashboardRoute: typeof EliteDashboardRoute
@@ -397,6 +410,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/franchise': {
+      id: '/franchise'
+      path: '/franchise'
+      fullPath: '/franchise'
+      preLoaderRoute: typeof FranchiseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -613,6 +633,7 @@ const rootRouteChildren: RootRouteChildren = {
   CalculatorRoute: CalculatorRoute,
   ChargersRoute: ChargersRoute,
   ContactRoute: ContactRoute,
+  FranchiseRoute: FranchiseRoute,
   EliteAiRoute: EliteAiRoute,
   EliteCommunityRoute: EliteCommunityRoute,
   EliteDashboardRoute: EliteDashboardRoute,
@@ -639,13 +660,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
