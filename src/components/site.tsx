@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import {
   ArrowRight, Mail, MessageCircle, Phone, Menu, X, Handshake, ChevronDown,
   Briefcase, MapPinned, FileBarChart2, Wrench, ShieldCheck,
+  Zap, MonitorSmartphone, Network, Crown, Building2, Store, Users, Coins,
 } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import logoAsset from "@/assets/sonar-logo.png.asset.json";
@@ -38,11 +39,23 @@ export function Logo({ className = "h-7" }: { className?: string }) {
 const NAV_LINKS: Array<{ label: string; to?: string; href?: string }> = [
   { label: "Home", to: "/" },
   { label: "Franchise", to: "/franchise" },
-  { label: "DC Fast Chargers", to: "/chargers" },
   { label: "Earnings Calculator", to: "/calculator" },
-  { label: "Elite", to: "/elite" },
   { label: "Contact", to: "/contact" },
 ];
+
+export const PRODUCT_LINKS = [
+  { label: "DC Fast Chargers", to: "/chargers", desc: "30 kW to 240 kW hardware, built for Indian sites", icon: Zap, featured: false },
+  { label: "Sonar Software", to: "/products/software", desc: "Owner app, live sessions, payouts and reports", icon: MonitorSmartphone, featured: false },
+  { label: "Sonar CMS", to: "/products/cms", desc: "Charge point management, OCPP, pricing and uptime", icon: Network, featured: false },
+  { label: "SonarEV Elite", to: "/elite", desc: "The business OS for land, capital and growth", icon: Crown, featured: true },
+] as const;
+
+export const MODEL_LINKS = [
+  { label: "COCO", to: "/models/coco", desc: "Company owned, company operated", icon: Building2 },
+  { label: "FOCO", to: "/models/foco", desc: "You invest, we operate end to end", icon: Store },
+  { label: "FOFO", to: "/models/fofo", desc: "You own and operate, we support", icon: Users },
+  { label: "Capital Circle", to: "/models/capital-circle", desc: "Pooled capital, shared returns", icon: Coins },
+] as const;
 
 export const SOLUTION_LINKS = [
   { label: "Business Consultancy", to: "/solutions/business-consultancy", desc: "Feasibility, ROI and model selection", icon: Briefcase },
