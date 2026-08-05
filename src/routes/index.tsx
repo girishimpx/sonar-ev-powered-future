@@ -1,13 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
-  ArrowRight, Zap, Cpu, Wrench, ShieldCheck, TrendingUp, BarChart3,
-  Smartphone, Handshake, CheckCircle2, Activity, Layers, Users,
-  Building2, Bolt, MapPin, PlugZap, HeartHandshake, LineChart,
-  Download,
+  ArrowRight, Zap, Cpu, Wrench, TrendingUp, CheckCircle2, Layers,
+  HeartHandshake, LineChart, Sparkles, Calculator, Handshake, PlugZap,
 } from "lucide-react";
 import heroImg from "@/assets/hero-charger.jpg";
-import plazaImg from "@/assets/plaza.jpg";
 import chargerLineupImg from "@/assets/charger-lineup.jpg";
+import eliteImg from "@/assets/elite-ai-dashboard.jpg";
 import {
   Nav, Footer, FloatingCTAs, ContactStrip, EnquiryForm,
   btnPrimary, btnSecondary,
@@ -17,66 +15,19 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "SONAR.EV Franchise — Own an EV Charging Station in India" },
+      { title: "SONAR.EV — EV Charging Infrastructure, Franchise & Elite Platform" },
       {
         name: "description",
         content:
-          "Become a SONAR.EV franchise partner. Own an EV charging station backed by enterprise-grade chargers, software, installation, and 24/7 support. 95% revenue share to franchisees.",
+          "SONAR.EV builds India's EV charging network: enterprise DC fast chargers, franchise ownership models, and SonarEV Elite — the business operating system for land, investment and growth.",
       },
-      { property: "og:title", content: "SONAR.EV Franchise — Own an EV Charging Station in India" },
-      { property: "og:description", content: "Build India's EV charging future. We power it. You profit. Enterprise-grade charging franchise with 95% revenue share." },
+      { property: "og:title", content: "SONAR.EV — EV Charging Infrastructure, Franchise & Elite Platform" },
+      { property: "og:description", content: "Chargers, franchise models and the SonarEV Elite platform — one partner for the EV charging economy." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
 });
-
-const steps = [
-  { n: "01", title: "You invest", body: "You invest in the charging station and secure a suitable site." },
-  { n: "02", title: "We supply", body: "SONAR.EV supplies chargers, software, and driver app." },
-  { n: "03", title: "We install", body: "We install, commission, and connect the station to our network." },
-  { n: "04", title: "EVs charge", body: "Customers charge their EVs — payments captured automatically." },
-  { n: "05", title: "You earn", body: "Revenue is shared transparently, monthly." },
-];
-
-const provides = [
-  "Fast DC Chargers", "AC Chargers", "Charging Management Software", "Mobile App",
-  "Remote Monitoring", "Payment Collection", "QR Charging", "Fleet Integration",
-  "Installation Support", "Preventive Maintenance", "Corrective Maintenance", "Spare Parts Support",
-  "Warranty Management", "Firmware Updates", "Technical Helpdesk", "Marketing Support",
-  "Business Analytics Dashboard", "Site Assessment", "Staff Training", "Network Listing",
-];
-
-const responsibilities = [
-  { icon: MapPin, t: "Suitable Land" },
-  { icon: Zap, t: "Electrical Connection" },
-  { icon: Bolt, t: "Transformer (if required)" },
-  { icon: Building2, t: "Civil Work" },
-  { icon: ShieldCheck, t: "Site Security" },
-  { icon: Users, t: "Daily Site Operations" },
-  { icon: Layers, t: "Local Permissions" },
-  { icon: Activity, t: "Internet & Utilities" },
-];
-
-const whyCards = [
-  { icon: TrendingUp, title: "Lowest Revenue Share", body: "Keep 95% of net revenue — one of the most partner-friendly splits in India." },
-  { icon: Cpu, title: "Enterprise Software Included", body: "Charging management platform, analytics, and driver app — all included, free." },
-  { icon: Wrench, title: "AMC Included", body: "Preventive and corrective maintenance handled by SONAR.EV engineers." },
-  { icon: LineChart, title: "AI Business Dashboard", body: "Real-time revenue, utilization, and health metrics for every station." },
-  { icon: HeartHandshake, title: "Dedicated Account Manager", body: "A single point of contact for operations, support, and expansion." },
-  { icon: Layers, title: "Scalable & Future-Ready", body: "Start with one site. Scale to a network with a national brand behind you." },
-];
-
-const faqs = [
-  { q: "Who owns the charger?", a: "The franchise partner owns the charger and the station assets. SONAR.EV owns the software platform, brand, and network integration." },
-  { q: "Who pays the electricity bills?", a: "The franchise partner is responsible for electricity, internet, and day-to-day utilities. These are treated as approved operating expenses in the revenue-share calculation." },
-  { q: "How is revenue calculated?", a: "Revenue share is calculated on net revenue — after electricity, payment-gateway fees, applicable taxes, and other approved operating expenses. Partners receive 95%, SONAR.EV retains 5%." },
-  { q: "Can I own multiple stations?", a: "Yes. Partners in good standing can expand to additional sites with priority rights on new territories." },
-  { q: "Who maintains the charger?", a: "SONAR.EV provides preventive maintenance, remote monitoring, spare parts, and emergency support under the AMC." },
-  { q: "How long is the franchise agreement?", a: "The standard franchise agreement is 5 years, renewable, subject to performance and brand-guideline compliance." },
-  { q: "What happens if the charger fails?", a: "Our 24/7 technical helpdesk and field engineers respond under a defined SLA, with remote diagnostics and spare-parts support." },
-  { q: "Can I exit the agreement?", a: "The agreement includes clear termination clauses and exit procedures. A specialist will walk you through the terms during consultation." },
-];
 
 function Index() {
   return (
@@ -84,17 +35,12 @@ function Index() {
       <Nav />
       <Hero />
       <TrustStrip />
+      <PillarsSection />
       <BusinessModelsSection />
-      <ModelSection />
-      <RevenueSplitSection />
-      <ProvidesSection />
-      <ResponsibilitiesSection />
-      <AmcSection />
-      <ContractSection />
+      <EliteSpotlight />
       <WhySection />
-      <ContactStrip>Ready to power a station? Talk to a SONAR.EV franchise specialist.</ContactStrip>
+      <ContactStrip>Not sure where to start? Talk to a SONAR.EV specialist.</ContactStrip>
       <LeadSection />
-      <FaqSection />
       <Footer />
       <FloatingCTAs />
     </div>
@@ -109,24 +55,24 @@ function Hero() {
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/70">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-white" />
-            SONAR.EV Franchise Program • India
+            EV Charging Infrastructure • India
           </div>
           <h1 className="mt-6 text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-            Own an EV charging business —{" "}
+            Powering India's{" "}
             <span className="bg-gradient-to-r from-white to-white/40 bg-clip-text text-transparent">
-              without building it yourself.
+              EV charging economy.
             </span>
           </h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
-            Launch a SONAR.EV charging station backed by enterprise-grade infrastructure,
-            intelligent software, nationwide support, and recurring revenue. We power it. You profit.
+            Enterprise-grade chargers, franchise ownership models, and SonarEV Elite — the platform
+            connecting land, capital and operators. One partner, end to end.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link to="/contact" className={btnPrimary}>
-              Become a Partner <ArrowRight className="h-4 w-4" />
+            <Link to="/elite" className={btnPrimary}>
+              <Sparkles className="h-4 w-4" /> Explore SonarEV Elite
             </Link>
-            <Link to="/calculator" className={btnSecondary}>
-              <Download className="h-4 w-4" /> Estimate Your Earnings
+            <Link to="/franchise" className={btnSecondary}>
+              Franchise Models <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
           <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
@@ -185,22 +131,55 @@ function SectionHeader({ eyebrow, title, sub }: { eyebrow: string; title: string
   );
 }
 
-function ModelSection() {
+const pillars = [
+  {
+    icon: PlugZap,
+    title: "DC Fast Chargers",
+    body: "30kW to 240kW enterprise chargers. Configure guns, connectors and site type in the interactive configurator.",
+    to: "/chargers" as const,
+    cta: "Configure a charger",
+  },
+  {
+    icon: Handshake,
+    title: "Franchise Ownership",
+    body: "Own a station with 95% of net revenue, software, installation and AMC included. Five ways to partner.",
+    to: "/franchise" as const,
+    cta: "See the franchise",
+  },
+  {
+    icon: Sparkles,
+    title: "SonarEV Elite",
+    body: "The business operating system for land, investment and growth — marketplace, investors, AI advisor and projects.",
+    to: "/elite" as const,
+    cta: "Explore Elite",
+  },
+];
+
+function PillarsSection() {
   return (
-    <section id="model" className="py-24 md:py-32">
+    <section className="py-24 md:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeader
-          eyebrow="Business Model"
-          title="How the SONAR.EV franchise works"
-          sub="Five steps from investment to recurring revenue — with SONAR.EV accountable for the tech and operations spine."
+          eyebrow="What we do"
+          title="Three ways SONAR.EV powers your business"
+          sub="Hardware, ownership models, and the platform that ties the ecosystem together."
         />
-        <div className="mt-16 grid gap-4 md:grid-cols-5">
-          {steps.map((s) => (
-            <div key={s.n} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-              <div className="text-xs font-mono text-white/40">{s.n}</div>
-              <div className="mt-3 text-sm font-semibold">{s.title}</div>
-              <p className="mt-2 text-xs leading-relaxed text-white/60">{s.body}</p>
-            </div>
+        <div className="mt-14 grid gap-4 md:grid-cols-3">
+          {pillars.map(({ icon: Icon, title, body, to, cta }) => (
+            <Link
+              key={title}
+              to={to}
+              className="group rounded-2xl border border-white/10 bg-white/[0.03] p-8 transition-all duration-300 hover:-translate-y-1 hover:border-white/30 hover:bg-white/[0.05]"
+            >
+              <div className="grid h-11 w-11 place-items-center rounded-xl border border-white/15 bg-white/5">
+                <Icon className="h-5 w-5 text-white" />
+              </div>
+              <h3 className="mt-6 text-xl font-semibold">{title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-white/60">{body}</p>
+              <span className="mt-6 inline-flex items-center gap-1.5 text-xs font-semibold text-white">
+                {cta} <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+              </span>
+            </Link>
           ))}
         </div>
       </div>
@@ -208,38 +187,42 @@ function ModelSection() {
   );
 }
 
-function RevenueSplitSection() {
-  return <RevenueSplitSectionInner />;
-}
-
 const businessModels = [
   {
     code: "COCO",
     to: "/models/coco" as const,
     name: "Company Owned, Company Operated",
-    body: "SONAR.EV invests, owns and operates the station end to end. Ideal for strategic, high-traffic locations where we control the full experience.",
-    points: ["100% SONAR.EV capital", "SONAR.EV operations team", "Site owner earns lease/rental"],
+    body: "SONAR.EV invests, owns and operates the station end to end.",
+    points: ["100% SONAR.EV capital", "Site owner earns lease/rental"],
   },
   {
     code: "FOCO",
     to: "/models/foco" as const,
     name: "Franchise Owned, Company Operated",
-    body: "You invest in the station, SONAR.EV runs day-to-day operations. Hands-off ownership with professional operations and monitoring.",
-    points: ["Partner capital, SONAR.EV operations", "Managed staffing and upkeep", "Predictable, passive earnings"],
+    body: "You invest in the station, SONAR.EV runs day-to-day operations.",
+    points: ["Partner capital, SONAR.EV operations", "Predictable, passive earnings"],
   },
   {
     code: "FOFO",
     to: "/models/fofo" as const,
     name: "Franchise Owned, Franchise Operated",
-    body: "You own and operate the station with our hardware, software and support behind you — and keep 95% of net revenue.",
-    points: ["Highest earning potential", "Full operational control", "SONAR.EV tech, AMC and training"],
+    body: "You own and operate the station and keep 95% of net revenue.",
+    points: ["Highest earning potential", "Full operational control"],
   },
   {
     code: "Capital Circle",
     to: "/models/capital-circle" as const,
     name: "Investor Capital Model",
-    body: "Invest capital into SONAR.EV-managed charging assets without owning land or running operations. Participate in the network's growth.",
-    points: ["No land or staffing needed", "Portfolio of managed stations", "Structured, agreement-backed returns"],
+    body: "Invest into SONAR.EV-managed charging assets without land or operations.",
+    points: ["No land or staffing needed", "Portfolio of managed stations"],
+  },
+  {
+    code: "Elite",
+    to: "/elite" as const,
+    name: "Platform Membership Model",
+    body: "Subscribe to SonarEV Elite and run land, capital and projects on one operating system.",
+    points: ["Land & investor marketplace", "AI advisor + project tracking"],
+    featured: true,
   },
 ];
 
@@ -255,18 +238,27 @@ function BusinessModelsSection() {
               Business Models
             </div>
             <h2 className="mt-5 text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl">
-              Four ways to <span className="text-white/40">partner.</span>
+              Five ways to <span className="text-white/40">partner.</span>
             </h2>
             <p className="mt-5 max-w-md text-base leading-relaxed text-white/55">
-              Choose the ownership and operating structure that matches your capital, land and appetite for day-to-day involvement.
+              Choose the ownership, investment or platform structure that matches your capital, land
+              and appetite for day-to-day involvement.
             </p>
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+              <Link to="/elite" className={btnPrimary}>
+                <Sparkles className="h-4 w-4" /> Explore SonarEV Elite
+              </Link>
+              <Link to="/franchise" className={btnSecondary}>
+                Full franchise details <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
             <div className="mt-8 hidden overflow-hidden rounded-2xl border border-white/10 lg:block">
               <img
                 src={chargerLineupImg}
                 alt="SONAR.EV charging station lineup"
                 width={1200}
                 height={800}
-                className="h-72 w-full object-cover"
+                className="h-60 w-full object-cover"
                 loading="lazy"
               />
             </div>
@@ -274,35 +266,37 @@ function BusinessModelsSection() {
 
           <div className="grid gap-4 sm:grid-cols-2">
             {businessModels.map((m, i) => (
-              <div
+              <Link
                 key={m.code}
-                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-black p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/30 hover:bg-white/[0.04] sm:min-h-[260px]"
+                to={m.to}
+                className={`group relative overflow-hidden rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/30 hover:bg-white/[0.06] sm:min-h-[240px] ${
+                  m.featured
+                    ? "border-white/30 bg-white/[0.06] sm:col-span-2"
+                    : "border-white/10 bg-black"
+                }`}
               >
                 <div className="absolute top-0 right-0 -mt-3 -mr-3 h-20 w-20 rounded-full bg-white/5 blur-2xl transition-opacity group-hover:bg-white/10" />
                 <div className="relative">
                   <div className="flex items-start justify-between gap-3">
                     <div className="text-3xl font-bold tracking-tighter text-white">{m.code}</div>
                     <span className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-white/60">
-                      0{i + 1}
+                      {m.featured ? "New" : `0${i + 1}`}
                     </span>
                   </div>
                   <div className="mt-3 text-xs font-medium uppercase tracking-widest text-white/40">{m.name}</div>
                   <p className="mt-3 text-sm leading-relaxed text-white/60">{m.body}</p>
                   <ul className="mt-5 space-y-1.5">
-                    {m.points.slice(0, 2).map((p) => (
+                    {m.points.map((p) => (
                       <li key={p} className="flex items-start gap-2 text-xs text-white/70">
                         <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-white" /> {p}
                       </li>
                     ))}
                   </ul>
-                  <Link
-                    to={m.to}
-                    className="mt-6 inline-flex items-center gap-1 text-xs font-semibold text-white transition-colors hover:text-white/80"
-                  >
+                  <span className="mt-6 inline-flex items-center gap-1 text-xs font-semibold text-white">
                     Explore {m.code} <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-                  </Link>
+                  </span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -311,209 +305,70 @@ function BusinessModelsSection() {
   );
 }
 
-function RevenueSplitSectionInner() {
-  return (
-    <section id="revenue" className="border-y border-white/10 bg-white/[0.02] py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-6">
-        <SectionHeader eyebrow="Revenue Sharing" title="Transparent revenue sharing" />
-        <div className="mt-14 grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:items-center">
-          <div className="rounded-3xl border border-white/10 bg-black p-8">
-            <div className="text-xs font-medium uppercase tracking-widest text-white/50">Net revenue split</div>
-            <div className="mt-6 h-4 w-full overflow-hidden rounded-full border border-white/10 bg-white/5">
-              <div className="flex h-full">
-                <div className="flex h-full items-center justify-end bg-white pr-3 text-[10px] font-semibold text-black" style={{ width: "95%" }}>
-                  95%
-                </div>
-                <div className="flex h-full items-center justify-center bg-white/25 text-[10px] font-semibold text-white" style={{ width: "5%" }}>
-                  5%
-                </div>
-              </div>
-            </div>
-            <div className="mt-6 grid grid-cols-2 gap-4">
-              <div className="rounded-2xl border border-white/10 bg-white p-5 text-black">
-                <div className="text-xs font-semibold uppercase tracking-widest text-black/60">Franchise Partner</div>
-                <div className="mt-3 text-4xl font-semibold">95%</div>
-                <div className="mt-1 text-xs text-black/60">of net revenue</div>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
-                <div className="text-xs font-semibold uppercase tracking-widest text-white/50">SONAR.EV</div>
-                <div className="mt-3 text-4xl font-semibold">5%</div>
-                <div className="mt-1 text-xs text-white/50">of net revenue</div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <h3 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-              Net revenue means net — nothing hidden.
-            </h3>
-            <p className="mt-4 text-white/60">
-              The revenue share is calculated <span className="text-white">after</span> electricity charges,
-              payment gateway fees, applicable taxes, and other approved operating expenses — ensuring a
-              transparent and sustainable partnership for both sides.
-            </p>
-            <ul className="mt-6 space-y-2 text-sm text-white/70">
-              {[
-                "Automated monthly reconciliation",
-                "Live revenue dashboard, per station",
-                "Payments directly to your bank account",
-                "Full audit trail on every session",
-              ].map((t) => (
-                <li key={t} className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-white" /> {t}
-                </li>
-              ))}
-            </ul>
-            <Link to="/calculator" className={`${btnSecondary} mt-8`}>
-              Model your earnings <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ProvidesSection() {
-  return (
-    <section id="provides" className="py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-6">
-        <SectionHeader
-          eyebrow="What SONAR.EV Provides"
-          title="Everything except the land and the local ops"
-          sub="One accountable partner across hardware, software, installation, support, and marketing."
-        />
-        <div className="mt-14 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-          {provides.map((t) => (
-            <div key={t} className="flex items-start gap-2.5 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3.5">
-              <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-white" />
-              <span className="text-sm text-white/85">{t}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ResponsibilitiesSection() {
-  return (
-    <section className="border-y border-white/10 bg-white/[0.02] py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-6">
-        <SectionHeader
-          eyebrow="Franchise Partner Responsibilities"
-          title="What you bring to the table"
-          sub="Your role is site, ownership, and local presence. Everything else is on us."
-        />
-        <div className="mt-14 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {responsibilities.map(({ icon: Icon, t }) => (
-            <div key={t} className="flex items-center gap-3 rounded-2xl border border-white/10 bg-black p-5">
-              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-white/15 bg-white/5">
-                <Icon className="h-5 w-5 text-white" />
-              </div>
-              <span className="text-sm font-medium">{t}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function AmcSection() {
-  const items = [
-    "Scheduled Preventive Maintenance",
-    "Emergency Breakdown Support",
-    "Software Updates & Firmware",
-    "Remote Diagnostics",
-    "Performance Monitoring",
-    "Technical Hotline",
-    "Spare Parts Supply",
-    "Charger Availability Monitoring",
-    "Fault Resolution SLAs",
-    "Annual Maintenance Contracts",
-  ];
+function EliteSpotlight() {
   return (
     <section className="py-24 md:py-32">
-      <div className="mx-auto grid max-w-7xl gap-14 px-6 lg:grid-cols-2 lg:items-center">
-        <div className="relative">
-          <div className="absolute -inset-4 -z-10 rounded-3xl bg-white/5 blur-2xl" />
-          <img src={plazaImg} alt="SONAR.EV field service" loading="lazy" width={1600} height={912} className="w-full rounded-2xl border border-white/10 object-cover" />
-        </div>
+      <div className="mx-auto grid max-w-7xl gap-14 px-6 lg:grid-cols-[1.05fr_1fr] lg:items-center">
         <div>
-          <div className="text-xs font-medium uppercase tracking-[0.2em] text-white/50">Operations & Maintenance</div>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
-            Complete AMC & technical support
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/70">
+            <Sparkles className="h-3.5 w-3.5" /> SonarEV Elite
+          </div>
+          <h2 className="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
+            The business operating system for land, investment & growth.
           </h2>
-          <p className="mt-4 text-white/60">
-            SONAR.EV keeps the tech running so you can focus on running the site. Our engineering
-            network delivers proactive maintenance, remote diagnostics, and rapid on-ground response.
+          <p className="mt-5 max-w-xl text-white/60">
+            Elite is our membership platform: a verified land marketplace, an investor network, project
+            tracking, a private community, and Sonar AI for feasibility and ROI analysis — all in one workspace.
           </p>
-          <ul className="mt-8 grid gap-2 sm:grid-cols-2">
-            {items.map((t) => (
+          <ul className="mt-7 grid gap-2 sm:grid-cols-2">
+            {["Verified land marketplace", "Investor & partner network", "Project kanban tracking", "Sonar AI advisor"].map((t) => (
               <li key={t} className="flex items-center gap-2 text-sm text-white/75">
                 <CheckCircle2 className="h-4 w-4 text-white" /> {t}
               </li>
             ))}
           </ul>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Link to="/elite" className={btnPrimary}>
+              <Sparkles className="h-4 w-4" /> Explore SonarEV Elite
+            </Link>
+            <Link to="/calculator" className={btnSecondary}>
+              <Calculator className="h-4 w-4" /> Estimate your earnings
+            </Link>
+          </div>
+        </div>
+        <div className="relative">
+          <div className="absolute -inset-4 -z-10 rounded-3xl bg-white/5 blur-2xl" />
+          <img
+            src={eliteImg}
+            alt="SonarEV Elite dashboard"
+            loading="lazy"
+            width={1600}
+            height={1000}
+            className="w-full rounded-2xl border border-white/10 object-cover"
+          />
         </div>
       </div>
     </section>
   );
 }
 
-function ContractSection() {
-  const cards = [
-    {
-      title: "Franchise Agreement",
-      items: ["Duration: 5 years, renewable", "Revenue share: 95% partner / 5% SONAR.EV", "Termination clauses", "Performance requirements", "Brand guidelines", "Expansion rights"],
-    },
-    {
-      title: "Warranty",
-      items: ["Standard hardware warranty", "Extended warranty options", "Replacement policy", "Defined support response times"],
-    },
-    {
-      title: "AMC",
-      items: ["Scheduled preventive visits", "Emergency support", "Remote monitoring", "Software & firmware maintenance", "Spare-parts coverage"],
-    },
-    {
-      title: "Service Level Agreement",
-      items: ["99.9% uptime target", "Issue priority levels", "Defined response times", "Escalation matrix", "Multi-channel support"],
-    },
-  ];
-  return (
-    <section id="contract" className="border-y border-white/10 bg-white/[0.02] py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-6">
-        <SectionHeader eyebrow="Contract Overview" title="Clear, professional, partner-first agreements" />
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {cards.map((c) => (
-            <details key={c.title} className="group rounded-2xl border border-white/10 bg-black p-6 open:border-white/25">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-3">
-                <span className="text-base font-semibold">{c.title}</span>
-                <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-white/15 text-white/60 transition-transform group-open:rotate-45">+</span>
-              </summary>
-              <ul className="mt-4 space-y-2 text-sm text-white/70">
-                {c.items.map((it) => (
-                  <li key={it} className="flex items-start gap-2">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-white/80" /> {it}
-                  </li>
-                ))}
-              </ul>
-            </details>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+const whyCards = [
+  { icon: TrendingUp, title: "Lowest Revenue Share", body: "Keep 95% of net revenue — one of the most partner-friendly splits in India." },
+  { icon: Cpu, title: "Enterprise Software Included", body: "Charging management platform, analytics, and driver app — all included, free." },
+  { icon: Wrench, title: "AMC Included", body: "Preventive and corrective maintenance handled by SONAR.EV engineers." },
+  { icon: LineChart, title: "AI Business Dashboard", body: "Real-time revenue, utilization, and health metrics for every station." },
+  { icon: HeartHandshake, title: "Dedicated Account Manager", body: "A single point of contact for operations, support, and expansion." },
+  { icon: Layers, title: "Scalable & Future-Ready", body: "Start with one site. Scale to a network with a national brand behind you." },
+];
 
 function WhySection() {
   return (
-    <section className="py-24 md:py-32">
+    <section className="border-y border-white/10 bg-white/[0.02] py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6">
-        <SectionHeader eyebrow="Why SONAR.EV" title="Built to make franchise partners win" />
+        <SectionHeader eyebrow="Why SONAR.EV" title="Built to make partners win" />
         <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {whyCards.map(({ icon: Icon, title, body }) => (
-            <div key={title} className="group rounded-2xl border border-white/10 bg-white/[0.03] p-7 transition-colors hover:border-white/25">
+            <div key={title} className="group rounded-2xl border border-white/10 bg-black p-7 transition-colors hover:border-white/25">
               <div className="grid h-10 w-10 place-items-center rounded-lg border border-white/15 bg-white/5">
                 <Icon className="h-5 w-5 text-white" />
               </div>
@@ -534,16 +389,16 @@ function LeadSection() {
         <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.04] to-transparent p-8 sm:p-12 lg:p-16">
           <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr]">
             <div>
-              <div className="text-xs font-medium uppercase tracking-[0.2em] text-white/50">Become a Franchise Partner</div>
+              <div className="text-xs font-medium uppercase tracking-[0.2em] text-white/50">Get in touch</div>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
-                Apply for a SONAR.EV franchise.
+                Let's build your charging business.
               </h2>
               <p className="mt-4 max-w-md text-white/60">
-                Share a few details and a franchise specialist will reach out within 24 hours with a
-                tailored proposal for your city and site.
+                Share a few details and a SONAR.EV specialist will reach out within 24 hours with the
+                right model, hardware and numbers for your site.
               </p>
               <ul className="mt-8 space-y-3 text-sm">
-                {["Free site & feasibility consultation", "ROI model tailored to your site", "Hardware + software + AMC included", "5-year renewable agreement"].map((t) => (
+                {["Free site & feasibility consultation", "ROI model tailored to your site", "Hardware + software + AMC included", "Elite platform walkthrough"].map((t) => (
                   <li key={t} className="flex items-center gap-2 text-white/70">
                     <CheckCircle2 className="h-4 w-4 text-white" /> {t}
                   </li>
@@ -562,26 +417,5 @@ function LeadSection() {
   );
 }
 
-function FaqSection() {
-  return (
-    <section id="faq" className="border-t border-white/10 bg-white/[0.02] py-24 md:py-32">
-      <div className="mx-auto max-w-4xl px-6">
-        <SectionHeader eyebrow="FAQ" title="Franchise questions, answered" />
-        <div className="mt-14 divide-y divide-white/10 rounded-2xl border border-white/10 bg-black">
-          {faqs.map((f) => (
-            <details key={f.q} className="group px-6 py-5">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-medium">
-                {f.q}
-                <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-white/15 text-white/60 transition-transform group-open:rotate-45">+</span>
-              </summary>
-              <p className="mt-3 text-sm leading-relaxed text-white/60">{f.a}</p>
-            </details>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const _icons = { PlugZap, Handshake, Smartphone, BarChart3 };
+const _icons = { Zap };
