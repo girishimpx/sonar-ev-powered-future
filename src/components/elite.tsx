@@ -231,7 +231,7 @@ export function EliteAppShell({
 
   return (
     <div className="relative min-h-screen bg-elite-bg text-white antialiased">
-      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(60%_45%_at_15%_0%,rgba(0,230,118,0.10),transparent_70%)]" />
+      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(60%_45%_at_15%_0%,rgba(255,255,255,0.08),transparent_70%)]" />
       <div className="relative flex">
         {/* sidebar */}
         <aside
@@ -253,7 +253,7 @@ export function EliteAppShell({
                   onClick={() => setOpen(false)}
                   className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-all duration-200 ${
                     active
-                      ? "bg-elite-accent-soft text-elite-accent shadow-[inset_0_0_0_1px_rgba(0,230,118,0.25)]"
+                      ? "bg-elite-accent-soft text-elite-accent shadow-[inset_0_0_0_1px_rgba(255,255,255,0.22)]"
                       : "text-white/55 hover:bg-white/[0.05] hover:text-white"
                   }`}
                 >

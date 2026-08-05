@@ -154,8 +154,8 @@
 
 /* ------------------------------ SonarEV Elite ----------------------------- */
 @theme {
-  --color-elite-bg: oklch(0.145 0 0);
-  --color-elite-surface: oklch(0.19 0 0);
-  --color-elite-accent: oklch(0.79 0.213 152.2);
-  --color-elite-accent-soft: oklch(0.79 0.213 152.2 / 0.14);
+  --color-elite-bg: oklch(0.11 0 0);
+  --color-elite-surface: oklch(0.17 0 0);
+  --color-elite-accent: oklch(0.98 0 0);
+  --color-elite-accent-soft: oklch(1 0 0 / 0.1);
 }
