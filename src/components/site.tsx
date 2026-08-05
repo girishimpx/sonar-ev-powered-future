@@ -39,6 +39,7 @@ const NAV_LINKS: Array<{ label: string; to?: string; href?: string }> = [
   { label: "Home", to: "/" },
   { label: "Franchise Model", to: "/chargers" },
   { label: "Earnings Calculator", to: "/calculator" },
+  { label: "Elite", to: "/elite" },
   { label: "Contact", to: "/contact" },
 ];
 
