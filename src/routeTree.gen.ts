@@ -25,6 +25,7 @@ import { Route as ModelsFofoRouteImport } from './routes/models.fofo'
 import { Route as ModelsFocoRouteImport } from './routes/models.foco'
 import { Route as ModelsCocoRouteImport } from './routes/models.coco'
 import { Route as ModelsCapitalCircleRouteImport } from './routes/models.capital-circle'
+import { Route as EliteDashboardRouteImport } from './routes/elite.dashboard'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
 const ContactRoute = ContactRouteImport.update({
@@ -109,6 +110,11 @@ const ModelsCapitalCircleRoute = ModelsCapitalCircleRouteImport.update({
   path: '/models/capital-circle',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EliteDashboardRoute = EliteDashboardRouteImport.update({
+  id: '/elite/dashboard',
+  path: '/elite/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -123,6 +129,7 @@ export interface FileRoutesByFullPath {
   '/chargers': typeof ChargersRoute
   '/contact': typeof ContactRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/elite/dashboard': typeof EliteDashboardRoute
   '/models/capital-circle': typeof ModelsCapitalCircleRoute
   '/models/coco': typeof ModelsCocoRoute
   '/models/foco': typeof ModelsFocoRoute
@@ -142,6 +149,7 @@ export interface FileRoutesByTo {
   '/chargers': typeof ChargersRoute
   '/contact': typeof ContactRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/elite/dashboard': typeof EliteDashboardRoute
   '/models/capital-circle': typeof ModelsCapitalCircleRoute
   '/models/coco': typeof ModelsCocoRoute
   '/models/foco': typeof ModelsFocoRoute
@@ -162,6 +170,7 @@ export interface FileRoutesById {
   '/chargers': typeof ChargersRoute
   '/contact': typeof ContactRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/elite/dashboard': typeof EliteDashboardRoute
   '/models/capital-circle': typeof ModelsCapitalCircleRoute
   '/models/coco': typeof ModelsCocoRoute
   '/models/foco': typeof ModelsFocoRoute
@@ -183,6 +192,7 @@ export interface FileRouteTypes {
     | '/chargers'
     | '/contact'
     | '/blog/$slug'
+    | '/elite/dashboard'
     | '/models/capital-circle'
     | '/models/coco'
     | '/models/foco'
@@ -202,6 +212,7 @@ export interface FileRouteTypes {
     | '/chargers'
     | '/contact'
     | '/blog/$slug'
+    | '/elite/dashboard'
     | '/models/capital-circle'
     | '/models/coco'
     | '/models/foco'
@@ -221,6 +232,7 @@ export interface FileRouteTypes {
     | '/chargers'
     | '/contact'
     | '/blog/$slug'
+    | '/elite/dashboard'
     | '/models/capital-circle'
     | '/models/coco'
     | '/models/foco'
@@ -240,6 +252,7 @@ export interface RootRouteChildren {
   CalculatorRoute: typeof CalculatorRoute
   ChargersRoute: typeof ChargersRoute
   ContactRoute: typeof ContactRoute
+  EliteDashboardRoute: typeof EliteDashboardRoute
   ModelsCapitalCircleRoute: typeof ModelsCapitalCircleRoute
   ModelsCocoRoute: typeof ModelsCocoRoute
   ModelsFocoRoute: typeof ModelsFocoRoute
@@ -366,6 +379,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ModelsCapitalCircleRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/elite/dashboard': {
+      id: '/elite/dashboard'
+      path: '/elite/dashboard'
+      fullPath: '/elite/dashboard'
+      preLoaderRoute: typeof EliteDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/$slug': {
       id: '/blog/$slug'
       path: '/$slug'
@@ -393,6 +413,7 @@ const rootRouteChildren: RootRouteChildren = {
   CalculatorRoute: CalculatorRoute,
   ChargersRoute: ChargersRoute,
   ContactRoute: ContactRoute,
+  EliteDashboardRoute: EliteDashboardRoute,
   ModelsCapitalCircleRoute: ModelsCapitalCircleRoute,
   ModelsCocoRoute: ModelsCocoRoute,
   ModelsFocoRoute: ModelsFocoRoute,
