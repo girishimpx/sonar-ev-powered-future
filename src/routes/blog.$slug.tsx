@@ -27,8 +27,21 @@ function BlogPostPage() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    setPost(getPost(slug));
-    setLoaded(true);
+    let active = true;
+    getPost(slug)
+      .then((p) => {
+        if (!active) return;
+        setPost(p);
+        setLoaded(true);
+      })
+      .catch(() => {
+        if (!active) return;
+        setPost(undefined);
+        setLoaded(true);
+      });
+    return () => {
+      active = false;
+    };
   }, [slug]);
 
   useEffect(() => {
