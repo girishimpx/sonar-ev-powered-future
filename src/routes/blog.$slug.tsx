@@ -12,12 +12,21 @@ import { getPost, formatDate, type BlogPost } from "@/lib/blog";
 
 export const Route = createFileRoute("/blog/$slug")({
   component: BlogPostPage,
-  head: () => ({
-    meta: [
-      { title: "Post — Sonar EV Blog" },
-      { name: "description", content: "Read the latest from the Sonar EV team." },
-    ],
-  }),
+  head: ({ params }) => {
+    const url = `https://sonar-ev-powered-future.lovable.app/blog/${params.slug}`;
+    return {
+      links: [{ rel: "canonical", href: url }],
+      meta: [
+        { title: "Post — Sonar EV Blog" },
+        { name: "description", content: "Insights on EV charging infrastructure, franchising and station economics from the Sonar EV team." },
+        { property: "og:title", content: "Sonar EV Blog" },
+        { property: "og:description", content: "Insights on EV charging infrastructure and station economics in India." },
+        { property: "og:type", content: "article" },
+        { property: "og:url", content: url },
+        { name: "twitter:card", content: "summary_large_image" },
+      ],
+    };
+  },
 });
 
 function BlogPostPage() {

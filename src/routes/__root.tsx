@@ -92,6 +92,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Fast DC chargers, free software, free app, free AMC. Build your EV charging business with Sonar EV.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Sonar EV" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@SonarEV" },
       {
@@ -105,6 +106,31 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "icon", href: faviconAsset.url, type: "image/png" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "Sonar EV",
+          url: "https://sonar-ev-powered-future.lovable.app",
+          description:
+            "Sonar EV builds DC fast charging infrastructure, software and franchise businesses across India.",
+          telephone: "+91-70197-21320",
+          email: "hello@sonarev.in",
+          areaServed: "IN",
+          contactPoint: [
+            {
+              "@type": "ContactPoint",
+              telephone: "+91-70197-21320",
+              contactType: "sales",
+              areaServed: "IN",
+              availableLanguage: ["en", "hi"],
+            },
+          ],
+        }),
+      },
     ],
   }),
   shellComponent: RootShell,

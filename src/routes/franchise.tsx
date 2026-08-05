@@ -6,7 +6,9 @@ import { Nav, Footer, FloatingCTAs, ContactStrip, EnquiryForm, btnPrimary, btnSe
 export const Route = createFileRoute("/franchise")({
   component: FranchisePage,
   head: () => ({
+    links: [{ rel: "canonical", href: "https://sonar-ev-powered-future.lovable.app/franchise" }],
     meta: [
+      { property: "og:url", content: "https://sonar-ev-powered-future.lovable.app/franchise" },
       { title: "EV Charging Franchise in India — SONAR.EV Partner Program" },
       { name: "description", content: "Full details of the SONAR.EV franchise: 95% revenue share, hardware, software, installation, AMC, contract terms and partner responsibilities." },
       { property: "og:title", content: "EV Charging Franchise in India — SONAR.EV Partner Program" },

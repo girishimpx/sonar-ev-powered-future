@@ -14,7 +14,9 @@ import {
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
+    links: [{ rel: "canonical", href: "https://sonar-ev-powered-future.lovable.app/" }],
     meta: [
+      { property: "og:url", content: "https://sonar-ev-powered-future.lovable.app/" },
       { title: "SONAR.EV — EV Charging Infrastructure, Franchise & Elite Platform" },
       {
         name: "description",

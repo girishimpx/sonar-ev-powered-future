@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 Disallow: /account
 Disallow: /account/
+
+Sitemap: https://sonar-ev-powered-future.lovable.app/sitemap.xml
