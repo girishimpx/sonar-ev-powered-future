@@ -308,31 +308,54 @@ function BusinessModelsSection() {
   );
 }
 
-function EliteSpotlight() {
+function CampaignBanner() {
+  return (
+    <section className="relative overflow-hidden border-b border-white/10 bg-white/[0.04]">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_120%_at_50%_0%,rgba(255,255,255,0.10),transparent_70%)]" />
+      <div className="relative mx-auto flex max-w-7xl flex-col items-center gap-4 px-6 py-4 text-center sm:flex-row sm:justify-between sm:text-left">
+        <div className="flex items-center gap-3">
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/20 bg-white text-black">
+            <Trophy className="h-4 w-4" />
+          </span>
+          <p className="text-sm text-white/80">
+            <span className="font-semibold text-white">Live campaign:</span> win a fully funded EV
+            charging station — we cover the entire investment and hand it over free.
+          </p>
+        </div>
+        <Link to="/contest" className={`${btnPrimary} shrink-0`}>
+          <Gift className="h-4 w-4" /> Join the contest
+        </Link>
+      </div>
+    </section>
+  );
+}
+
+function FundingSection() {
   return (
     <section className="py-24 md:py-32">
       <div className="mx-auto grid max-w-7xl gap-14 px-6 lg:grid-cols-[1.05fr_1fr] lg:items-center">
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/70">
-            <Sparkles className="h-3.5 w-3.5" /> SonarEV Elite
+            <IndianRupee className="h-3.5 w-3.5" /> Funding Support
           </div>
           <h2 className="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
-            The business operating system for land, investment & growth.
+            Need funding to install an EV charging station?
           </h2>
           <p className="mt-5 max-w-xl text-white/60">
-            Elite is our membership platform: a verified land marketplace, an investor network, project
-            tracking, a private community, and Sonar AI for feasibility and ROI analysis — all in one workspace.
+            Capital shouldn't stop a good site. Share your location and plan, and our team will help
+            you structure financing with our lending and investor partners — then build, install and
+            run the station with you.
           </p>
           <ul className="mt-7 grid gap-2 sm:grid-cols-2">
-            {["Verified land marketplace", "Investor & partner network", "Project kanban tracking", "Sonar AI advisor"].map((t) => (
+            {["Site feasibility review", "Financing partner introductions", "Repay from station revenue", "Hardware, software & AMC included"].map((t) => (
               <li key={t} className="flex items-center gap-2 text-sm text-white/75">
                 <CheckCircle2 className="h-4 w-4 text-white" /> {t}
               </li>
             ))}
           </ul>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link to="/elite" className={btnPrimary}>
-              <Sparkles className="h-4 w-4" /> Explore SonarEV Elite
+            <Link to="/funding" className={btnPrimary}>
+              <IndianRupee className="h-4 w-4" /> Apply here
             </Link>
             <Link to="/calculator" className={btnSecondary}>
               <Calculator className="h-4 w-4" /> Estimate your earnings
@@ -341,14 +364,31 @@ function EliteSpotlight() {
         </div>
         <div className="relative">
           <div className="absolute -inset-4 -z-10 rounded-3xl bg-white/5 blur-2xl" />
-          <img
-            src={eliteImg}
-            alt="SonarEV Elite dashboard"
-            loading="lazy"
-            width={1600}
-            height={1000}
-            className="w-full rounded-2xl border border-white/10 object-cover"
-          />
+          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-8">
+            <div className="flex items-center gap-3">
+              <span className="grid h-11 w-11 place-items-center rounded-xl border border-white/20 bg-white text-black">
+                <Trophy className="h-5 w-5" />
+              </span>
+              <div>
+                <div className="text-xs uppercase tracking-widest text-white/50">Campaign</div>
+                <div className="text-lg font-semibold">Win a free charging station</div>
+              </div>
+            </div>
+            <p className="mt-5 text-sm leading-relaxed text-white/60">
+              Enter our contest and one selected site owner gets a complete SONAR.EV charging station
+              — chargers, installation and software — fully funded by us and handed over free.
+            </p>
+            <ul className="mt-6 space-y-2 text-sm text-white/75">
+              {["Zero investment for the winner", "We fund hardware + installation", "Software and AMC included", "Winner keeps the station revenue share"].map((t) => (
+                <li key={t} className="flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-white" /> {t}
+                </li>
+              ))}
+            </ul>
+            <Link to="/contest" className={`${btnPrimary} mt-7 w-full justify-center`}>
+              <Gift className="h-4 w-4" /> Join the contest
+            </Link>
+          </div>
         </div>
       </div>
     </section>
