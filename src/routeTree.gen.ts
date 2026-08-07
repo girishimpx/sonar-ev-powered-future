@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as FundingRouteImport } from './routes/funding'
 import { Route as FranchiseRouteImport } from './routes/franchise'
+import { Route as ContestRouteImport } from './routes/contest'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ChargersRouteImport } from './routes/chargers'
 import { Route as CalculatorRouteImport } from './routes/calculator'
@@ -57,6 +58,11 @@ const FundingRoute = FundingRouteImport.update({
 const FranchiseRoute = FranchiseRouteImport.update({
   id: '/franchise',
   path: '/franchise',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContestRoute = ContestRouteImport.update({
+  id: '/contest',
+  path: '/contest',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -224,6 +230,7 @@ export interface FileRoutesByFullPath {
   '/calculator': typeof CalculatorRoute
   '/chargers': typeof ChargersRoute
   '/contact': typeof ContactRoute
+  '/contest': typeof ContestRoute
   '/franchise': typeof FranchiseRoute
   '/funding': typeof FundingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -260,6 +267,7 @@ export interface FileRoutesByTo {
   '/calculator': typeof CalculatorRoute
   '/chargers': typeof ChargersRoute
   '/contact': typeof ContactRoute
+  '/contest': typeof ContestRoute
   '/franchise': typeof FranchiseRoute
   '/funding': typeof FundingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -297,6 +305,7 @@ export interface FileRoutesById {
   '/calculator': typeof CalculatorRoute
   '/chargers': typeof ChargersRoute
   '/contact': typeof ContactRoute
+  '/contest': typeof ContestRoute
   '/franchise': typeof FranchiseRoute
   '/funding': typeof FundingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -335,6 +344,7 @@ export interface FileRouteTypes {
     | '/calculator'
     | '/chargers'
     | '/contact'
+    | '/contest'
     | '/franchise'
     | '/funding'
     | '/sitemap.xml'
@@ -371,6 +381,7 @@ export interface FileRouteTypes {
     | '/calculator'
     | '/chargers'
     | '/contact'
+    | '/contest'
     | '/franchise'
     | '/funding'
     | '/sitemap.xml'
@@ -407,6 +418,7 @@ export interface FileRouteTypes {
     | '/calculator'
     | '/chargers'
     | '/contact'
+    | '/contest'
     | '/franchise'
     | '/funding'
     | '/sitemap.xml'
@@ -444,6 +456,7 @@ export interface RootRouteChildren {
   CalculatorRoute: typeof CalculatorRoute
   ChargersRoute: typeof ChargersRoute
   ContactRoute: typeof ContactRoute
+  ContestRoute: typeof ContestRoute
   FranchiseRoute: typeof FranchiseRoute
   FundingRoute: typeof FundingRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -494,6 +507,13 @@ declare module '@tanstack/react-router' {
       path: '/franchise'
       fullPath: '/franchise'
       preLoaderRoute: typeof FranchiseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contest': {
+      id: '/contest'
+      path: '/contest'
+      fullPath: '/contest'
+      preLoaderRoute: typeof ContestRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -733,6 +753,7 @@ const rootRouteChildren: RootRouteChildren = {
   CalculatorRoute: CalculatorRoute,
   ChargersRoute: ChargersRoute,
   ContactRoute: ContactRoute,
+  ContestRoute: ContestRoute,
   FranchiseRoute: FranchiseRoute,
   FundingRoute: FundingRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
