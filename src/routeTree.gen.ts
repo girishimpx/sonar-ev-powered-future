@@ -10,7 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as FundingRouteImport } from './routes/funding'
 import { Route as FranchiseRouteImport } from './routes/franchise'
+import { Route as ContestRouteImport } from './routes/contest'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ChargersRouteImport } from './routes/chargers'
 import { Route as CalculatorRouteImport } from './routes/calculator'
@@ -48,9 +50,19 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FundingRoute = FundingRouteImport.update({
+  id: '/funding',
+  path: '/funding',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FranchiseRoute = FranchiseRouteImport.update({
   id: '/franchise',
   path: '/franchise',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContestRoute = ContestRouteImport.update({
+  id: '/contest',
+  path: '/contest',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -218,7 +230,9 @@ export interface FileRoutesByFullPath {
   '/calculator': typeof CalculatorRoute
   '/chargers': typeof ChargersRoute
   '/contact': typeof ContactRoute
+  '/contest': typeof ContestRoute
   '/franchise': typeof FranchiseRoute
+  '/funding': typeof FundingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/elite/ai': typeof EliteAiRoute
@@ -253,7 +267,9 @@ export interface FileRoutesByTo {
   '/calculator': typeof CalculatorRoute
   '/chargers': typeof ChargersRoute
   '/contact': typeof ContactRoute
+  '/contest': typeof ContestRoute
   '/franchise': typeof FranchiseRoute
+  '/funding': typeof FundingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/elite/ai': typeof EliteAiRoute
@@ -289,7 +305,9 @@ export interface FileRoutesById {
   '/calculator': typeof CalculatorRoute
   '/chargers': typeof ChargersRoute
   '/contact': typeof ContactRoute
+  '/contest': typeof ContestRoute
   '/franchise': typeof FranchiseRoute
+  '/funding': typeof FundingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/elite/ai': typeof EliteAiRoute
@@ -326,7 +344,9 @@ export interface FileRouteTypes {
     | '/calculator'
     | '/chargers'
     | '/contact'
+    | '/contest'
     | '/franchise'
+    | '/funding'
     | '/sitemap.xml'
     | '/blog/$slug'
     | '/elite/ai'
@@ -361,7 +381,9 @@ export interface FileRouteTypes {
     | '/calculator'
     | '/chargers'
     | '/contact'
+    | '/contest'
     | '/franchise'
+    | '/funding'
     | '/sitemap.xml'
     | '/blog/$slug'
     | '/elite/ai'
@@ -396,7 +418,9 @@ export interface FileRouteTypes {
     | '/calculator'
     | '/chargers'
     | '/contact'
+    | '/contest'
     | '/franchise'
+    | '/funding'
     | '/sitemap.xml'
     | '/blog/$slug'
     | '/elite/ai'
@@ -432,7 +456,9 @@ export interface RootRouteChildren {
   CalculatorRoute: typeof CalculatorRoute
   ChargersRoute: typeof ChargersRoute
   ContactRoute: typeof ContactRoute
+  ContestRoute: typeof ContestRoute
   FranchiseRoute: typeof FranchiseRoute
+  FundingRoute: typeof FundingRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   EliteAiRoute: typeof EliteAiRoute
   EliteCommunityRoute: typeof EliteCommunityRoute
@@ -469,11 +495,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/funding': {
+      id: '/funding'
+      path: '/funding'
+      fullPath: '/funding'
+      preLoaderRoute: typeof FundingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/franchise': {
       id: '/franchise'
       path: '/franchise'
       fullPath: '/franchise'
       preLoaderRoute: typeof FranchiseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contest': {
+      id: '/contest'
+      path: '/contest'
+      fullPath: '/contest'
+      preLoaderRoute: typeof ContestRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -713,7 +753,9 @@ const rootRouteChildren: RootRouteChildren = {
   CalculatorRoute: CalculatorRoute,
   ChargersRoute: ChargersRoute,
   ContactRoute: ContactRoute,
+  ContestRoute: ContestRoute,
   FranchiseRoute: FranchiseRoute,
+  FundingRoute: FundingRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   EliteAiRoute: EliteAiRoute,
   EliteCommunityRoute: EliteCommunityRoute,
