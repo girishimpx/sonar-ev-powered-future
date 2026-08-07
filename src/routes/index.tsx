@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight, Zap, Cpu, Wrench, TrendingUp, CheckCircle2, Layers,
-  HeartHandshake, LineChart, Sparkles, Calculator, Handshake, PlugZap,
+  HeartHandshake, LineChart, Calculator, Handshake, PlugZap,
   Gift, IndianRupee, Trophy,
 } from "lucide-react";
 import heroImg from "@/assets/hero-charger.jpg";
