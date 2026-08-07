@@ -2,10 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight, Zap, Cpu, Wrench, TrendingUp, CheckCircle2, Layers,
   HeartHandshake, LineChart, Sparkles, Calculator, Handshake, PlugZap,
+  Gift, IndianRupee, Trophy,
 } from "lucide-react";
 import heroImg from "@/assets/hero-charger.jpg";
 import chargerLineupImg from "@/assets/charger-lineup.jpg";
-import eliteImg from "@/assets/elite-ai-dashboard.jpg";
 import {
   Nav, Footer, FloatingCTAs, ContactStrip, EnquiryForm,
   btnPrimary, btnSecondary,
@@ -17,14 +17,14 @@ export const Route = createFileRoute("/")({
     links: [{ rel: "canonical", href: "https://sonar-ev-powered-future.lovable.app/" }],
     meta: [
       { property: "og:url", content: "https://sonar-ev-powered-future.lovable.app/" },
-      { title: "SONAR.EV — EV Charging Infrastructure, Franchise & Elite Platform" },
+      { title: "SONAR.EV — EV Charging Infrastructure & Franchise Partnerships" },
       {
         name: "description",
         content:
-          "SONAR.EV builds India's EV charging network: enterprise DC fast chargers, franchise ownership models, and SonarEV Elite — the business operating system for land, investment and growth.",
+          "SONAR.EV builds India's EV charging network: enterprise DC fast chargers, franchise ownership models, funding support for new stations, and a contest to win a fully funded charging station.",
       },
-      { property: "og:title", content: "SONAR.EV — EV Charging Infrastructure, Franchise & Elite Platform" },
-      { property: "og:description", content: "Chargers, franchise models and the SonarEV Elite platform — one partner for the EV charging economy." },
+      { property: "og:title", content: "SONAR.EV — EV Charging Infrastructure & Franchise Partnerships" },
+      { property: "og:description", content: "Chargers, franchise models, funding support and a contest to win a fully funded EV charging station." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -35,11 +35,12 @@ function Index() {
   return (
     <div className="min-h-screen bg-black text-white antialiased">
       <Nav />
+      <CampaignBanner />
       <Hero />
       <TrustStrip />
       <PillarsSection />
       <BusinessModelsSection />
-      <EliteSpotlight />
+      <FundingSection />
       <WhySection />
       <ContactStrip>Not sure where to start? Talk to a SONAR.EV specialist.</ContactStrip>
       <LeadSection />
