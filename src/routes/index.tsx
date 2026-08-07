@@ -67,12 +67,12 @@ function Hero() {
             </span>
           </h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
-            Enterprise-grade chargers, franchise ownership models, and SonarEV Elite — the platform
-            connecting land, capital and operators. One partner, end to end.
+            Enterprise-grade chargers, franchise ownership models and funding support for new
+            stations. One partner, end to end.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link to="/elite" className={btnPrimary}>
-              <Sparkles className="h-4 w-4" /> Explore SonarEV Elite
+            <Link to="/funding" className={btnPrimary}>
+              <IndianRupee className="h-4 w-4" /> Need funding? Apply here
             </Link>
             <Link to="/franchise" className={btnSecondary}>
               Franchise Models <ArrowRight className="h-4 w-4" />
@@ -150,11 +150,11 @@ const pillars = [
     cta: "See the franchise",
   },
   {
-    icon: Sparkles,
-    title: "SonarEV Elite",
-    body: "The business operating system for land, investment and growth — marketplace, investors, AI advisor and projects.",
-    to: "/elite" as const,
-    cta: "Explore Elite",
+    icon: IndianRupee,
+    title: "Station Funding",
+    body: "Short on capital? Apply for SONAR.EV funding support and get your charging station financed and installed.",
+    to: "/funding" as const,
+    cta: "Apply for funding",
   },
 ];
 
@@ -220,11 +220,11 @@ const businessModels = [
     points: ["No land or staffing needed", "Portfolio of managed stations"],
   },
   {
-    code: "Elite",
-    to: "/elite" as const,
-    name: "Platform Membership Model",
-    body: "Subscribe to SonarEV Elite and run land, capital and projects on one operating system.",
-    points: ["Land & investor marketplace", "AI advisor + project tracking"],
+    code: "Funded",
+    to: "/funding" as const,
+    name: "Funding Assisted Ownership",
+    body: "Own a station even without full capital — apply for funding support and repay from station revenue.",
+    points: ["Capital arranged with our partners", "Repay from charging revenue"],
     featured: true,
   },
 ];
@@ -248,8 +248,8 @@ function BusinessModelsSection() {
               and appetite for day-to-day involvement.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              <Link to="/elite" className={btnPrimary}>
-                <Sparkles className="h-4 w-4" /> Explore SonarEV Elite
+              <Link to="/funding" className={btnPrimary}>
+                <IndianRupee className="h-4 w-4" /> Apply for funding
               </Link>
               <Link to="/franchise" className={btnSecondary}>
                 Full franchise details <ArrowRight className="h-4 w-4" />
